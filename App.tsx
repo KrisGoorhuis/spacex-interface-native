@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { AppRegistry } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
   QueryClientProvider,
@@ -12,6 +13,7 @@ import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import store from './redux'
 
+AppRegistry.registerComponent('main', () => App);
 
 export default function App() {
   const isLoadingComplete = useCachedResources(); // TODO: being replaced?

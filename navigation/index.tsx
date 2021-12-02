@@ -12,6 +12,7 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
+import LaunchPadScreen from '../screens/LaunchPadScreen';
 import LaunchScreen from '../screens/LaunchScreen';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
@@ -44,6 +45,7 @@ function RootNavigator() {
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
         <Stack.Screen name="Launch" component={LaunchScreen} />
+        <Stack.Screen name="LaunchPad" component={LaunchPadScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );

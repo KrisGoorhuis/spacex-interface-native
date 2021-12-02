@@ -1,72 +1,99 @@
 import React from "react";
-import { Box, Stat, StatLabel, StatNumber, StatHelpText, StatGroup, SimpleGrid } from "@chakra-ui/react";
 import { Navigation, Layers } from "react-feather";
+import { View, StyleSheet, Text } from "react-native";
+import { Divider, ListItem } from "react-native-elements";
+
 import { LaunchProps } from "../../../model";
+
 
 
 function RocketInfo(props: LaunchProps) {
    const cores = props.launch.rocket.first_stage.cores;
 
    return (
-      <SimpleGrid
-         columns={[1, 1, 2]}
-         borderWidth="1px"
-         mt="4"
-         p="4"
-         borderRadius="md"
-      >
-         <Stat>
-            <StatLabel display="flex">
-               <Box as={Navigation} width="1em" />{" "}
-               <Box ml="2" as="span">
+      <View style={styles.container}>
+         <ListItem>
+            <ListItem.Title style={styles.listItemTitle}>
+               <Navigation />{" "}
+               <Text style={styles.titleText}>
                   Rocket
-               </Box>
-            </StatLabel>
-            <StatNumber fontSize={["md", "xl"]}>
-               {props.launch.rocket.rocket_name}
-            </StatNumber>
-            <StatHelpText>{props.launch.rocket.rocket_type}</StatHelpText>
-         </Stat>
-         <StatGroup>
-            <Stat>
-               <StatLabel display="flex">
-                  <Box as={Layers} width="1em" />{" "}
-                  <Box ml="2" as="span">
+               </Text>
+            </ListItem.Title>
+            <ListItem.Content style={styles.content}>
+               <Text>
+                  {props.launch.rocket.rocket_name}
+               </Text>
+               <Divider />
+            </ListItem.Content>
+            <Text>
+               {props.launch.rocket.rocket_type}
+            </Text>
+         </ListItem>
+         <View>
+            <ListItem>
+               <ListItem.Title style={styles.listItemTitle}>
+                  <Layers />{" "}
+                  <Text style={styles.titleText}>
                      First Stage
-                  </Box>
-               </StatLabel>
-               <StatNumber fontSize={["md", "xl"]}>
-                  {cores.map((core) => core.core_serial).join(", ")}
-               </StatNumber>
-               <StatHelpText>
+                  </Text>
+               </ListItem.Title>
+               <ListItem.Content style={styles.content}>
+                  <Text>
+                     {cores.map((core) => core.core_serial).join(", ")}
+                  </Text>
+               </ListItem.Content>
+               <Text>
                   {cores.every((core) => core.land_success)
                      ? cores.length === 1
                         ? "Recovered"
                         : "All recovered"
                      : "Lost"}
-               </StatHelpText>
-            </Stat>
-            <Stat>
-               <StatLabel display="flex">
-                  <Box as={Layers} width="1em" />{" "}
-                  <Box ml="2" as="span">
+               </Text>
+            </ListItem>
+            <ListItem>
+               <ListItem.Title style={styles.listItemTitle}>
+                  <Layers />{" "}
+                  <Text style={styles.titleText}>
                      Second Stage
-                  </Box>
-               </StatLabel>
-               <StatNumber fontSize={["md", "xl"]}>
-                  Block {props.launch.rocket.second_stage.block}
-               </StatNumber>
-               <StatHelpText>
+                  </Text>
+               </ListItem.Title>
+               <ListItem.Content>
+                  <Text>
+                     Block {props.launch.rocket.second_stage.block}
+                  </Text>
+               </ListItem.Content>
+               <Text>
                   Payload:{" "}
                   {props.launch.rocket.second_stage.payloads
                      .map((payload) => payload.payload_type)
                      .join(", ")}
-               </StatHelpText>
-            </Stat>
-         </StatGroup>
-      </SimpleGrid>
+               </Text>
+            </ListItem>
+         </View>
+      </View>
    );
 }
 
+const styles = StyleSheet.create({
+   container: {
+      // borderWidth: '1px',
+      marginTop: 4,
+      padding: 4,
+      borderRadius: 5, // 'md'
+   },
+   listItemTitle: {
+      display: 'flex',
+   },
+   titleText: {
+      marginLeft: 2
+   },
+   content: {
+      fontSize: 20, // Replaces 'md' | 'xl'
+   }
+});
+//  borderWidth="1px"
+//  mt="4"
+//  p="4"
+//  borderRadius="md"
 
 export default RocketInfo

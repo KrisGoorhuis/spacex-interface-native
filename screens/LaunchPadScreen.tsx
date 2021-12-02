@@ -4,14 +4,15 @@ import { Platform, StyleSheet } from 'react-native';
 import LaunchPage from '../components/Launches/launchPage/launch-page';
 
 import { Text, View } from '../components/Themed';
+import { Launch } from '../model';
 
 
-interface LaunchScreenProps {
+interface LaunchPadScreenProps {
    [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
 
-export default function LaunchScreen(props: LaunchScreenProps) { 
-   const launch = props.route.params.launch
+export default function LaunchPadScreen(props: LaunchPadScreenProps) { 
+   const launch = props.route.params.launchPad
 
    return (
       <View style={styles.container}>
@@ -21,7 +22,7 @@ export default function LaunchScreen(props: LaunchScreenProps) {
 
          {
             launch &&
-            <LaunchPage flight_number={launch.flight_number} />
+            <LaunchPadPage flight_number={launch.flight_number} />
          }
 
 

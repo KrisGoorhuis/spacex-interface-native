@@ -1,52 +1,76 @@
 import React from "react";
-import { Stat, StatLabel, StatNumber, StatHelpText, Tooltip, SimpleGrid, Box, Link } from "@chakra-ui/react";
 import { Watch, MapPin } from "react-feather";
 import { format as timeAgo } from "timeago.js";
-import { Link as RouterLink } from "react-router-dom";
-
+import { View, StyleSheet, Text } from "react-native";
+import { Divider, ListItem } from "react-native-elements";
 
 import { LaunchProps } from "../../../model";
 import { formatDateLong, formatDateTargetZone } from "../../../utils/format-date";
+// import { Link } from "@react-navigation/native";
 
 
 
 function TimeAndLocation(props: LaunchProps) {
 
-  return (
-    <SimpleGrid columns={[1, 1, 2]} borderWidth="1px" p="4" borderRadius="md">
-      <Stat>
-        <StatLabel display="flex">
-          <Box as={Watch} width="1em" />{" "}
-          <Box ml="2" as="span">
-            Launch Date
-          </Box>
-        </StatLabel>
-        <StatNumber fontSize={["md", "xl"]} cursor="default" borderBottom="1px dotted black" display="inline-block">
-          <Tooltip label={formatDateLong(props.launch.launch_date_local)} aria-label="Local time tooltip">
-            {formatDateTargetZone(props.launch.launch_date_local)}
-          </Tooltip>
-        </StatNumber>
-        <StatHelpText>{timeAgo(props.launch.launch_date_utc)}</StatHelpText>
-      </Stat>
-      <Stat>
-        <StatLabel display="flex">
-          <Box as={MapPin} width="1em" />{" "}
-          <Box ml="2" as="span">
-            Launch Site
-          </Box>
-        </StatLabel>
-        <StatNumber fontSize={["md", "xl"]}>
-          <Link
-            as={RouterLink}
-            to={`/launch-pads/${props.launch.launch_site.site_id}`}
-          >
+   return (
+      <View style={styles.container}>
+         <ListItem>
+            <ListItem.Content style={styles.content}>
+               <ListItem.Title style={styles.listItemTitle}>
+                  <Watch />{" "}
+                  <Text style={styles.titleText}>
+                     Launch Date
+                  </Text>
+               </ListItem.Title>
+               {/* TODO: choose one. No tooltips here. */}
+               <Text>
+                  {formatDateLong(props.launch.launch_date_local)}
+                  {formatDateTargetZone(props.launch.launch_date_local)}
+               </Text>
+               {/* Replaces borderBottom for .Content: */}
+               <Divider />
+            </ListItem.Content>
+            {/* Previously '<StatHelpText />' */}
+            <Text>{timeAgo(props.launch.launch_date_utc)}</Text>
+         </ListItem>
+         <ListItem>
+            <ListItem.Title style={styles.listItemTitle}>
+               <MapPin />{" "}
+               <Text style={styles.titleText} >
+                  Launch Site
+               </Text>
+            </ListItem.Title>
+            <ListItem.Content>
+               {/* <Link
+          // to={`/launch-pads/${props.launch.launch_site.site_id}`}
+          // Singular? How to get appropriate site_id in?
+            to={{ screen: 'launch-pads', params: { site_id: props.launch.launch_site.site_id } }}>
             {props.launch.launch_site.site_name_long}
-          </Link>
-        </StatNumber>
-        <StatHelpText>{props.launch.launch_site.site_name}</StatHelpText>
-      </Stat>
-    </SimpleGrid>
-  );
+          </Link> */}
+            </ListItem.Content>
+            <Text>{props.launch.launch_site.site_name}</Text>
+         </ListItem>
+      </View>
+   );
 }
+
+const styles = StyleSheet.create({
+   container: {
+      borderWidth: 1,
+      padding: 4,
+      borderRadius: 5, // TODO: Test. Previously 'md' in chakra
+      // columns={[1, 1, 2]}
+   },
+   listItemTitle: {
+      display: 'flex',
+   },
+   titleText: {
+      marginLeft: 2
+   },
+   content: {
+      fontSize: 20, // Replaces 'md' | 'xl'
+   }
+});
+
 
 export default TimeAndLocation

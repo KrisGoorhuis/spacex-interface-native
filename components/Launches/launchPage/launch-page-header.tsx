@@ -43,14 +43,14 @@ const LaunchPageHeader = (props: LaunchProps) => {
       <ImageBackground
          resizeMode="cover"
          style={styles.container}
-         source={{ uri: `url(${props.launch.links.flickr_images[0]})` }}
+         source={{ uri: `${props.launch.links.flickr_images[0]}` }}
       >
          <View
          // bgPos="center"
          // bgRepeat="no-repeat"
          >
             <Image
-               source={require(props.launch.links.mission_patch_small)}
+               source={{uri: props.launch.links.mission_patch_small }}
             // objectFit="contain"
             // objectPosition="bottom"
             />

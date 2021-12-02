@@ -12,12 +12,12 @@ import { queryLaunches } from "../../../utils/networking";
 import OpenURLButton from "../../openURLButton";
 
 
-interface LaunchScreenProps {
-  flight_number: number,
+interface LaunchPageProps {
+  flight_number: number | undefined,
   [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
 
-export default function LaunchPage(props: LaunchScreenProps) {
+export default function LaunchPage(props: LaunchPageProps) {
   const { isLoading, isError, error, data } = useQuery<LaunchType[], Error>('launches', queryLaunches)
 
 
@@ -50,8 +50,8 @@ export default function LaunchPage(props: LaunchScreenProps) {
         </Text>
         <iframe
           style={{ maxHeight: 400, aspectRatio: '1.7' }} // Aspect ratio as string doesn't play nicely with stylesheet. TODO: is it working here?
-          title={props.launch.mission_name}
-          src={`https://www.youtube.com/embed/${props.launch.links.youtube_id}`}
+          title={thisLaunch.mission_name}
+          src={`https://www.youtube.com/embed/${thisLaunch.links.youtube_id}`}
           allowFullScreen
         />
 
@@ -60,7 +60,7 @@ export default function LaunchPage(props: LaunchScreenProps) {
           {/* spacing="4" */}
           {thisLaunch.links.flickr_images.map((imageUrl) => (
             <OpenURLButton url={imageUrl} key={imageUrl}>
-              <Image source={require(imageUrl.replace("_o.jpg", "_z.jpg"))} />
+              <Image source={{uri:imageUrl.replace("_o.jpg", "_z.jpg")}} />
             </OpenURLButton>
           ))}
         </View>
