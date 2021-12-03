@@ -1,8 +1,10 @@
 import React from "react";
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+import { Badge } from 'react-native-elements'
 
 import FavoriteLaunchPadButton from "../favoriteLaunchPadButton";
 import { LaunchPad as LaunchPadType } from '../../../model/index'
+import LinearGradient from "react-native-linear-gradient";
 
 
 function LaunchPadHeader(props: { launchPad: LaunchPadType }) {
@@ -11,52 +13,64 @@ function LaunchPadHeader(props: { launchPad: LaunchPadType }) {
       `hsl(${start + end * Math.random()}, 80%, 90%)`;
    const styles = StyleSheet.create({
       container: {
-         background
+         minHeight: '30vh',
+         position: 'relative',
+         padding: 2,
+         alignItems: 'flex-end',
+         justifyContent: 'space-between'
+      },
+      image: {
+         position: 'absolute',
+         top: 5,
+         right: 5,
+         height: 85, // 150?
+      },
+      header: {
+         color: 'white',
+         // display: 'inline',
+         backgroundColor: '#718096b8',
+         // fontSize: 'large' or '5xl'
+         margin: '2px 4px',
+         borderRadius: 10 // 'large'
+      },
+      stack: {
+         display: 'flex',
+         alignItems: 'center',
+         justifyContent: 'center',
+         // isInline spacing="3" alignItems="center" justifyContent="center" display="flex"
       }
    })
 
 
    // withbackground component. Wraps the rest. Used it elsewhere. 
    return (
-      <View
-         background={`linear-gradient(${randomColor()}, ${randomColor()})`}
-         bgPos="center"
-         bgSize="cover"
-         bgRepeat="no-repeat"
-         minHeight="15vh"
-         position="relative"
-         flexDirection={["column", "row"]}
-         p={[2, 6]}
-         alignItems="flex-end"
-         justifyContent="space-between"
+      <LinearGradient
+         style={styles.container}
+         colors={[randomColor(), randomColor()]}
       >
-         <Heading
-            color="gray.900"
-            display="inline"
-            mx={[2, 4]}
-            my="2"
-            fontSize={["md", "3xl"]}
-            borderRadius="lg"
-         >
+         <Text style={styles.header}>
             {props.launchPad.site_name_long}
-         </Heading>
-         <Stack isInline spacing="3" display="flex" alignItems="center" justifyContent="center">
+         </Text>
+         <View style={styles.stack}>
             <FavoriteLaunchPadButton {...props} />
-            <Badge colorScheme="purple" fontSize={["sm", "md"]}>
+            {/* colorScheme="purple" */}
+            <Badge>
                {props.launchPad.successful_launches}/{props.launchPad.attempted_launches}{" "}
                successful
             </Badge>
             {props.launchPad.status === "active" ? (
-               <Badge colorScheme="green" fontSize={["sm", "md"]}>
+               // colorScheme="green"
+               <Badge>
                   Active
                </Badge>
             ) : (
-               <Badge colorScheme="red" fontSize={["sm", "md"]}>
+               // colorScheme="red"
+               <Badge>
                   Retired
                </Badge>
             )}
-         </Stack>
-      </View>
+         </View>
+      </LinearGradient>
    );
 }
 

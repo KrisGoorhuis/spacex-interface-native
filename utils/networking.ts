@@ -10,7 +10,7 @@ export const queryLaunches = (): Promise<Launch[]> => {
 }
 
 
-export const queryLaunchPads = (launchPadId): Promise<LaunchPad[]> => {
+export const queryLaunchPads = (context: any, launchPadId: number): Promise<LaunchPad[]> => {
    return fetch(`${REACT_APP_SPACEX_API_URL}/launchPads/${launchPadId}/past?limit=3&order="desc"&sort=launch_date_utc&offset=0`)
    .then((res) => res.json())
    .catch(() => {

@@ -4,9 +4,9 @@ import { useQuery } from "react-query";
 import { InstagramLoader } from "react-native-easy-content-loader";
 
 import Error from "../../error";
-import { Launch, LaunchPad as LaunchPadType, LaunchPadProps } from '../../../model/index'
+import { Launch as LaunchType, LaunchPad as LaunchPadType, LaunchPadProps } from '../../../model/index'
 import LaunchPadHeader from "./launch-pad-header";
-import { queryLaunchPads } from "../../../utils/networking";
+import { queryLaunches, queryLaunchPads } from "../../../utils/networking";
 import { StyleSheet, Text, View } from 'react-native'
 import { ListItem } from "react-native-elements/dist/list/ListItem";
 import { Divider } from "react-native-elements";
@@ -20,26 +20,26 @@ interface LaunchPadPageProps {
 
 export default function LaunchPadPage(props: LaunchPadPageProps) {
 
-  const { isLoading, isError, error, data } = useQuery<LaunchPadType[], Error>('launchPads', queryLaunchPads)
+  const LaunchPadQuery = useQuery<LaunchPadType[], Error>('launchPads', (args:) => queryLaunchPads(...args, props.launchPadId))
 
-  const { isLoading, isError, error, data } = useQuery<LaunchType[], Error>('launches', queryLaunches)
+  const LaunchesQuery = useQuery<LaunchType[], Error>('launches', queryLaunches)
 
 
-  if (error) return <Error />;
+  if (LaunchPadQuery.error || LaunchesQuery.error) return <Error />;
 
-  if (!data) {
+  if (!LaunchPadQuery.data || !LaunchesQuery.data) {
     return (
       <InstagramLoader active />
     );
   }
 
-  const thisLaunchPad = data.filter((datum) => datum.id === props.launchPadId)[0]
+  const thisLaunchPad = LaunchPadQuery.data.filter((launchPad: LaunchPadType) => launchPad.id === props.launchPadId)[0]
 
 
   return (
     <>
       <LaunchPadHeader launchPad={thisLaunchPad} />
-      <View m={[3, 6]}>
+      <View>
         <LocationAndVehicles launchPad={thisLaunchPad} />
         <Text style={styles.launchPadDetails}>
           {thisLaunchPad.details}
@@ -51,7 +51,7 @@ export default function LaunchPadPage(props: LaunchPadPageProps) {
           src={`https://maps.google.com/maps?q=${thisLaunchPad.location.latitude}, ${thisLaunchPad.location.longitude}&z=15&output=embed`}
           allowFullScreen
         />
-        <RecentLaunches launches={data || []} />
+        <RecentLaunches launches={LaunchesQuery.data || []} />
       </View>
     </>
   );
