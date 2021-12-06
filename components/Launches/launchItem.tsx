@@ -20,14 +20,9 @@ const LaunchItem = (props: LaunchItemProps) => {
 
    return (
       <Pressable
-         onPress={() => navigation.navigate('Launch', { launch: props.launch })}
+         onPress={() => navigation.navigate('LaunchScreen', { launch: props.launch })}
          data-testid={"launchItem"}
-         // as={Link}
-         // to={`/launches/${props.launch.flight_number.toString()}`}
          style={{
-            // boxShadow: "md",
-            // borderWidth: {props.isDrawerFavorite ? 0 : "1px"},
-            // rounded: "lg",
             overflow: "hidden",
             position: "relative",
          }}

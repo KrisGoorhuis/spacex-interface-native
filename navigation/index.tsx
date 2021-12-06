@@ -1,8 +1,3 @@
-/**
- * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
 import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
@@ -12,9 +7,9 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import LaunchPadScreen from '../screens/LaunchPadScreen';
-import LaunchScreen from '../screens/LaunchScreen';
-import ModalScreen from '../screens/ModalScreen';
+// import LaunchPadScreen from '../screens/LaunchPadScreen';
+import LaunchScreen from '../screens/Launches/LaunchScreen';
+import LaunchScrollScreen from '../screens/Launches/launchScrollScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
@@ -42,11 +37,14 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-        <Stack.Screen name="Launch" component={LaunchScreen} />
-        <Stack.Screen name="LaunchPad" component={LaunchPadScreen} />
+      <Stack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
+        <Stack.Screen name="LaunchScrollScreen" component={LaunchScrollScreen} />
+        <Stack.Screen name="LaunchScreen" component={LaunchScreen} />
       </Stack.Group>
+      {/* <Stack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
+        <Stack.Screen name="LaunchPadScroll" component={LaunchPadScroll} />
+        <Stack.Screen name="LaunchPadScreen" component={LaunchPadScreen} />
+      </Stack.Group> */}
     </Stack.Navigator>
   );
 }

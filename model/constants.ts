@@ -3,3 +3,8 @@ export enum LocalStorageKeys {
    favoriteLaunchPads = "favoriteLaunchPads",
    defaultIndex = "defaultIndex"
 }
+
+export enum SpaceXSections {
+   launches = "launches",
+   launchPads = "launchPads",
+}

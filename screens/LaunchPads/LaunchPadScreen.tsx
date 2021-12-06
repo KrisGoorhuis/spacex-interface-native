@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
-import LaunchPage from '../components/Launches/launchPage/launch-page';
+import LaunchPage from '../../components/Launches/launchPage/launch-page';
 
-import { Text, View } from '../components/Themed';
-import { Launch } from '../model';
+import { Text, View } from '../../components/Themed';
+import { Launch } from '../../model';
 
 
 interface LaunchPadScreenProps {
@@ -14,16 +14,19 @@ interface LaunchPadScreenProps {
 export default function LaunchPadScreen(props: LaunchPadScreenProps) { 
    const launch = props.route.params.launchPad
 
+   console.log("launch")
+   console.log(launch)
+
    return (
       <View style={styles.container}>
          <Text style={styles.title}>Launches!</Text>
 
          <Text style={styles.title}>{JSON.stringify(launch)}</Text>
 
-         {
+         {/* {
             launch &&
             <LaunchPadPage flight_number={launch.flight_number} />
-         }
+         } */}
 
 
          <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />

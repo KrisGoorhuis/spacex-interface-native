@@ -15,7 +15,7 @@ const LaunchPadItem = (props: launchPadItemProps) => {
 
   return (
     <Pressable
-      onPress={() => navigation.navigate('LaunchPad', { launchPad: props.launchPad })}
+      onPress={() => navigation.navigate('LaunchPadScreen', { launchPad: props.launchPad })}
       data-testid={"launchItem"}
       // as={Link}
       // to={`/launches/${props.launch.flight_number.toString()}`}

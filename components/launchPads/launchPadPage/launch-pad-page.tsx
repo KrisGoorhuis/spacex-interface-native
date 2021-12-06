@@ -1,10 +1,10 @@
 import React from "react";
 import { MapPin, Navigation } from "react-feather";
-import { useQuery } from "react-query";
+import { QueryFunctionContext, useQuery } from "react-query";
 import { InstagramLoader } from "react-native-easy-content-loader";
 
 import Error from "../../error";
-import { Launch as LaunchType, LaunchPad as LaunchPadType, LaunchPadProps } from '../../../model/index'
+import { Launch, Launch as LaunchType, LaunchPad as LaunchPadType, LaunchPadProps } from '../../../model/index'
 import LaunchPadHeader from "./launch-pad-header";
 import { queryLaunches, queryLaunchPads } from "../../../utils/networking";
 import { StyleSheet, Text, View } from 'react-native'
@@ -19,8 +19,8 @@ interface LaunchPadPageProps {
 }
 
 export default function LaunchPadPage(props: LaunchPadPageProps) {
-
-  const LaunchPadQuery = useQuery<LaunchPadType[], Error>('launchPads', (args:) => queryLaunchPads(...args, props.launchPadId))
+// (context: QueryFunctionContext<TQueryKey>) => T | Promise<T>;
+  const LaunchPadQuery = useQuery<LaunchPadType[], Error>('launchPads', () => queryLaunchPads(props.launchPadId))
 
   const LaunchesQuery = useQuery<LaunchType[], Error>('launches', queryLaunches)
 
