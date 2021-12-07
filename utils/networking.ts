@@ -4,23 +4,21 @@ import { Launch, LaunchPad } from "../model"
 
 
 
-export const queryLaunches = async (limit: number, offset: number = 0): Promise<any> => {
-   console.log("Querying launches")
-   const result = await fetch(`${REACT_APP_SPACEX_API_URL}/launches/past?limit=${limit}&order=desc&sort=launch_date_utc&offset=${offset * limit}`)
-   const data = await result.json()
-   return data
-   return {data: data, nextPage: offset + 1}
-   return fetch(`${REACT_APP_SPACEX_API_URL}/launches/past?limit=${limit}&order=desc&sort=launch_date_utc&offset=${offset * limit}`)
-      .then((res) => {
-         return {
-            data: res.json(),
-            nextPage: offset + 1
-         }
-         return res.json()
-      })
-      .catch(() => {
-         // TODO: Handle errors?
-      })
+export const queryLaunches = async (context: any, pageSize: number): Promise<any> => {
+   console.log("fetching?")
+   console.log("context")
+   console.log(context)
+   console.log("context.pageParams")
+   console.log(context.pageParam)
+
+   const offset = context.pageParam | 0
+
+   console.log('offset')
+   console.log(offset)
+   const result = fetch(`${REACT_APP_SPACEX_API_URL}/launches/past?limit=${pageSize}&order=desc&sort=launch_date_utc&offset=${offset}`)
+      .then((res) => res.json())
+      .catch((error) => console.log(error))
+      return result
 }
 
 export const queryLaunch = (launchId: number): Promise<Launch[]> => {

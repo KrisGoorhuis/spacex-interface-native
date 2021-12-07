@@ -13,15 +13,17 @@ import { SpaceXSections } from '../model/constants';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
 
-  
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View>
-        <Pressable 
+        <Pressable
           onPress={() => navigation.navigate('LaunchScrollScreen')}
-          
+
         >
-          Browse Launches
+          <Text>
+            Browse Launches
+          </Text>
         </Pressable>
         {/* <Pressable 
           onPress={() => navigation.navigate('LaunchPageScroll')}
@@ -34,7 +36,6 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 
         } */}
       </View>
-      <Text style={styles.title}>Tab One</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
     </ScrollView>
   );

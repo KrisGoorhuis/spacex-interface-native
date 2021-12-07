@@ -10,17 +10,19 @@ import LoadMoreButton from "../../components/load-more-button"
 
 const pageSize = 3
 const LaunchScrollScreen = () => {
-   const [offset, setOffset] = React.useState<number>(0)
    const { isLoading, isError, error, data, fetchNextPage } = useInfiniteQuery<Launch[], { message: string }>(
       ['launches'],
-      (...args) => {console.log(args); return queryLaunches(pageSize, offset)},
+      (context) => queryLaunches(context, pageSize),
       {
-         initialData: {pages: [], pageParams: []},
+         initialData: { pages: [], pageParams: [] },
          getNextPageParam: (lastPage: any, allPages: any) => {
-            const newOffset = lastPage.length > 0 && lastPage[lastPage.length - 1].flight_number + 1
-            return (
-               {pageSize: 5, offset: newOffset}
-            )
+            if (lastPage) {
+               return (
+                  lastPage.length + 1
+                  // lastPage.length > 0 && lastPage[lastPage.length - 1].flight_number + 1
+               )
+            }
+            // else return { pageSize, offset: 0 }
          }
       }
    )
@@ -32,14 +34,9 @@ const LaunchScrollScreen = () => {
    if (isError && error) {
       return <span>Error: {error.message}</span>
    }
-   console.log("offset")
-   console.log(offset)
+
    console.log("data")
    console.log(data)
-   console.log("data?.pages")
-   console.log(data?.pages)
-   console.log("data?.pageParams")
-   console.log(data?.pageParams)
 
    return (
       <View>
@@ -53,9 +50,8 @@ const LaunchScrollScreen = () => {
          </ScrollView>
          <LoadMoreButton
             loadMore={() => fetchNextPage()}
-            // loadMore={() => { console.log("pressed"); setOffset(offset + 1) }}
             data={data?.pages.flat()}
-            pageSize={offset}
+            pageSize={pageSize}
             isLoadingMore={isLoading}
          />
       </View>
