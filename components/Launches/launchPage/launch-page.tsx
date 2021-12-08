@@ -1,66 +1,38 @@
 import React from "react";
-import { useQuery } from "react-query";
-import { InstagramLoader } from "react-native-easy-content-loader";
 import { View, Text, Image, StyleSheet } from "react-native";
 
-import Error from "../../error";
-import { Launch as LaunchType } from "../../../model";
+import { Launch } from "../../../model";
 import RocketInfo from "./rocket-info";
-import LaunchPageHeader from "./launch-page-header";
 import TimeAndLocation from "./time-and-location";
-import { queryLaunches } from "../../../utils/networking";
 import OpenURLButton from "../../openURLButton";
 
 
 interface LaunchPageProps {
-  flight_number: number | undefined,
+  launch: Launch,
   [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
 
-export default function LaunchPage(props: LaunchPageProps) {
-  const { isLoading, isError, error, data } = useQuery<LaunchType[], Error>('launches', queryLaunches)
-
-
-  if (error) return <Error />;
-
-  if (!data) {
-    return (
-      <InstagramLoader active />
-    );
-  }
-
-  const thisLaunch = data.filter((datum) => datum.flight_number === props.flight_number)[0]
+const LaunchPage = (props: LaunchPageProps) => {
 
   return (
     <View>
-      {/* TODO: delete? */}
-      {/* <Breadcrumbs
-        items={[
-          { label: "Home", to: "/" },
-          { label: "Launches", to: ".." },
-          { label: `#${thisLaunch.flight_number}` },
-        ]}
-      /> */}
-      <LaunchPageHeader launch={thisLaunch} />
       <View style={{ margin: 3 }}>
-        <TimeAndLocation launch={thisLaunch} />
-        <RocketInfo launch={thisLaunch} />
+        <TimeAndLocation launch={props.launch} />
+        <RocketInfo launch={props.launch} />
         <Text style={styles.launchDetails}>
-          {thisLaunch.details}
+          {props.launch.details}
         </Text>
         <iframe
           style={{ maxHeight: 400, aspectRatio: '1.7' }} // Aspect ratio as string doesn't play nicely with stylesheet. TODO: is it working here?
-          title={thisLaunch.mission_name}
-          src={`https://www.youtube.com/embed/${thisLaunch.links.youtube_id}`}
+          title={props.launch.mission_name}
+          src={`https://www.youtube.com/embed/${props.launch.links.youtube_id}`}
           allowFullScreen
         />
 
-        {/* Image gallery */}
         <View style={{ marginLeft: 6, marginRight: 6 }}>
-          {/* spacing="4" */}
-          {thisLaunch.links.flickr_images.map((imageUrl) => (
+          {props.launch.links.flickr_images.map((imageUrl) => (
             <OpenURLButton url={imageUrl} key={imageUrl}>
-              <Image source={{uri:imageUrl.replace("_o.jpg", "_z.jpg")}} />
+              <Image source={{ uri: imageUrl.replace("_o.jpg", "_z.jpg") }} />
             </OpenURLButton>
           ))}
         </View>
@@ -69,7 +41,6 @@ export default function LaunchPage(props: LaunchPageProps) {
     </View>
   );
 }
-
 
 
 const styles = StyleSheet.create({
@@ -82,3 +53,5 @@ const styles = StyleSheet.create({
     minWidth: '350px'
   },
 });
+
+export default LaunchPage

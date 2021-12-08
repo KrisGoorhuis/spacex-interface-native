@@ -1,6 +1,6 @@
 import React from "react"
 import { StyleSheet, ScrollView, View } from 'react-native'
-import { useInfiniteQuery, useQuery } from "react-query"
+import { useInfiniteQuery } from "react-query"
 
 import { Launch } from "../../model"
 import LaunchItem from "../../components/Launches/launchItem"
@@ -16,13 +16,7 @@ const LaunchScrollScreen = () => {
       {
          initialData: { pages: [], pageParams: [] },
          getNextPageParam: (lastPage: any, allPages: any) => {
-            if (lastPage) {
-               return (
-                  lastPage.length + 1
-                  // lastPage.length > 0 && lastPage[lastPage.length - 1].flight_number + 1
-               )
-            }
-            // else return { pageSize, offset: 0 }
+            if (lastPage) { return allPages.flat().length + 1 }
          }
       }
    )
@@ -35,8 +29,6 @@ const LaunchScrollScreen = () => {
       return <span>Error: {error.message}</span>
    }
 
-   console.log("data")
-   console.log(data)
 
    return (
       <View>
@@ -64,7 +56,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
    },
-
 });
 
 

@@ -1,13 +1,12 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import { format as timeAgo } from "timeago.js";
 import { Image, Badge } from 'react-native-elements'
+import { View, Text, Pressable, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { formatDateSimple } from "../../utils/format-date";
 import { Launch } from "../../model";
 import FavoriteLaunchButton from "./favoriteLaunchButton";
-import { View, Text, Pressable } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 
 interface LaunchItemProps {
@@ -18,9 +17,10 @@ interface LaunchItemProps {
 const LaunchItem = (props: LaunchItemProps) => {
    const navigation = useNavigation();
 
+
    return (
       <Pressable
-         onPress={() => navigation.navigate('LaunchScreen', { launch: props.launch })}
+         onPress={() => navigation.navigate('Launch', { launch: props.launch })}
          data-testid={"launchItem"}
          style={{
             overflow: "hidden",
@@ -34,11 +34,9 @@ const LaunchItem = (props: LaunchItemProps) => {
                      props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
                      props.launch.links.mission_patch_small
                }}
-               // alt={`${props.launch.mission_name} launch`}
                containerStyle={{
                   height: props.isDrawerFavorite ? 100 : 300,
                   width: "100%",
-                  // objectPosition={props.isDrawerFavorite ? "center" : "bottom"}
                }}
                resizeMode="cover"
             />
@@ -52,7 +50,6 @@ const LaunchItem = (props: LaunchItemProps) => {
                      top: "5",
                      right: "5",
                      height: "75px"
-                     // objectPosition="bottom"
                   }}
                   resizeMode="contain"
                />
@@ -60,6 +57,7 @@ const LaunchItem = (props: LaunchItemProps) => {
             {
                props.isDrawerFavorite &&
                <View style={{ position: "absolute", bottom: "10px", right: "10px" }} >
+
                   <FavoriteLaunchButton {...props} />
                </View>
             }
@@ -69,26 +67,23 @@ const LaunchItem = (props: LaunchItemProps) => {
             <View style={{ display: 'flex', alignItems: 'baseline' }}>
                <View style={{ width: '100%', display: 'flex' }}>
                   {props.launch.launch_success ? (
-                     <Badge containerStyle={{ paddingLeft: 2, paddingRight: 2, display: 'flex', alignItems: 'center' }}>
+                     <Badge containerStyle={styles.launchSuccessBadge}>
                         Successful
                      </Badge>
                   ) : (
-                     <Badge containerStyle={{ paddingLeft: 2, paddingRight: 2 }}>
+                     <Badge containerStyle={styles.launchSuccessBadge}>
                         Failed
                      </Badge>
                   )}
-                  {/* // color="gray.500"
-                     letterSpacing="wide"
-                     fontSize="xs"
-                     textTransform="uppercase"
-                     ml="2" */}
-                  <Text style={{ marginTop: 2, textTransform: "uppercase" }}>
+                  <Text>
                      {props.launch.rocket.rocket_name} &bull; {props.launch.launch_site.site_name}
                   </Text>
                </View>
                {
                   !props.isDrawerFavorite &&
-                  <FavoriteLaunchButton {...props} />
+                  <View>
+                     <FavoriteLaunchButton {...props} />
+                  </View>
                }
             </View>
             <Text
@@ -98,8 +93,8 @@ const LaunchItem = (props: LaunchItemProps) => {
                {props.launch.mission_name}
             </Text>
             <View style={{ flexDirection: props.isDrawerFavorite ? 'column' : 'row' }}>
-               <Text>{formatDateSimple(props.launch.launch_date_utc)} </Text>
-               <Text style={{ color: 'gray.500', marginLeft: 2 }}>
+               <Text style={styles.launchDate}>{formatDateSimple(props.launch.launch_date_utc)} </Text>
+               <Text style={styles.timeAgo}>
                   {timeAgo(props.launch.launch_date_utc)}
                </Text>
             </View>
@@ -107,5 +102,28 @@ const LaunchItem = (props: LaunchItemProps) => {
       </Pressable>
    );
 }
+
+const styles = StyleSheet.create({
+   launchSuccess: {
+
+   },
+   launchSuccessBadge: {
+      paddingLeft: 2,
+      paddingRight: 2,
+      display: 'flex',
+      alignItems: 'center'
+   },
+   rocketName: {
+      marginTop: 2,
+      textTransform: "uppercase"
+   },
+   launchDate: {
+      color: 'white'
+   },
+   timeAgo: {
+      color: 'white',
+      marginLeft: 2
+   }
+})
 
 export default LaunchItem

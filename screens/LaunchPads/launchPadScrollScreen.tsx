@@ -9,10 +9,19 @@ import { queryLaunchPads } from "../../utils/networking";
 import LoadMoreButton from "../../components/load-more-button";
 
 
+const pageSize = 12
+const LaunchPadScrollScreen = (props: { data: LaunchPad[] | undefined }) => {
 
-export default function LaunchPads(props: { data: LaunchPad[] | undefined }) {
-  const [pageSize, setPageSize] = React.useState<number>(12)
-  const { isLoading, isError, error, data } = useInfiniteQuery<LaunchPad[], { message: string }>('launchPads', () => queryLaunchPads(pageSize))
+  const { isLoading, isError, error, data, fetchNextPage } = useInfiniteQuery<LaunchPad[], { message: string }>(
+    ['launchPads'],
+    (context) => queryLaunchPads(context, pageSize),
+    {
+      initialData: { pages: [], pageParams: [] },
+      getNextPageParam: (lastPage: any, allPages: any) => {
+        if (lastPage) { return allPages.flat().length + 1 }
+      }
+    }
+  )
 
   if (isLoading) {
     return <span>Loading...</span>
@@ -22,10 +31,6 @@ export default function LaunchPads(props: { data: LaunchPad[] | undefined }) {
     return <span>Error: {error.message}</span>
   }
 
-  console.log("data?.pages")
-  console.log(data?.pages)
-  console.log("data?.pages.flat()")
-  console.log(data?.pages.flat())
 
   return (
     <View>
@@ -39,7 +44,7 @@ export default function LaunchPads(props: { data: LaunchPad[] | undefined }) {
         }
       </ScrollView>
       <LoadMoreButton
-        loadMore={() => {console.log("pressed"); setPageSize(pageSize + 1)}}
+        loadMore={() => fetchNextPage()}
         data={data?.pages.flat()}
         pageSize={pageSize}
         isLoadingMore={isLoading}
@@ -48,3 +53,4 @@ export default function LaunchPads(props: { data: LaunchPad[] | undefined }) {
   );
 }
 
+export default LaunchPadScrollScreen

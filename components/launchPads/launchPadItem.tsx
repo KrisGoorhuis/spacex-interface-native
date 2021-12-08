@@ -1,9 +1,10 @@
 import React from "react";
-import { LaunchPad, LaunchPadProps } from "../../model";
-import FavoriteLaunchPadButton from "./favoriteLaunchPadButton";
 import { Pressable, StyleSheet, View, Text } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 import { Badge } from "react-native-elements";
+
+import { LaunchPad, LaunchPadProps } from "../../model";
+import FavoriteLaunchPadButton from "./favoriteLaunchPadButton";
 
 interface launchPadItemProps extends LaunchPadProps {
   launchPad: LaunchPad
@@ -15,10 +16,8 @@ const LaunchPadItem = (props: launchPadItemProps) => {
 
   return (
     <Pressable
-      onPress={() => navigation.navigate('LaunchPadScreen', { launchPad: props.launchPad })}
+      onPress={() => navigation.navigate('Launch Pad', { launchPad: props.launchPad })}
       data-testid={"launchItem"}
-      // as={Link}
-      // to={`/launches/${props.launch.flight_number.toString()}`}
       style={{
         // boxShadow: "md",
         // borderWidth: {props.isDrawerFavorite ? 0 : "1px"},
@@ -26,14 +25,6 @@ const LaunchPadItem = (props: launchPadItemProps) => {
         overflow: "hidden",
         position: "relative",
       }}
-    // data-testid="launchPadItem"
-    // as={Link}
-    // to={`/launch-pads/${props.launchPad.site_id}`}
-    // boxShadow="md"
-    // borderWidth={props.isDrawerFavorite ? 0 : "1px"}
-    // rounded="lg"
-    // overflow="hidden"
-    // position="relative"
     >
       <View style={{ padding: 6 }}>
         <View style={{ display: 'flex', alignItems: 'baseline' }}>

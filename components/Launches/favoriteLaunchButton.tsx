@@ -2,11 +2,11 @@ import React from 'react'
 import { Check, X, Star } from "react-feather";
 import { useDispatch, useSelector } from 'react-redux';
 import { Badge } from 'react-native-elements'
+import { View, Text, Pressable } from 'react-native';
 
 import { Launch } from '../../model';
 import { removeFromFavoriteLaunches, addToFavoriteLaunches } from '../../redux/slices/favoritesSlice';
 import { State } from '../../redux';
-import { View } from 'react-native';
 
 
 interface FavoriteLaunchButtonProps {
@@ -33,7 +33,7 @@ const FavoriteLaunchButton = (props: FavoriteLaunchButtonProps) => {
    }
 
    const handleToggleFavorite = (e: any) => { // Event typing 
-      e.preventDefault() // Prevent parent's onclick
+      e.stopPropagation() // Prevent parent's onclick
 
       if (props.isDrawerFavorite && !confirming) { // Non drawer favorites and confirmation clicks will bypass
          setConfirming(true)
@@ -42,44 +42,32 @@ const FavoriteLaunchButton = (props: FavoriteLaunchButtonProps) => {
    }
 
    const handleCancel = (e: any) => {
-      e.preventDefault()
+      e.stopPropagation()
 
       setConfirming(false)
    }
 
 
    return (
-      <Badge containerStyle={{padding: '2px'}}>
+      <View style={{ padding: '2px' }}>
          {
             confirming &&
-            <View style={{display: 'flex', backgroundColor: 'whitesmoke'}}>
-               {/* <View
-                  style={{position: 'relative' }}
-                  as={}
-                  onClick={handleToggleFavorite}
-               /> */}
-               <Check color="greenyellow" onClick={handleToggleFavorite} />
-               {/* <View
-                  style={{ color: 'red', position: 'relative' }}
-                  as={X}
-                  onClick={handleCancel}
-               /> */}
-               <X color="red" onClick={handleCancel} />
+            <View style={{ display: 'flex', backgroundColor: 'whitesmoke' }}>
+               <Pressable onPress={handleToggleFavorite}>
+                  <Check color="greenyellow" />
+               </Pressable>
+               <Pressable>
+                  <X color="red" onClick={handleCancel} />
+               </Pressable>
             </View>
          }
          {
             !confirming &&
-            // <View
-            //    backgroundColor="whitesmoke"
-            //    padding="2px"
-            //    style={{ color: isFavorited ? 'gold' : 'darkgray', position: 'relative' }}
-            //    as={Star}
-            //    onClick={handleToggleFavorite}
-            // />
-            <Star color={isFavorited ? 'gold' : 'darkgray'} onClick={handleToggleFavorite} />
-
+            <Pressable onPress={handleToggleFavorite}>
+               <Star color={isFavorited ? 'gold' : 'darkgray'} />
+            </Pressable>
          }
-      </Badge>
+      </View>
    )
 }
 

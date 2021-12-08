@@ -17,10 +17,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View>
-        <Pressable
-          onPress={() => navigation.navigate('LaunchScrollScreen')}
-
-        >
+        <Pressable onPress={() => navigation.navigate('Launches')}>
           <Text>
             Browse Launches
           </Text>

@@ -1,48 +1,34 @@
 import { REACT_APP_SPACEX_API_URL } from "react-native-dotenv"
+import { QueryFunctionContext } from "react-query"
 import { Launch, LaunchPad } from "../model"
 
 
-
-
-export const queryLaunches = async (context: any, pageSize: number): Promise<any> => {
-   console.log("fetching?")
-   console.log("context")
-   console.log(context)
-   console.log("context.pageParams")
-   console.log(context.pageParam)
-
+export const queryLaunches = async (context: QueryFunctionContext, pageSize: number): Promise<Launch[]> => {
    const offset = context.pageParam | 0
 
-   console.log('offset')
-   console.log(offset)
-   const result = fetch(`${REACT_APP_SPACEX_API_URL}/launches/past?limit=${pageSize}&order=desc&sort=launch_date_utc&offset=${offset}`)
-      .then((res) => res.json())
+   return fetch(`${REACT_APP_SPACEX_API_URL}/launches/past?limit=${pageSize}&order=desc&sort=launch_date_utc&offset=${offset}`)
+      .then((response) => response.json())
       .catch((error) => console.log(error))
-      return result
 }
 
-export const queryLaunch = (launchId: number): Promise<Launch[]> => {
+export const queryLaunch = (context: QueryFunctionContext, launchId: number): Promise<Launch> => {
    return fetch(`${REACT_APP_SPACEX_API_URL}/launches/${launchId}`)
-      .then((res) => res.json())
-      .catch(() => {
-         // TODO: Handle errors?
-      })
+      .then((response) => response.json())
+      .catch((error) => console.log(error))
 }
 
 
 export const queryPastLaunches = (launchPadId: number, limit: number, order: string = 'desc'): Promise<LaunchPad[]> => {
    return fetch(`${REACT_APP_SPACEX_API_URL}/launchPads/${launchPadId}/past?limit=${limit}&order="${order}"&sort=launch_date_utc&offset=0`)
-      .then((res) => res.json())
+      .then((response) => response.json())
       .catch(() => {
          // TODO: Handle errors?
       })
 }
 
 
-export const queryLaunchPads = (limit: number): Promise<LaunchPad[]> => {
-   return fetch(`${REACT_APP_SPACEX_API_URL}/launchpads?limit=${limit}&offset=0`)
-      .then((res) => res.json())
-      .catch(() => {
-         // TODO: Handle errors?
-      })
+export const queryLaunchPads = (context: QueryFunctionContext, pageSize: number): Promise<LaunchPad[]> => {
+   return fetch(`${REACT_APP_SPACEX_API_URL}/launchpads?limit=${pageSize}&offset=0`)
+      .then((response) => response.json())
+      .catch((error) => console.log(error))
 }

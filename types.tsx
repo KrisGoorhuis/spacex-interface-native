@@ -6,6 +6,7 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { Launch, LaunchPad } from './model';
 
 declare global {
@@ -17,11 +18,11 @@ declare global {
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
-  LaunchScrollScreen: undefined;
-  LaunchScreen: {launch: Launch};
+  Launch: {launch: Launch};
+  Launches: undefined;
 
-  LaunchPadScrollScreen: undefined;
-  LaunchPadScreen: {launchPad: LaunchPad};
+  "Launch Pad": {launchPad: LaunchPad};
+  "Launch Pads": undefined;
   NotFound: undefined;
 };
 

@@ -3,7 +3,8 @@ import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import LaunchPage from '../../components/Launches/launchPage/launch-page';
 
-import { Text, View } from '../../components/Themed';
+import { View } from '../../components/Themed';
+import { Launch } from '../../model';
 
 
 interface LaunchScreenProps {
@@ -11,23 +12,15 @@ interface LaunchScreenProps {
 }
 
 export default function LaunchScreen(props: LaunchScreenProps) { 
-   const launch = props.route.params.launch
+   const launch: Launch = props.route.params.launch
 
    return (
       <View style={styles.container}>
-         <Text style={styles.title}>Launches!</Text>
-
-         <Text style={styles.title}>{JSON.stringify(launch)}</Text>
-
          {
             launch &&
-            <LaunchPage flight_number={launch.flight_number} />
+            <LaunchPage launch={launch} />
          }
-
-
          <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-
-
          {/* Use a light status bar on iOS to account for the black space above the modal */}
          <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
       </View>

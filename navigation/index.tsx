@@ -10,6 +10,8 @@ import useColorScheme from '../hooks/useColorScheme';
 // import LaunchPadScreen from '../screens/LaunchPadScreen';
 import LaunchScreen from '../screens/Launches/LaunchScreen';
 import LaunchScrollScreen from '../screens/Launches/launchScrollScreen';
+import LaunchPadScreen from '../screens/LaunchPads/LaunchPadScreen';
+import LaunchPadScrollScreen from '../screens/LaunchPads/launchPadScrollScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
@@ -38,13 +40,13 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
-        <Stack.Screen name="LaunchScrollScreen" component={LaunchScrollScreen} />
-        <Stack.Screen name="LaunchScreen" component={LaunchScreen} />
+        <Stack.Screen name="Launches" component={LaunchScrollScreen} />
+        <Stack.Screen name="Launch" component={LaunchScreen} />
       </Stack.Group>
-      {/* <Stack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
-        <Stack.Screen name="LaunchPadScroll" component={LaunchPadScroll} />
-        <Stack.Screen name="LaunchPadScreen" component={LaunchPadScreen} />
-      </Stack.Group> */}
+      <Stack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
+        <Stack.Screen name="Launch Pads" component={LaunchPadScrollScreen} />
+        <Stack.Screen name="Launch Pad" component={LaunchPadScreen} />
+      </Stack.Group>
     </Stack.Navigator>
   );
 }

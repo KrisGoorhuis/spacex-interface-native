@@ -10,7 +10,7 @@ interface LoadMoreButtonProps {
 }
 
 
-export default function LoadMoreButton(props: LoadMoreButtonProps) {
+const LoadMoreButton = (props: LoadMoreButtonProps) => {
   const isReachingEnd = props.data?.[0]?.length === 0 || (props.data && props.data[props.data.length - 1]?.length < props.pageSize);
 
   return (
@@ -20,12 +20,14 @@ export default function LoadMoreButton(props: LoadMoreButtonProps) {
           props.isLoadingMore ? (
             <ActivityIndicator size="large" />
           ) : isReachingEnd ? (
-            <Text>"That's all!"</Text>
+            <Text>That's all!</Text>
           ) : (
-            <Text>"Show more..."</Text>
+            <Text>Show more...</Text>
           )
         }
       </Pressable>
     </View>
   );
 }
+
+export default LoadMoreButton

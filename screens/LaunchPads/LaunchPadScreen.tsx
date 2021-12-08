@@ -14,8 +14,6 @@ interface LaunchPadScreenProps {
 export default function LaunchPadScreen(props: LaunchPadScreenProps) { 
    const launch = props.route.params.launchPad
 
-   console.log("launch")
-   console.log(launch)
 
    return (
       <View style={styles.container}>
