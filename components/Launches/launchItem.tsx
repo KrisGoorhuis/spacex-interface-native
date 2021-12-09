@@ -17,27 +17,20 @@ interface LaunchItemProps {
 const LaunchItem = (props: LaunchItemProps) => {
    const navigation = useNavigation();
 
-
    return (
       <Pressable
          onPress={() => navigation.navigate('Launch', { launch: props.launch })}
          data-testid={"launchItem"}
-         style={{
-            overflow: "hidden",
-            position: "relative",
-         }}
+         style={styles.container}
       >
-         <View style={{ position: "relative" }} >
+         <View>
             <Image
                source={{
                   uri:
                      props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
                      props.launch.links.mission_patch_small
                }}
-               containerStyle={{
-                  height: props.isDrawerFavorite ? 100 : 300,
-                  width: "100%",
-               }}
+               containerStyle={{ height: props.isDrawerFavorite ? 100 : 300 }}
                resizeMode="cover"
             />
 
@@ -45,37 +38,32 @@ const LaunchItem = (props: LaunchItemProps) => {
                !props.isDrawerFavorite &&
                <Image
                   source={{ uri: props.launch.links.mission_patch_small }}
-                  style={{
-                     position: "absolute",
-                     top: "5",
-                     right: "5",
-                     height: "75px"
-                  }}
+                  style={styles.patch}
                   resizeMode="contain"
                />
             }
             {
                props.isDrawerFavorite &&
-               <View style={{ position: "absolute", bottom: "10px", right: "10px" }} >
-
+               <View style={styles.launchButtonContainer} >
                   <FavoriteLaunchButton {...props} />
                </View>
             }
          </View>
 
-         <View style={{ padding: 6 }}>
-            <View style={{ display: 'flex', alignItems: 'baseline' }}>
-               <View style={{ width: '100%', display: 'flex' }}>
-                  {props.launch.launch_success ? (
-                     <Badge containerStyle={styles.launchSuccessBadge}>
-                        Successful
-                     </Badge>
-                  ) : (
-                     <Badge containerStyle={styles.launchSuccessBadge}>
-                        Failed
-                     </Badge>
-                  )}
-                  <Text>
+         <View style={styles.body}>
+            <View>
+               <View>
+                  {props.launch.launch_success ?
+                     <View>
+                        <Badge containerStyle={styles.launchSuccessBadge} value="Successful" status={"success"} />
+
+                     </View>
+                     :
+                     <View>
+                        <Badge containerStyle={styles.launchSuccessBadge} value="Failed" status={"warning"} />
+                     </View>
+                  }
+                  <Text style={styles.rocketName}>
                      {props.launch.rocket.rocket_name} &bull; {props.launch.launch_site.site_name}
                   </Text>
                </View>
@@ -87,7 +75,7 @@ const LaunchItem = (props: LaunchItemProps) => {
                }
             </View>
             <Text
-               style={{ marginTop: 1, }}
+               style={styles.missionName}
                numberOfLines={3} // TODO: adjust me. Replacement for isTruncated from chakraUI
             >
                {props.launch.mission_name}
@@ -104,8 +92,18 @@ const LaunchItem = (props: LaunchItemProps) => {
 }
 
 const styles = StyleSheet.create({
-   launchSuccess: {
-
+   container: {
+      overflow: "hidden",
+      position: "relative",
+   },
+   patch: {
+      position: "absolute",
+      top: "5",
+      right: "5",
+      height: "75px"
+   },
+   body: {
+      padding: 6,
    },
    launchSuccessBadge: {
       paddingLeft: 2,
@@ -113,7 +111,12 @@ const styles = StyleSheet.create({
       display: 'flex',
       alignItems: 'center'
    },
+   missionName: {
+      marginTop: 1,
+      color: 'white',
+   },
    rocketName: {
+      color: 'white',
       marginTop: 2,
       textTransform: "uppercase"
    },
@@ -123,6 +126,11 @@ const styles = StyleSheet.create({
    timeAgo: {
       color: 'white',
       marginLeft: 2
+   },
+   launchButtonContainer: {
+      position: "absolute",
+      bottom: "10px",
+      right: "10px"
    }
 })
 
