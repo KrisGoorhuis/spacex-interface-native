@@ -1,43 +1,30 @@
 import * as React from 'react';
 import { Pressable, ScrollView, StyleSheet } from 'react-native';
-import { useQuery } from 'react-query';
 
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
-import { REACT_APP_SPACEX_API_URL } from "react-native-dotenv"
-import { Launch } from '../model';
-import LaunchItem from '../components/Launches/launchItem';
-import { SpaceXSections } from '../model/constants';
-
 
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
 
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View>
-        <Pressable onPress={() => navigation.navigate('Launches')}>
-          <Text>
-            Browse Launches
-          </Text>
-        </Pressable>
-        {/* <Pressable 
-          onPress={() => navigation.navigate('LaunchPageScroll')}
+      <Pressable onPress={() => navigation.navigate('Launches')}>
+        <Text>
+          Browse Launches
+        </Text>
+      </Pressable>
 
-        >
-          Launch Pads!
-        </Pressable> */}
-        {/* {
-          presentlyNavigating === SpaceXSections.launches &&
-
-        } */}
-      </View>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+
+      <Pressable onPress={() => navigation.navigate('Launch Pads')}>
+        <Text>
+          Browse Launch Pads
+        </Text>
+      </Pressable>
     </ScrollView>
   );
 }
-
 
 
 

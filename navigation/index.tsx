@@ -1,4 +1,4 @@
-import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -7,7 +7,6 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-// import LaunchPadScreen from '../screens/LaunchPadScreen';
 import LaunchScreen from '../screens/Launches/LaunchScreen';
 import LaunchScrollScreen from '../screens/Launches/launchScrollScreen';
 import LaunchPadScreen from '../screens/LaunchPads/LaunchPadScreen';
@@ -63,15 +62,24 @@ function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="TabOne"
-      screenOptions={{
+      screenOptions={({route}) =>({
         tabBarActiveTintColor: Colors[colorScheme].tint,
-      }}>
+        tabBarIcon: ({focused, color, size}) => {
+          if (route.name === "TabOne") {
+            return <AntDesign name="rocket1" />
+          }
+          else if (route.name === "TabTwo") {
+            return <AntDesign name="staro" />
+          }
+          else return <AntDesign name="home" />
+        }
+      })}>
       <BottomTab.Screen
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Browser',
+          tabBarIcon: ({ color }) => <TabBarIcon name="rocket1" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -92,8 +100,8 @@ function BottomTabNavigator() {
         name="TabTwo"
         component={TabTwoScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Favorites',
+          tabBarIcon: ({ color }) => <TabBarIcon name="staro" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -104,8 +112,8 @@ function BottomTabNavigator() {
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof AntDesign>['name'];
   color: string;
 }) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <AntDesign size={30} style={{ marginBottom: -3 }} {...props} />;
 }
