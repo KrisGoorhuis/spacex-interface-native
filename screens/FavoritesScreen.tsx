@@ -2,8 +2,9 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { Text, View } from '../components/Themed';
+import { RootTabScreenProps } from '../model/navTypes';
 
-export default function TabTwoScreen() {
+export default function Favorites({ navigation }: RootTabScreenProps<'Favorites'>) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>

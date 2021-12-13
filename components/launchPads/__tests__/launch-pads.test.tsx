@@ -5,7 +5,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import LaunchPadScrollScreen from '../../../screens/LaunchPads/launchPadScrollScreen';
+import LaunchPadScrollScreen from '../../../screens/LaunchPads/launchPadsScreen';
 import { ExampleLaunchPad } from '../../../model/example-launch-pad';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store'

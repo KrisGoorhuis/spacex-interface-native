@@ -7,15 +7,11 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import LaunchScreen from '../screens/Launches/LaunchScreen';
-import LaunchScrollScreen from '../screens/Launches/launchScrollScreen';
-import LaunchPadScreen from '../screens/LaunchPads/LaunchPadScreen';
-import LaunchPadScrollScreen from '../screens/LaunchPads/launchPadScrollScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
+import Favorites from '../screens/FavoritesScreen';
+import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../model/navTypes';
 import LinkingConfiguration from './LinkingConfiguration';
+import BrowserStack from './browserStack';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -38,14 +34,24 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
+
+      {/* Nest stacks */}
+      {/* <Stack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
         <Stack.Screen name="Launches" component={LaunchScrollScreen} />
-        <Stack.Screen name="Launch" component={LaunchScreen} />
+        <Stack.Screen
+          name="Launch"
+          options={({ route }) => ({
+            headerTitle: `${route.params.launch.mission_name}`
+          })}
+          component={LaunchScreen}
+        />
       </Stack.Group>
+
       <Stack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
         <Stack.Screen name="Launch Pads" component={LaunchPadScrollScreen} />
         <Stack.Screen name="Launch Pad" component={LaunchPadScreen} />
-      </Stack.Group>
+      </Stack.Group> */}
+
     </Stack.Navigator>
   );
 }
@@ -61,24 +67,15 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
-      screenOptions={({route}) =>({
+      initialRouteName="Browser"
+      screenOptions={({ route }) => ({
         tabBarActiveTintColor: Colors[colorScheme].tint,
-        tabBarIcon: ({focused, color, size}) => {
-          if (route.name === "TabOne") {
-            return <AntDesign name="rocket1" />
-          }
-          else if (route.name === "TabTwo") {
-            return <AntDesign name="staro" />
-          }
-          else return <AntDesign name="home" />
-        }
       })}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Browser',
+        name="Browser"
+        component={BrowserStack}
+        options={({ navigation }: RootTabScreenProps<'Browser'>) => ({
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="rocket1" color={color} />,
           headerRight: () => (
             <Pressable
@@ -97,8 +94,8 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Favorites"
+        component={Favorites}
         options={{
           title: 'Favorites',
           tabBarIcon: ({ color }) => <TabBarIcon name="staro" color={color} />,

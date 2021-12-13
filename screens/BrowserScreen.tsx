@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Pressable, ScrollView, StyleSheet } from 'react-native';
 
 import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
+import { RootTabScreenProps } from '../model/navTypes';
 
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function BrowserScreen({ navigation }: RootTabScreenProps<'Browser'>) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -25,6 +25,8 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
     </ScrollView>
   );
 }
+
+
 
 
 
