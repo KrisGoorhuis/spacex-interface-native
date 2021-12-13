@@ -5,6 +5,8 @@ import { Badge } from "react-native-elements";
 
 import { LaunchPad, LaunchPadProps } from "../../model";
 import FavoriteLaunchPadButton from "./favoriteLaunchPadButton";
+import { BrowserStackParamList } from "../../model/navTypes";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 interface launchPadItemProps extends LaunchPadProps {
   launchPad: LaunchPad
@@ -12,16 +14,13 @@ interface launchPadItemProps extends LaunchPadProps {
 }
 
 const LaunchPadItem = (props: launchPadItemProps) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<BrowserStackParamList>>();
 
   return (
     <Pressable
       onPress={() => navigation.navigate('Launch Pad', { launchPad: props.launchPad })}
       data-testid={"launchItem"}
       style={{
-        // boxShadow: "md",
-        // borderWidth: {props.isDrawerFavorite ? 0 : "1px"},
-        // rounded: "lg",
         overflow: "hidden",
         position: "relative",
       }}

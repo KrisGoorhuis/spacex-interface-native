@@ -2,11 +2,10 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import { useInfiniteQuery } from "react-query";
 
-import Error from "../../components/error";
-import LaunchPadItem from "../../components/launchPads/launchPadItem";
-import { LaunchPad } from "../../model";
-import { queryLaunchPads } from "../../utils/networking";
-import LoadMoreButton from "../../components/load-more-button";
+import LaunchPadItem from "../../../components/launchPads/launchPadItem";
+import { LaunchPad } from "../../../model";
+import { queryLaunchPads } from "../../../utils/networking";
+import LoadMoreButton from "../../../components/load-more-button";
 
 
 const pageSize = 12

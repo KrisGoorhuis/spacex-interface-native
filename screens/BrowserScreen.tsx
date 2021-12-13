@@ -2,13 +2,13 @@ import * as React from 'react';
 import { Pressable, ScrollView, StyleSheet } from 'react-native';
 
 import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../model/navTypes';
+import { BrowserScreenProps } from '../model/navTypes';
 
 
-export default function BrowserScreen({ navigation }: RootTabScreenProps<'Browser'>) {
+export default function BrowserScreen({ navigation }: BrowserScreenProps<'Browser Screen'>) {
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
       <Pressable onPress={() => navigation.navigate('Launches')}>
         <Text>
           Browse Launches
@@ -22,12 +22,9 @@ export default function BrowserScreen({ navigation }: RootTabScreenProps<'Browse
           Browse Launch Pads
         </Text>
       </Pressable>
-    </ScrollView>
+    </View>
   );
 }
-
-
-
 
 
 const styles = StyleSheet.create({

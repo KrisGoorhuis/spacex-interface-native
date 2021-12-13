@@ -15,14 +15,11 @@ declare global {
   }
 }
 
+
+// Stack params
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
-  Launch: { launch: Launch };
-  Launches: undefined;
-
-  "Launch Pad": { launchPad: LaunchPad };
-  "Launch Pads": undefined;
   NotFound: undefined;
 };
 
@@ -38,19 +35,31 @@ export type BrowserStackParamList = {
 
 export type FavoritesStackParamList = {
   "Favorites Screen": undefined
-};
 
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
-  RootStackParamList,
-  Screen
->;
+  Launch: { launch: Launch };
+  "Launch Pad": { launchPad: LaunchPad }
+};
 
 export type RootTabParamList = {
   Browser: undefined;
   Favorites: undefined;
 };
 
+
+export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
+  RootStackParamList,
+  Screen
+>;
+
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
   BottomTabScreenProps<RootTabParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>
 >;
+
+export type BrowserScreenProps<Screen extends keyof BrowserStackParamList> = CompositeScreenProps<
+  BottomTabScreenProps<BrowserStackParamList, Screen>,
+  NativeStackScreenProps<BrowserStackParamList>
+>;
+
+export type FavoritesScreenProps<Screen extends keyof FavoritesStackParamList> = NativeStackScreenProps<FavoritesStackParamList, Screen>;
+

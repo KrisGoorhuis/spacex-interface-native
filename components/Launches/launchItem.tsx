@@ -3,10 +3,12 @@ import { format as timeAgo } from "timeago.js";
 import { Image, Badge } from 'react-native-elements'
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from '@react-navigation/stack'
 
 import { formatDateSimple } from "../../utils/format-date";
 import { Launch } from "../../model";
 import FavoriteLaunchButton from "./favoriteLaunchButton";
+import { BrowserStackParamList } from "../../model/navTypes";
 
 
 interface LaunchItemProps {
@@ -15,7 +17,7 @@ interface LaunchItemProps {
 }
 
 const LaunchItem = (props: LaunchItemProps) => {
-   const navigation = useNavigation();
+   const navigation = useNavigation<StackNavigationProp<BrowserStackParamList>>();
 
    return (
       <Pressable

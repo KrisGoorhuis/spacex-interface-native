@@ -12,6 +12,7 @@ import Favorites from '../screens/FavoritesScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../model/navTypes';
 import LinkingConfiguration from './LinkingConfiguration';
 import BrowserStack from './browserStack';
+import FavoritesStack from './favoritesStack';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -95,8 +96,9 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Favorites"
-        component={Favorites}
+        component={FavoritesStack}
         options={{
+          headerShown: false,
           title: 'Favorites',
           tabBarIcon: ({ color }) => <TabBarIcon name="staro" color={color} />,
         }}

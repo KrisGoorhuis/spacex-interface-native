@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { BrowserStackParamList, RootTabScreenProps } from "../model/navTypes";
+import { BrowserScreenProps, BrowserStackParamList } from "../model/navTypes";
 import BrowserScreen from "../screens/BrowserScreen";
-import LaunchScrollScreen from "../screens/Launches/launchesScreen";
-import LaunchScreen from "../screens/Launches/LaunchScreen";
-import LaunchPadScreen from "../screens/LaunchPads/LaunchPadScreen";
-import LaunchPadScrollScreen from "../screens/LaunchPads/launchPadsScreen";
+import LaunchScrollScreen from "../screens/BrowserSubscreens/Launches/launchesScreen";
+import LaunchScreen from "../screens/BrowserSubscreens/Launches/LaunchScreen";
+import LaunchPadScreen from "../screens/BrowserSubscreens/LaunchPads/LaunchPadScreen";
+import LaunchPadScrollScreen from "../screens/BrowserSubscreens/LaunchPads/launchPadsScreen";
+
 
 const Stack = createNativeStackNavigator<BrowserStackParamList>();
 
-export default function BrowserStack({ navigation }: RootTabScreenProps<'Browser'>) {
+export default function BrowserStack({ navigation }: BrowserScreenProps<'Browser Screen'>) {
 
   return (
     <Stack.Navigator initialRouteName="Browser Screen">

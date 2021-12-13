@@ -1,11 +1,11 @@
 import React from "react"
-import { StyleSheet, ScrollView, View } from 'react-native'
+import { StyleSheet, ScrollView, View, FlatList } from 'react-native'
 import { useInfiniteQuery } from "react-query"
 
-import { Launch } from "../../model"
-import LaunchItem from "../../components/Launches/launchItem"
-import { queryLaunches } from "../../utils/networking"
-import LoadMoreButton from "../../components/load-more-button"
+import { Launch } from "../../../model"
+import LaunchItem from "../../../components/Launches/launchItem"
+import { queryLaunches } from "../../../utils/networking"
+import LoadMoreButton from "../../../components/load-more-button"
 
 
 const pageSize = 3
@@ -31,28 +31,33 @@ const LaunchScrollScreen = () => {
 
 
    return (
-      <View>
-         <ScrollView contentContainerStyle={styles.container}>
-            {
+      <ScrollView>
+         <FlatList
+            contentContainerStyle={styles.container}
+            data={data?.pages.flat()}
+            renderItem={({ item }) => (
+               <LaunchItem key={item.flight_number} launch={item} />
+            )}
+         />
+            {/* {
                data &&
                data.pages.flat().map((launchItem: Launch) => {
                   return <LaunchItem key={launchItem.flight_number} launch={launchItem} />
                })
-            }
-         </ScrollView>
+            } */}
          <LoadMoreButton
             loadMore={() => fetchNextPage()}
             data={data?.pages.flat()}
             pageSize={pageSize}
             isLoadingMore={isLoading}
          />
-      </View>
+      </ScrollView>
    );
 }
 
 const styles = StyleSheet.create({
    container: {
-      flex: 1,
+      // flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: 'black'
