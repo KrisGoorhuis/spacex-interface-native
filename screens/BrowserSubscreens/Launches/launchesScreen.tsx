@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, ScrollView, View, FlatList } from 'react-native'
+import { StyleSheet, ScrollView, FlatList } from 'react-native'
 import { useInfiniteQuery } from "react-query"
 
 import { Launch } from "../../../model"
@@ -39,7 +39,8 @@ const LaunchScrollScreen = () => {
                <LaunchItem key={item.flight_number} launch={item} />
             )}
          />
-            {/* {
+         {/* TODO: delete */}
+         {/* {
                data &&
                data.pages.flat().map((launchItem: Launch) => {
                   return <LaunchItem key={launchItem.flight_number} launch={launchItem} />
