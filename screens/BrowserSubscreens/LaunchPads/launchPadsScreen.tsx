@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, Text } from "react-native";
 import { useInfiniteQuery } from "react-query";
 
 import LaunchPadItem from "../../../components/launchPads/launchPadItem";
@@ -23,23 +23,25 @@ const LaunchPadScrollScreen = (props: { data: LaunchPad[] | undefined }) => {
   )
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <Text>Loading...</Text>
   }
 
   if (isError && error) {
-    return <span>Error: {error.message}</span>
+    return <Text>Error: {error.message}</Text>
   }
 
 
   return (
     <View>
       <ScrollView>
-        {props.data &&
+        {props.data ?
           (props.data.flat()).map((item, i) => {
             return (
               <LaunchPadItem launchPad={item} key={item.site_id + i} />
             )
           })
+          :
+          null
         }
       </ScrollView>
       <LoadMoreButton

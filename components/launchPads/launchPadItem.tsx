@@ -55,7 +55,7 @@ const LaunchPadItem = (props: launchPadItemProps) => {
         >
           {props.launchPad.location.name}
         </Text>
-        <Text style={{ color: 'gray.500' }}>
+        <Text style={{ color: 'gray' }}>
           {props.launchPad.vehicles_launched.join(", ")}
         </Text>
       </View>

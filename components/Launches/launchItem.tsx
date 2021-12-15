@@ -37,18 +37,22 @@ const LaunchItem = (props: LaunchItemProps) => {
             />
 
             {
-               !props.isDrawerFavorite &&
+               !props.isDrawerFavorite ?
                <Image
                   source={{ uri: props.launch.links.mission_patch_small }}
                   style={styles.patch}
                   resizeMode="contain"
                />
+               : 
+               null
             }
             {
-               props.isDrawerFavorite &&
+               props.isDrawerFavorite ?
                <View style={styles.launchButtonContainer} >
                   <FavoriteLaunchButton {...props} />
                </View>
+               :
+               null
             }
          </View>
 
@@ -70,10 +74,12 @@ const LaunchItem = (props: LaunchItemProps) => {
                   </Text>
                </View>
                {
-                  !props.isDrawerFavorite &&
+                  !props.isDrawerFavorite ?
                   <View>
                      <FavoriteLaunchButton {...props} />
                   </View>
+                  :
+                  null
                }
             </View>
             <Text

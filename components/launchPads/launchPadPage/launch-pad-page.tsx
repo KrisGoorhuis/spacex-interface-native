@@ -4,36 +4,38 @@ import { QueryFunctionContext, useQuery } from "react-query";
 import { InstagramLoader } from "react-native-easy-content-loader";
 
 import Error from "../../error";
-import { Launch, Launch as LaunchType, LaunchPad as LaunchPadType, LaunchPadProps } from '../../../model/index'
+import { Launch, Launch as LaunchType, LaunchPad, LaunchPad as LaunchPadType, LaunchPadProps } from '../../../model/index'
 import LaunchPadHeader from "./launch-pad-header";
 import { queryLaunches, queryLaunchPads } from "../../../utils/networking";
 import { StyleSheet, Text, View } from 'react-native'
-import { ListItem } from "react-native-elements/dist/list/ListItem";
+import { ListItem } from "react-native-elements";
 import { Divider } from "react-native-elements";
 import LaunchItem from "../../Launches/launchItem";
 
 
 interface LaunchPadPageProps {
-  launchPadId: number | undefined,
+  launchPad: LaunchPad,
   [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
 
 export default function LaunchPadPage(props: LaunchPadPageProps) {
 // (context: QueryFunctionContext<TQueryKey>) => T | Promise<T>;
-  const LaunchPadQuery = useQuery<LaunchPadType[], Error>('launchPads', () => queryLaunchPads(props.launchPadId))
 
-  const LaunchesQuery = useQuery<LaunchType[], Error>('launches', queryLaunches)
+  const LaunchesQuery = {data: [], error: 'temp'}
+  // const LaunchesQuery = useQuery<LaunchType[], Error>('launches', queryPastLaunches)
 
+// 
 
-  if (LaunchPadQuery.error || LaunchesQuery.error) return <Error />;
+  // if (props.launchPad.error || LaunchesQuery.error) return <Error />;
 
-  if (!LaunchPadQuery.data || !LaunchesQuery.data) {
-    return (
-      <InstagramLoader active />
-    );
-  }
+  // if (!props.launchPad.data || !LaunchesQuery.data) {
+  //   return (
+  //     <InstagramLoader active />
+  //   );
+  // }
 
-  const thisLaunchPad = LaunchPadQuery.data.filter((launchPad: LaunchPadType) => launchPad.id === props.launchPadId)[0]
+  // const thisLaunchPad = LaunchesQuery.data.filter((launchPad: LaunchPadType) => launchPad.id === props.launchPadId)[0]
+  const thisLaunchPad = props.launchPad
 
 
   return (
@@ -120,7 +122,7 @@ function RecentLaunches(props: { launches: Launch[] }) {
 
 const styles = StyleSheet.create({
   launchPadDetails: {
-    color: 'gray.700',
+    color: 'darkgray',
     marginLeft: 8,
     marginRight: 8
   },

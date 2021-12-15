@@ -1,6 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
 import * as React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { FlatList, ScrollView, StyleSheet } from 'react-native';
 import { Divider, ListItem } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -15,39 +15,15 @@ import { State } from '../redux';
 export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favorites'>) {
   const favoriteLaunches = useSelector((state: State) => state.favorites.favoriteLaunches)
   const favoriteLaunchPads = useSelector((state: State) => state.favorites.favoriteLaunchPads)
-  const defaultIndex = useSelector((state: State) => state.favorites.defaultIndex)
-  const dispatch = useDispatch()
+  // const defaultIndex = useSelector((state: State) => state.favorites.defaultIndex)
+  // const dispatch = useDispatch()
 
   const [launchesExpanded, setLaunchesExpanded] = React.useState<boolean>(false)
   const [launchPadsExpanded, setLaunchPadsExpanded] = React.useState<boolean>(false)
 
-  console.log("favoriteLaunches")
-  console.log(favoriteLaunches)
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* <ListItem.Accordion
-        content={
-          <>
-            <Icon name="place" size={30} />
-            <ListItem.Content>
-              <ListItem.Title>List Accordion</ListItem.Title>
-            </ListItem.Content>
-          </>
-        }
-      >
-        {list2.map((l, i) => (
-          <ListItem key={i} onPress={log} bottomDivider>
-            <Avatar title={l.name[0]} source={{ uri: l.avatar_url }} />
-            <ListItem.Content>
-              <ListItem.Title>{l.name}</ListItem.Title>
-              <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
-            </ListItem.Content>
-            <ListItem.Chevron />
-          </ListItem>
-        ))}
-      </ListItem.Accordion> */}
-
       <ListItem.Accordion
         content={
           <>
@@ -65,28 +41,29 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
           favoriteLaunches.length > 0 ?
             <ListItem>
               <ListItem.Content>
-
-              </ListItem.Content>
-              <ListItem.Title>
-                <Text style={styles.title} >
-                  Favorite Launches
-                </Text>
-              </ListItem.Title>
-              <Text>List</Text>
-              {
-                favoriteLaunches.map((launch, i) => {
-                  return (
-                    <ListItem key={launch.flight_number + i + "favorite"}>
-                      <LaunchItem launch={launch} isDrawerFavorite />
+                <ListItem.Title>
+                  <Text style={styles.title} >
+                    Favorite Launches
+                  </Text>
+                </ListItem.Title>
+                <Text>List</Text>
+                <FlatList
+                  data={favoriteLaunches}
+                  contentContainerStyle={styles.interiorList}
+                  renderItem={({ item, index }) => (
+                    <ListItem key={"favorite" + index.toString()}>
+                      <LaunchItem launch={item} isDrawerFavorite />
                       {
-                        i < favoriteLaunches.length - 1 && favoriteLaunches.length > 0 &&
+                        (index < favoriteLaunches.length - 1 && favoriteLaunches.length > 0) ?
                         <Divider style={styles.marginBottom} />
+                        : 
+                        null
                       }
                     </ListItem>
-                  )
-                })
-              }
-              <ListItem.Chevron />
+                  )}
+                />
+              </ListItem.Content>
+              {/* <ListItem.Chevron /> */}
             </ListItem>
             :
             <ListItem.Title>
@@ -116,22 +93,22 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
                 <Text style={styles.title}>
                   Favorite Launch Pads
                 </Text>
+                <FlatList
+                  data={favoriteLaunchPads}
+                  contentContainerStyle={styles.interiorList}
+                  renderItem={({ item, index }) => (
+                    <View key={item.site_id + index}>
+                      <LaunchPadItem launchPad={item} isDrawerFavorite />
+                      {
+                        (index < favoriteLaunchPads.length - 1 && favoriteLaunchPads.length > 0) ?
+                        <Divider style={styles.marginBottom} />
+                        : 
+                        null
+                      }
+                    </View>
+                  )}
+                />
               </ListItem.Content>
-              <ListItem.Accordion>
-                {
-                  favoriteLaunchPads.map((launchPad, i) => {
-                    return (
-                      <ListItem key={launchPad.site_id + i}>
-                        <LaunchPadItem launchPad={launchPad} isDrawerFavorite />
-                        {
-                          i < favoriteLaunchPads.length - 1 && favoriteLaunchPads.length > 0 &&
-                          <Divider style={styles.marginBottom} />
-                        }
-                      </ListItem>
-                    )
-                  })
-                }
-              </ListItem.Accordion>
             </ListItem>
             :
             <ListItem>
@@ -140,12 +117,12 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
               </Text>
             </ListItem>
         }
-
       </ListItem.Accordion>
 
-    </ScrollView>
+    </ScrollView >
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -154,7 +131,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   accordion: {
-    // flex: 1,
+    backgroundColor: 'black'
+  },
+  interiorList: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: 'black'
   },
   title: {
     flex: 1,

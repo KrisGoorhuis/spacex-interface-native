@@ -51,7 +51,7 @@ const FavoriteLaunchButton = (props: FavoriteLaunchButtonProps) => {
    return (
       <View style={{ padding: '2px' }}>
          {
-            confirming &&
+            confirming ?
             <View style={{ display: 'flex', backgroundColor: 'whitesmoke' }}>
                <Pressable onPress={handleToggleFavorite}>
                   <Check color="greenyellow" />
@@ -60,12 +60,16 @@ const FavoriteLaunchButton = (props: FavoriteLaunchButtonProps) => {
                   <X color="red" onClick={handleCancel} />
                </Pressable>
             </View>
+            :
+            null
          }
          {
-            !confirming &&
+            !confirming ?
             <Pressable onPress={handleToggleFavorite}>
                <Star color={isFavorited ? 'gold' : 'darkgray'} />
             </Pressable>
+            :
+            null
          }
       </View>
    )
