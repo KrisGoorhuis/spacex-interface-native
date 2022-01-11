@@ -20,8 +20,10 @@ export default function LaunchPadScreen(props: LaunchPadScreenProps) {
 
          <Text style={styles.title}>{JSON.stringify(launchPad)}</Text>
          {
-            launchPad &&
+            launchPad ?
             <LaunchPadPage launchPad={launchPad} />
+            :
+            null
          }
          <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 

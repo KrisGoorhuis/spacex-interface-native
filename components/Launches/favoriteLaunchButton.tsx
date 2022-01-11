@@ -1,7 +1,6 @@
 import React from 'react'
-import { Check, X, Star } from "react-feather";
+import { Check, X, Star } from "react-native-feather";
 import { useDispatch, useSelector } from 'react-redux';
-import { Badge } from 'react-native-elements'
 import { View, Text, Pressable } from 'react-native';
 
 import { Launch } from '../../model';
@@ -49,7 +48,7 @@ const FavoriteLaunchButton = (props: FavoriteLaunchButtonProps) => {
 
 
    return (
-      <View style={{ padding: '2px' }}>
+      <View>
          {
             confirming ?
             <View style={{ display: 'flex', backgroundColor: 'whitesmoke' }}>
@@ -57,7 +56,7 @@ const FavoriteLaunchButton = (props: FavoriteLaunchButtonProps) => {
                   <Check color="greenyellow" />
                </Pressable>
                <Pressable>
-                  <X color="red" onClick={handleCancel} />
+                  <X color="red" onPress={handleCancel} />
                </Pressable>
             </View>
             :

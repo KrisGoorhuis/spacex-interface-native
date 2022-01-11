@@ -21,7 +21,6 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
   const [launchesExpanded, setLaunchesExpanded] = React.useState<boolean>(false)
   const [launchPadsExpanded, setLaunchPadsExpanded] = React.useState<boolean>(false)
 
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <ListItem.Accordion
@@ -55,12 +54,13 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
                       <LaunchItem launch={item} isDrawerFavorite />
                       {
                         (index < favoriteLaunches.length - 1 && favoriteLaunches.length > 0) ?
-                        <Divider style={styles.marginBottom} />
-                        : 
-                        null
+                          <Divider color="white" style={styles.marginBottom} />
+                          :
+                          null
                       }
                     </ListItem>
                   )}
+                  keyExtractor={(item, index) => "favorite" + index.toString()}
                 />
               </ListItem.Content>
               {/* <ListItem.Chevron /> */}
@@ -101,9 +101,9 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
                       <LaunchPadItem launchPad={item} isDrawerFavorite />
                       {
                         (index < favoriteLaunchPads.length - 1 && favoriteLaunchPads.length > 0) ?
-                        <Divider style={styles.marginBottom} />
-                        : 
-                        null
+                          <Divider style={styles.marginBottom} />
+                          :
+                          null
                       }
                     </View>
                   )}
@@ -147,7 +147,9 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   marginBottom: {
-    marginBottom: 24
+    marginBottom: 24,
+    color: 'red',
+    backgroundColor: 'red',
   },
   icon: {
     paddingRight: 8

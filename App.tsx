@@ -17,7 +17,7 @@ import store from './redux'
 AppRegistry.registerComponent('main', () => App);
 
 export default function App() {
-  const isLoadingComplete = useCachedResources(); // TODO: being replaced?
+  const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
   const queryClient = new QueryClient()
 
@@ -25,14 +25,14 @@ export default function App() {
     return null;
   } else {
     return (
-      <QueryClientProvider client={queryClient} >
-        <Provider store={store}>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient} >
           <SafeAreaProvider>
             <Navigation colorScheme={colorScheme} />
             <StatusBar />
-          </SafeAreaProvider>\
-        </Provider>
-      </QueryClientProvider>
+          </SafeAreaProvider>
+        </QueryClientProvider>
+      </Provider>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigation, Layers } from "react-feather";
+import { Navigation, Layers } from "react-native-feather";
 import { View, StyleSheet, Text } from "react-native";
 import { Divider, ListItem } from "react-native-elements";
 

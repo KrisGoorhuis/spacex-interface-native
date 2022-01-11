@@ -29,7 +29,7 @@ export type BrowserStackParamList = {
   Launch: { launch: Launch };
   Launches: undefined;
 
-  "Launch Pad": { launchPad: LaunchPad };
+  "Launch Pad": { launchPadId: string };
   "Launch Pads": undefined;
 };
 
@@ -37,7 +37,7 @@ export type FavoritesStackParamList = {
   "Favorites Screen": undefined
 
   Launch: { launch: Launch };
-  "Launch Pad": { launchPad: LaunchPad }
+  "Launch Pad": { launchPadId: string }
 };
 
 export type RootTabParamList = {

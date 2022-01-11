@@ -1,5 +1,5 @@
 import React from "react";
-import { MapPin, Navigation } from "react-feather";
+import { MapPin, Navigation } from "react-native-feather";
 import { QueryFunctionContext, useQuery } from "react-query";
 import { InstagramLoader } from "react-native-easy-content-loader";
 
@@ -14,7 +14,7 @@ import LaunchItem from "../../Launches/launchItem";
 
 
 interface LaunchPadPageProps {
-  launchPad: LaunchPad,
+  launchPadId: string,
   [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
 
@@ -147,6 +147,6 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   recentLaunchesItem: {
-    minWidth: '350px'
+    minWidth: 350
   }
 });

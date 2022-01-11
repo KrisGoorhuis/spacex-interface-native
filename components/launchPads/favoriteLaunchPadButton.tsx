@@ -1,5 +1,5 @@
 import React from 'react'
-import { Check, X, Star } from "react-feather";
+import { Check, X, Star } from "react-native-feather";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { removeFromFavoriteLaunchPads, addToFavoriteLaunchPads } from '../../redux/slices/favoritesSlice';
@@ -54,20 +54,22 @@ const FavoriteLaunchPadButton = (props: FavoriteLaunchPadButtonProps) => {
             confirming ?
             <View style={{ display: 'flex', backgroundColor: 'whitesmoke' }}>
                <Pressable onPress={handleToggleFavorite}>
-                  <Check style={{ color: '#1dbf04', position: 'relative' }} />
+                  <Check color="#1dbf04" style={{ position: 'relative' }} />
                </Pressable>
                <Pressable onPress={handleCancel}>
-                  <X style={{ color: 'red', position: 'relative' }} />
+                  <X color='red' style={{ position: 'relative' }} />
                </Pressable>
             </View>
             : 
             null
          }
          {
-            !confirming &&
+            !confirming ?
             <Pressable onPress={handleToggleFavorite}>
-               <Star style={{ color: isFavorited ? 'gold' : 'darkgray', position: 'relative', backgroundColor: 'whitesmoke' }} />
+               <Star color={isFavorited ? 'gold' : 'darkgray'} style={{ position: 'relative', backgroundColor: 'whitesmoke' }} />
             </Pressable>
+            :
+            null
          }
       </View>
    )

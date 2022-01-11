@@ -22,7 +22,7 @@ const OpenURLButton = ({ url, children }: any) => {
 
  const styles = StyleSheet.create({
    button: {
-     minWidth: '350px'
+     minWidth: 350
    },
  });
  

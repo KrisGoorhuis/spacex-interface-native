@@ -10,7 +10,6 @@ import { Launch } from "../../model";
 import FavoriteLaunchButton from "./favoriteLaunchButton";
 import { BrowserStackParamList } from "../../model/navTypes";
 
-
 interface LaunchItemProps {
    launch: Launch
    isDrawerFavorite?: boolean
@@ -21,6 +20,7 @@ const LaunchItem = (props: LaunchItemProps) => {
 
    return (
       <Pressable
+         key={props.launch.flight_number}
          onPress={() => navigation.navigate('Launch', { launch: props.launch })}
          data-testid={"launchItem"}
          style={styles.container}
@@ -29,57 +29,56 @@ const LaunchItem = (props: LaunchItemProps) => {
             <Image
                source={{
                   uri:
-                     props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
-                     props.launch.links.mission_patch_small
+                     props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ?? // 'invalid regular expression: unmatched parentheses' sometimes comes from here. Console logging fixes temporarily?
+                     props.launch.links.mission_patch_small                              // Observing it makes it behave.
                }}
                containerStyle={{ height: props.isDrawerFavorite ? 100 : 300 }}
                resizeMode="cover"
             />
-
+            {props.launch.launch_success ?
+               <View style={styles.statusBadge}>
+                  <Badge containerStyle={styles.launchSuccessBadge} value="Successful" status={"success"} />
+               </View>
+               :
+               <View style={styles.statusBadge}>
+                  <Badge containerStyle={styles.launchSuccessBadge} value="Failed" status={"warning"} />
+               </View>
+            }
             {
                !props.isDrawerFavorite ?
-               <Image
-                  source={{ uri: props.launch.links.mission_patch_small }}
-                  style={styles.patch}
-                  resizeMode="contain"
-               />
-               : 
-               null
+                  <Image
+                     source={{ uri: props.launch.links.mission_patch_small }}
+                     style={styles.patch}
+                     resizeMode="contain"
+                  />
+                  :
+                  null
             }
             {
                props.isDrawerFavorite ?
-               <View style={styles.launchButtonContainer} >
-                  <FavoriteLaunchButton {...props} />
-               </View>
-               :
-               null
+                  <View style={styles.launchButtonContainer} >
+                     <FavoriteLaunchButton {...props} />
+                  </View>
+                  :
+                  null
             }
          </View>
 
          <View style={styles.body}>
             <View>
                <View>
-                  {props.launch.launch_success ?
-                     <View>
-                        <Badge containerStyle={styles.launchSuccessBadge} value="Successful" status={"success"} />
 
-                     </View>
-                     :
-                     <View>
-                        <Badge containerStyle={styles.launchSuccessBadge} value="Failed" status={"warning"} />
-                     </View>
-                  }
                   <Text style={styles.rocketName}>
                      {props.launch.rocket.rocket_name} &bull; {props.launch.launch_site.site_name}
                   </Text>
                </View>
                {
                   !props.isDrawerFavorite ?
-                  <View>
-                     <FavoriteLaunchButton {...props} />
-                  </View>
-                  :
-                  null
+                     <View>
+                        <FavoriteLaunchButton {...props} />
+                     </View>
+                     :
+                     null
                }
             </View>
             <Text
@@ -106,9 +105,14 @@ const styles = StyleSheet.create({
    },
    patch: {
       position: "absolute",
-      top: "5",
-      right: "5",
-      height: "75px"
+      top: 5,
+      right: 5,
+      height: 75
+   },
+   statusBadge: {
+      position: 'absolute',
+      bottom: 5,
+      left: 5
    },
    body: {
       padding: 6,
@@ -137,9 +141,10 @@ const styles = StyleSheet.create({
    },
    launchButtonContainer: {
       position: "absolute",
-      bottom: "10px",
-      right: "10px"
-   }
+      bottom: 10,
+      right: 10
+   },
+
 })
 
 export default LaunchItem
