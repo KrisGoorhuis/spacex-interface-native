@@ -5,8 +5,8 @@ import { BrowserScreenProps, BrowserStackParamList } from "../model/navTypes";
 import BrowserScreen from "../screens/BrowserScreen";
 import LaunchScrollScreen from "../screens/BrowserSubscreens/Launches/launchesScreen";
 import LaunchScreen from "../screens/BrowserSubscreens/Launches/LaunchScreen";
-import LaunchPadScreen from "../screens/BrowserSubscreens/LaunchPads/LaunchPadScreen";
-import LaunchPadScrollScreen from "../screens/BrowserSubscreens/LaunchPads/launchPadsScreen";
+import LaunchPadScreen from "../screens/BrowserSubscreens/Launches/LaunchPads/LaunchPadScreen";
+import LaunchPadScrollScreen from "../screens/BrowserSubscreens/Launches/LaunchPads/launchPadsScreen";
 
 
 const Stack = createNativeStackNavigator<BrowserStackParamList>();

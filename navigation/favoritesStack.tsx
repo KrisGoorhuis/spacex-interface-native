@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { FavoritesStackParamList, RootTabScreenProps } from "../model/navTypes";
 import FavoritesScreen from '../screens/FavoritesScreen';
-import LaunchPadScreen from '../screens/BrowserSubscreens/LaunchPads/LaunchPadScreen';
+import LaunchPadScreen from '../screens/BrowserSubscreens/Launches/LaunchPads/LaunchPadScreen';
 import LaunchScreen from '../screens/BrowserSubscreens/Launches/LaunchScreen';
 
 

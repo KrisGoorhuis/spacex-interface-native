@@ -2,10 +2,10 @@ import React from "react";
 import { ScrollView, View, Text } from "react-native";
 import { useInfiniteQuery } from "react-query";
 
-import LaunchPadItem from "../../../components/launchPads/launchPadItem";
-import { LaunchPad } from "../../../model";
-import { queryLaunchPads } from "../../../utils/networking";
-import LoadMoreButton from "../../../components/load-more-button";
+import LaunchPadItem from "../../../../components/launchPads/launchPadItem";
+import { LaunchPad } from "../../../../model";
+import { queryLaunchPads } from "../../../../utils/networking";
+import IsFetchingMoreIndicator from "../../../../components/isFetchingMoreIndicator";
 
 
 const pageSize = 12
@@ -44,8 +44,7 @@ const LaunchPadScrollScreen = (props: { data: LaunchPad[] | undefined }) => {
           null
         }
       </ScrollView>
-      <LoadMoreButton
-        loadMore={() => fetchNextPage()}
+      <IsFetchingMoreIndicator
         data={data?.pages.flat()}
         pageSize={pageSize}
         isLoadingMore={isLoading}

@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
-import LaunchPadPage from '../../../components/launchPads/launchPadPage/launch-pad-page';
+import LaunchPadPage from '../../../../components/launchPads/launchPadPage/launch-pad-page';
 
-import { Text, View } from '../../../components/Themed';
+import { Text, View } from '../../../../components/Themed';
 
 
 interface LaunchPadScreenProps {

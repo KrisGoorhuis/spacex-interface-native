@@ -11,16 +11,16 @@ interface LaunchScreenProps {
    [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
 
-export default function LaunchScreen(props: LaunchScreenProps) { 
+export default function LaunchScreen(props: LaunchScreenProps) {
    const launch: Launch = props.route.params.launch
 
    return (
       <View style={styles.container}>
          {
             launch ?
-            <LaunchPage launch={launch} />
-            :
-            null
+               <LaunchPage launch={launch} />
+               :
+               null
          }
          <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
          {/* Use a light status bar on iOS to account for the black space above the modal */}

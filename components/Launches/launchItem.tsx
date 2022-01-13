@@ -17,7 +17,7 @@ interface LaunchItemProps {
 
 const LaunchItem = (props: LaunchItemProps) => {
    const navigation = useNavigation<StackNavigationProp<BrowserStackParamList>>();
-
+   console.log(props.launch.links.mission_patch_small)
    return (
       <Pressable
          key={props.launch.flight_number}
@@ -29,11 +29,11 @@ const LaunchItem = (props: LaunchItemProps) => {
             <Image
                source={{
                   uri:
-                     props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ?? // 'invalid regular expression: unmatched parentheses' sometimes comes from here. Console logging fixes temporarily?
-                     props.launch.links.mission_patch_small                              // Observing it makes it behave.
+                     props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
+                     props.launch.links.mission_patch_small
                }}
                containerStyle={{ height: props.isDrawerFavorite ? 100 : 300 }}
-               resizeMode="cover"
+               resizeMode={props.launch.links.flickr_images[0] ? "cover" : "contain"}
             />
             {props.launch.launch_success ?
                <View style={styles.statusBadge}>
@@ -45,45 +45,48 @@ const LaunchItem = (props: LaunchItemProps) => {
                </View>
             }
             {
-               !props.isDrawerFavorite ?
-                  <Image
-                     source={{ uri: props.launch.links.mission_patch_small }}
-                     style={styles.patch}
-                     resizeMode="contain"
-                  />
-                  :
-                  null
-            }
-            {
-               props.isDrawerFavorite ?
-                  <View style={styles.launchButtonContainer} >
-                     <FavoriteLaunchButton {...props} />
+               !props.isDrawerFavorite && props.launch.links.flickr_images[0] ?
+                  <View style={styles.patchContainer}>
+                     <Image
+                        source={{ uri: props.launch.links.mission_patch_small }}
+                        style={styles.patch}
+                        resizeMode="contain"
+                     />
                   </View>
                   :
                   null
             }
+            {/* {
+               props.isDrawerFavorite ?
+                  <View style={styles.favoriteButtonContainer} >
+                     <FavoriteLaunchButton {...props} />
+                  </View>
+                  :
+                  null
+            } */}
+            <View style={styles.favoriteButtonContainer} >
+               <FavoriteLaunchButton {...props} />
+            </View>
          </View>
 
          <View style={styles.body}>
             <View>
                <View>
-
                   <Text style={styles.rocketName}>
                      {props.launch.rocket.rocket_name} &bull; {props.launch.launch_site.site_name}
                   </Text>
                </View>
-               {
+               {/* {
                   !props.isDrawerFavorite ?
                      <View>
                         <FavoriteLaunchButton {...props} />
                      </View>
                      :
                      null
-               }
+               } */}
             </View>
             <Text
                style={styles.missionName}
-               numberOfLines={3} // TODO: adjust me. Replacement for isTruncated from chakraUI
             >
                {props.launch.mission_name}
             </Text>
@@ -103,16 +106,23 @@ const styles = StyleSheet.create({
       overflow: "hidden",
       position: "relative",
    },
-   patch: {
+   patchContainer: {
       position: "absolute",
-      top: 5,
-      right: 5,
-      height: 75
+      top: 10,
+      right: 10,
+      height: 50,
+      width: 50,
+   },
+   patch: {
+      // position: 'relative',
+      height: 50,
+      width: 50,
+      zIndex: 20
    },
    statusBadge: {
       position: 'absolute',
-      bottom: 5,
-      left: 5
+      bottom: 10,
+      left: 10
    },
    body: {
       padding: 6,
@@ -139,7 +149,7 @@ const styles = StyleSheet.create({
       color: 'white',
       marginLeft: 2
    },
-   launchButtonContainer: {
+   favoriteButtonContainer: {
       position: "absolute",
       bottom: 10,
       right: 10
