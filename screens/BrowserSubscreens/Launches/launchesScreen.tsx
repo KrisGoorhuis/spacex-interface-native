@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, FlatList, View, Dimensions, Text } from 'react-native'
+import { StyleSheet, FlatList, View, Dimensions } from 'react-native'
 import { useInfiniteQuery } from "react-query"
 
 import { Launch } from "../../../model"
@@ -30,9 +30,6 @@ const LaunchScrollScreen = () => {
    }
 
    const flatPages = data?.pages.flat() || []
-
-   console.log("isFetchingNextPage")
-   console.log(isFetchingNextPage)
 
    return (
       <View style={styles.container}>

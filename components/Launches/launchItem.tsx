@@ -12,12 +12,11 @@ import { BrowserStackParamList } from "../../model/navTypes";
 
 interface LaunchItemProps {
    launch: Launch
-   isDrawerFavorite?: boolean
 }
 
 const LaunchItem = (props: LaunchItemProps) => {
-   const navigation = useNavigation<StackNavigationProp<BrowserStackParamList>>();
-   console.log(props.launch.links.mission_patch_small)
+   const navigation = useNavigation<StackNavigationProp<BrowserStackParamList>>()
+
    return (
       <Pressable
          key={props.launch.flight_number}
@@ -32,7 +31,7 @@ const LaunchItem = (props: LaunchItemProps) => {
                      props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
                      props.launch.links.mission_patch_small
                }}
-               containerStyle={{ height: props.isDrawerFavorite ? 100 : 300 }}
+               containerStyle={{ height: 300 }}
                resizeMode={props.launch.links.flickr_images[0] ? "cover" : "contain"}
             />
             {props.launch.launch_success ?
@@ -45,7 +44,7 @@ const LaunchItem = (props: LaunchItemProps) => {
                </View>
             }
             {
-               !props.isDrawerFavorite && props.launch.links.flickr_images[0] ?
+               props.launch.links.flickr_images[0] ?
                   <View style={styles.patchContainer}>
                      <Image
                         source={{ uri: props.launch.links.mission_patch_small }}
@@ -56,14 +55,6 @@ const LaunchItem = (props: LaunchItemProps) => {
                   :
                   null
             }
-            {/* {
-               props.isDrawerFavorite ?
-                  <View style={styles.favoriteButtonContainer} >
-                     <FavoriteLaunchButton {...props} />
-                  </View>
-                  :
-                  null
-            } */}
             <View style={styles.favoriteButtonContainer} >
                <FavoriteLaunchButton {...props} />
             </View>
@@ -76,21 +67,11 @@ const LaunchItem = (props: LaunchItemProps) => {
                      {props.launch.rocket.rocket_name} &bull; {props.launch.launch_site.site_name}
                   </Text>
                </View>
-               {/* {
-                  !props.isDrawerFavorite ?
-                     <View>
-                        <FavoriteLaunchButton {...props} />
-                     </View>
-                     :
-                     null
-               } */}
             </View>
-            <Text
-               style={styles.missionName}
-            >
+            <Text style={styles.missionName}>
                {props.launch.mission_name}
             </Text>
-            <View style={{ flexDirection: props.isDrawerFavorite ? 'column' : 'row' }}>
+            <View style={{ flexDirection: 'row' }}>
                <Text style={styles.launchDate}>{formatDateSimple(props.launch.launch_date_utc)} </Text>
                <Text style={styles.timeAgo}>
                   {timeAgo(props.launch.launch_date_utc)}
@@ -105,6 +86,7 @@ const styles = StyleSheet.create({
    container: {
       overflow: "hidden",
       position: "relative",
+      backgroundColor: 'black',
    },
    patchContainer: {
       position: "absolute",

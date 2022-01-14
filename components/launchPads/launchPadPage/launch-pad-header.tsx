@@ -44,9 +44,9 @@ function LaunchPadHeader(props: { launchPad: LaunchPadType }) {
 
    // withbackground component. Wraps the rest. Used it elsewhere. 
    return (
-      <LinearGradient
+      <View // TODO: Change back to LinearGradient. Don't work on web
          style={styles.container}
-         colors={[randomColor(), randomColor()]}
+         // colors={[randomColor(), randomColor()]}
       >
          <Text style={styles.header}>
             {props.launchPad.site_name_long}
@@ -70,7 +70,7 @@ function LaunchPadHeader(props: { launchPad: LaunchPadType }) {
                </Badge>
             )}
          </View>
-      </LinearGradient>
+      </View>
    );
 }
 

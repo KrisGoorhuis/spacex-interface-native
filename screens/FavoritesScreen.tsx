@@ -1,8 +1,8 @@
 import { AntDesign } from '@expo/vector-icons';
 import * as React from 'react';
-import { FlatList, ScrollView, StyleSheet } from 'react-native';
+import { Dimensions, FlatList, StyleSheet } from 'react-native';
 import { Divider, ListItem } from 'react-native-elements';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import LaunchItem from '../components/Launches/launchItem';
 import LaunchPadItem from '../components/launchPads/launchPadItem';
@@ -16,13 +16,12 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
   const favoriteLaunches = useSelector((state: State) => state.favorites.favoriteLaunches)
   const favoriteLaunchPads = useSelector((state: State) => state.favorites.favoriteLaunchPads)
   // const defaultIndex = useSelector((state: State) => state.favorites.defaultIndex)
-  // const dispatch = useDispatch()
 
   const [launchesExpanded, setLaunchesExpanded] = React.useState<boolean>(false)
   const [launchPadsExpanded, setLaunchPadsExpanded] = React.useState<boolean>(false)
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
       <ListItem.Accordion
         content={
           <>
@@ -38,37 +37,29 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
       >
         {
           favoriteLaunches.length > 0 ?
-            <ListItem>
-              <ListItem.Content>
-                <ListItem.Title>
-                  <Text style={styles.title} >
-                    Favorite Launches
-                  </Text>
-                </ListItem.Title>
-                <Text>List</Text>
-                <FlatList
-                  data={favoriteLaunches}
-                  contentContainerStyle={styles.interiorList}
-                  renderItem={({ item, index }) => (
-                    <ListItem key={"favorite" + index.toString()}>
-                      <LaunchItem launch={item} isDrawerFavorite />
-                      {
-                        (index < favoriteLaunches.length - 1 && favoriteLaunches.length > 0) ?
-                          <Divider color="white" style={styles.marginBottom} />
-                          :
-                          null
-                      }
-                    </ListItem>
-                  )}
-                  keyExtractor={(item, index) => "favorite" + index.toString()}
-                />
-              </ListItem.Content>
-              {/* <ListItem.Chevron /> */}
-            </ListItem>
+            <FlatList
+              data={favoriteLaunches}
+              contentContainerStyle={styles.interiorList}
+              renderItem={({ item, index }) => {
+                return (
+                  <View key={"favoriteLaunch" + index.toString()} style={{ ...styles.item, width: Dimensions.get('window').width }}>
+                    <LaunchItem launch={item} />
+                    {
+                      (index < favoriteLaunches.length - 1 && favoriteLaunches.length > 0) ?
+                        <Divider color="white" style={styles.marginBottom} />
+                        :
+                        null
+                    }
+                  </View>
+                )
+              }}
+              keyExtractor={(item, index) => "favorite" + index.toString()}
+            />
+            // {/* <ListItem.Chevron /> */}
             :
-            <ListItem.Title>
+            <Text>
               No favorite launches yet
-            </ListItem.Title>
+            </Text>
         }
       </ListItem.Accordion>
 
@@ -118,38 +109,42 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
             </ListItem>
         }
       </ListItem.Accordion>
-
-    </ScrollView >
+    </View >
   );
 }
 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    // flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    width: '100%',
+    backgroundColor: 'red',
   },
   accordion: {
-    backgroundColor: 'black'
+    // maxHeight:
+    width: '100%',
+  },
+  item: {
+    padding: 20
   },
   interiorList: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'black'
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 40,
+    backgroundColor: 'blue'
   },
   title: {
     flex: 1,
     textAlign: 'left'
   },
   divider: {
-    marginTop: 10,
-    marginBottom: 10
+    // marginTop: 10,
+    // marginBottom: 10
   },
   marginBottom: {
-    marginBottom: 24,
-    color: 'red',
-    backgroundColor: 'red',
+    // marginBottom: 24,
   },
   icon: {
     paddingRight: 8
