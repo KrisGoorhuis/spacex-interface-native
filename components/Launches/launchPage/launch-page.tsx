@@ -14,10 +14,13 @@ interface LaunchPageProps {
   [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
 
+export const launchPageIconSize = 20
+
 const LaunchPage = (props: LaunchPageProps) => {
 
   return (
     <View style={styles.viewContainer}>
+
       <LaunchPageHeader launch={props.launch} />
       <TimeAndLocation launch={props.launch} />
       <RocketInfo launch={props.launch} />
@@ -50,6 +53,7 @@ const styles = StyleSheet.create({
   },
   launchDetails: {
     color: 'darkgray',
+    marginTop: 20,
     marginLeft: 8,
     marginRight: 8
   },

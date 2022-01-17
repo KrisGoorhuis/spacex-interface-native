@@ -1,9 +1,10 @@
 import React from "react";
-import { Navigation, Layers } from "react-native-feather";
+import { Navigation as Navigation2, Layers } from "react-native-feather";
 import { View, StyleSheet, Text } from "react-native";
-import { Divider, ListItem } from "react-native-elements";
+import { ListItem } from "react-native-elements";
 
 import { LaunchProps } from "../../../model";
+import { launchPageIconSize } from "./launch-page";
 
 
 
@@ -12,88 +13,81 @@ function RocketInfo(props: LaunchProps) {
 
    return (
       <View style={styles.container}>
-         <ListItem>
-            <ListItem.Title style={styles.listItemTitle}>
-               <Navigation />{" "}
-               <Text style={styles.titleText}>
+
+         <ListItem containerStyle={styles.listItem}>
+            <Navigation2 color="black" height={launchPageIconSize} width={launchPageIconSize} />
+            <ListItem.Content style={styles.listItemTitle}>
+               <ListItem.Title style={styles.titleText}>
                   Rocket
-               </Text>
-            </ListItem.Title>
-            <ListItem.Content style={styles.content}>
-               <Text>
-                  {props.launch.rocket.rocket_name}
-               </Text>
-               <Divider />
-            </ListItem.Content>
-            <Text>
-               {props.launch.rocket.rocket_type}
-            </Text>
-         </ListItem>
-         <View>
-            <ListItem>
-               <ListItem.Title style={styles.listItemTitle}>
-                  <Layers />{" "}
-                  <Text style={styles.titleText}>
-                     First Stage
-                  </Text>
                </ListItem.Title>
-               <ListItem.Content style={styles.content}>
-                  <Text>
-                     {cores.map((core) => core.core_serial).join(", ")}
-                  </Text>
-               </ListItem.Content>
-               <Text>
+               <ListItem.Subtitle>
+                  {props.launch.rocket.rocket_name}
+               </ListItem.Subtitle>
+               <ListItem.Subtitle>
+                  {props.launch.rocket.rocket_type}
+               </ListItem.Subtitle>
+
+            </ListItem.Content>
+         </ListItem>
+
+         <ListItem containerStyle={styles.listItem}>
+            <Layers color="black" height={launchPageIconSize} width={launchPageIconSize} />
+            <ListItem.Content style={styles.content}>
+               <ListItem.Title style={styles.listItemTitle}>
+                  First Stage
+               </ListItem.Title>
+               <ListItem.Subtitle>
+                  {cores.map((core) => core.core_serial).join(", ")}
+               </ListItem.Subtitle>
+               <ListItem.Subtitle>
                   {cores.every((core) => core.land_success)
                      ? cores.length === 1
                         ? "Recovered"
                         : "All recovered"
                      : "Lost"}
-               </Text>
-            </ListItem>
-            <ListItem>
+               </ListItem.Subtitle>
+            </ListItem.Content>
+         </ListItem>
+
+         <ListItem containerStyle={styles.listItem}>
+            <Layers color="black" height={launchPageIconSize} width={launchPageIconSize} />
+            <ListItem.Content>
                <ListItem.Title style={styles.listItemTitle}>
-                  <Layers />{" "}
-                  <Text style={styles.titleText}>
-                     Second Stage
-                  </Text>
+                  Second Stage
                </ListItem.Title>
-               <ListItem.Content>
-                  <Text>
-                     Block {props.launch.rocket.second_stage.block}
-                  </Text>
-               </ListItem.Content>
-               <Text>
-                  Payload:{" "}
+               <ListItem.Subtitle>
+                  Block {props.launch.rocket.second_stage.block}
+               </ListItem.Subtitle>
+               <ListItem.Subtitle>
+                  Payload: {" "}
                   {props.launch.rocket.second_stage.payloads
                      .map((payload) => payload.payload_type)
                      .join(", ")}
-               </Text>
-            </ListItem>
-         </View>
+               </ListItem.Subtitle>
+            </ListItem.Content>
+         </ListItem>
       </View>
    );
 }
 
 const styles = StyleSheet.create({
    container: {
-      // borderWidth: '1px',
-      marginTop: 4,
-      padding: 4,
-      borderRadius: 5, // 'md'
+
+   },
+   listItem: {
+      paddingTop: 5,
+      paddingBottom: 5
    },
    listItemTitle: {
-      display: 'flex',
+
    },
    titleText: {
-      marginLeft: 2
+
    },
    content: {
-      fontSize: 20, // Replaces 'md' | 'xl'
+
    }
 });
-//  borderWidth="1px"
-//  mt="4"
-//  p="4"
-//  borderRadius="md"
+
 
 export default RocketInfo

@@ -1,83 +1,87 @@
 import React from "react";
-
-import { LaunchProps } from "../../../model";
-import FavoriteLaunchButton from "../favoriteLaunchButton";
 import { View, Image, ImageBackground, StyleSheet, Text } from "react-native";
 import { Badge } from "react-native-elements";
 
+import { LaunchProps } from "../../../model";
+import FavoriteLaunchButton from "../favoriteLaunchButton";
 
+
+const LaunchPageHeader = (props: LaunchProps) => {
+
+   return (
+      <ImageBackground
+         resizeMode="cover"
+         style={{ ...styles.container }}
+         source={{ uri: `${props.launch.links.flickr_images[0]}` }}
+      >
+         {
+            props.launch.links.mission_patch_small !== null &&
+            <Image
+               style={styles.image}
+               source={{ uri: props.launch.links.mission_patch_small }}
+               resizeMode="contain"
+            />
+         }
+         <Text style={styles.title}>
+            {props.launch.mission_name}
+         </Text>
+
+         <View style={styles.stack}>
+            <FavoriteLaunchButton {...props} />
+            {/* colorScheme="purple" */}
+            <Badge>
+               #{props.launch.flight_number}
+            </Badge>
+            {props.launch.launch_success ? (
+               // colorScheme="green"
+               <Badge>
+                  Successful
+               </Badge>
+            ) : (
+               // colorScheme="red"
+               <Badge>
+                  Failed
+               </Badge>
+            )}
+         </View>
+      </ImageBackground>
+   );
+}
 
 const styles = StyleSheet.create({
    container: {
       position: 'relative',
       padding: 2,
       alignItems: 'flex-end',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      // height: 150
    },
    image: {
       position: 'absolute',
       top: 5,
       right: 5,
-      height: 85, // 150?
+      height: 50,
+      width: 50,
    },
-   header: {
+   title: {
       color: 'white',
-      // display: 'inline',
-      backgroundColor: '#718096b8',
-      // fontSize: 'large' or '5xl'
-      // margin: '2px 4px',
-      borderRadius: 10 // 'large'
+      backgroundColor: 'rgba(0, 0, 0, .25)',
+      borderRadius: 5,
+      position: 'absolute',
+      left: 5,
+      bottom: 5,
+      padding: 3,
    },
    stack: {
       display: 'flex',
+      flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      // isInline spacing="3" alignItems="center" justifyContent="center" display="flex"
+      position: 'absolute',
+      bottom: 5,
+      right: 5,
    }
 });
 
-const LaunchPageHeader = (props: LaunchProps) => {
-   return (
-
-      <ImageBackground
-         resizeMode="cover"
-         style={styles.container}
-         source={{ uri: `${props.launch.links.flickr_images[0]}` }}
-      >
-         <View
-            
-         >
-            <Image
-               source={{uri: props.launch.links.mission_patch_small }}
-            />
-            <Text style={styles.header}>
-               {props.launch.mission_name}
-            </Text>
-
-            <View 
-               style={styles.stack}
-            >
-               <FavoriteLaunchButton {...props} />
-               {/* colorScheme="purple" */}
-               <Badge>
-                  #{props.launch.flight_number}
-               </Badge>
-               {props.launch.launch_success ? (
-                  // colorScheme="green"
-                  <Badge>
-                     Successful
-                  </Badge>
-               ) : (
-                  // colorScheme="red"
-                  <Badge>
-                     Failed
-                  </Badge>
-               )}
-
-            </View>
-         </View>
-      </ImageBackground>
-   );
-}
-
 export default LaunchPageHeader
+
