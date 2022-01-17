@@ -20,19 +20,18 @@ const LaunchPage = (props: LaunchPageProps) => {
 
   return (
     <View style={styles.viewContainer}>
-
       <LaunchPageHeader launch={props.launch} />
       <TimeAndLocation launch={props.launch} />
       <RocketInfo launch={props.launch} />
       <Text style={styles.launchDetails}>
         {props.launch.details}
       </Text>
-      <WebView
+      {/* <WebView
         style={styles.webview} // Aspect ratio as string doesn't play nicely with stylesheet. TODO: is it working here?
         title={props.launch.mission_name}
         src={`https://www.youtube.com/embed/${props.launch.links.youtube_id}`}
         allowFullScreen
-      />
+      /> */}
 
       <View style={{ marginLeft: 6, marginRight: 6 }}>
         {props.launch.links.flickr_images.map((imageUrl) => (

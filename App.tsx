@@ -7,7 +7,7 @@ import {
   QueryClient,
 } from 'react-query'
 import { Provider } from 'react-redux';
-// import 'localstorage-polyfill';
+import 'localstorage-polyfill';
 
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';

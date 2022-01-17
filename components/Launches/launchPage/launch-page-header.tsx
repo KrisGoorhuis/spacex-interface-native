@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, ImageBackground, StyleSheet, Text } from "react-native";
+import { View, Image, ImageBackground, StyleSheet, Text, Dimensions } from "react-native";
 import { Badge } from "react-native-elements";
 
 import { LaunchProps } from "../../../model";
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
       padding: 2,
       alignItems: 'flex-end',
       justifyContent: 'space-between',
-      // height: 150
+      height: 150
    },
    image: {
       position: 'absolute',
