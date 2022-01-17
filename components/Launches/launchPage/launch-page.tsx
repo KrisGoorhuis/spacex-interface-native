@@ -6,6 +6,7 @@ import { Launch } from "../../../model";
 import RocketInfo from "./rocket-info";
 import TimeAndLocation from "./time-and-location";
 import OpenURLButton from "../../openURLButton";
+import LaunchPageHeader from "./launch-page-header";
 
 
 interface LaunchPageProps {
@@ -17,6 +18,7 @@ const LaunchPage = (props: LaunchPageProps) => {
 
   return (
     <View style={styles.viewContainer}>
+      <LaunchPageHeader launch={props.launch} />
       <TimeAndLocation launch={props.launch} />
       <RocketInfo launch={props.launch} />
       <Text style={styles.launchDetails}>

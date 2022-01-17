@@ -9,7 +9,6 @@ import { Badge } from "react-native-elements";
 
 const styles = StyleSheet.create({
    container: {
-      minHeight: '30vh',
       position: 'relative',
       padding: 2,
       alignItems: 'flex-end',
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
       // display: 'inline',
       backgroundColor: '#718096b8',
       // fontSize: 'large' or '5xl'
-      margin: '2px 4px',
+      // margin: '2px 4px',
       borderRadius: 10 // 'large'
    },
    stack: {
@@ -46,13 +45,10 @@ const LaunchPageHeader = (props: LaunchProps) => {
          source={{ uri: `${props.launch.links.flickr_images[0]}` }}
       >
          <View
-         // bgPos="center"
-         // bgRepeat="no-repeat"
+            
          >
             <Image
                source={{uri: props.launch.links.mission_patch_small }}
-            // objectFit="contain"
-            // objectPosition="bottom"
             />
             <Text style={styles.header}>
                {props.launch.mission_name}
