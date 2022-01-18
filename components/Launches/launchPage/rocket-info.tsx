@@ -1,10 +1,10 @@
 import React from "react";
 import { Navigation as Navigation2, Layers } from "react-native-feather";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { ListItem } from "react-native-elements";
 
 import { LaunchProps } from "../../../model";
-import { launchPageIconSize } from "./launch-page";
+import { launchPageIconSize } from "../../../model/constants";
 
 
 

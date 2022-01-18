@@ -2,14 +2,14 @@ import React from "react";
 import { Watch, MapPin } from "react-native-feather";
 import { format as timeAgo } from "timeago.js";
 import { View, StyleSheet, Text, Pressable, Dimensions } from "react-native";
-import { Avatar, Divider, ListItem } from "react-native-elements";
+import { ListItem } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 import { LaunchProps } from "../../../model";
 import { formatDateTargetZone } from "../../../utils/format-date";
 import { BrowserStackParamList } from "../../../model/navTypes";
-import { launchPageIconSize } from "./launch-page";
+import { launchPageIconSize } from "../../../model/constants";
 
 
 
@@ -17,10 +17,10 @@ function TimeAndLocation(props: LaunchProps) {
    const navigation = useNavigation<StackNavigationProp<BrowserStackParamList>>();
 
    return (
-      <View style={styles.container}>
+      <View>
 
-         <ListItem>
-            <Watch color="black" width={launchPageIconSize} height={launchPageIconSize} style={styles.featherIcon} />
+         <ListItem containerStyle={styles.listItem}>
+            <Watch color="black" width={launchPageIconSize} height={launchPageIconSize} />
             <ListItem.Content style={styles.content}>
                <ListItem.Title style={styles.titleText}>
                   Launch Date
@@ -34,8 +34,8 @@ function TimeAndLocation(props: LaunchProps) {
             </ListItem.Content>
          </ListItem>
 
-         <ListItem>
-            <MapPin color="black" width={launchPageIconSize} height={launchPageIconSize} style={styles.featherIcon} />
+         <ListItem containerStyle={styles.listItem}>
+            <MapPin color="black" width={launchPageIconSize} height={launchPageIconSize} />
             <ListItem.Content>
                <ListItem.Title style={styles.titleText} >
                   Launch Site
@@ -58,12 +58,10 @@ function TimeAndLocation(props: LaunchProps) {
 }
 
 const styles = StyleSheet.create({
-   container: {
-
+   listItem: {
+      paddingTop: 5,
+      paddingBottom: 5,
    },
-   featherIcon: {
-      
-   }, 
    listItemTitle: {
       display: 'flex',
       justifyContent: 'center',

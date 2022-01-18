@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from "react-native";
 import { WebView } from 'react-native-webview';
 
 import { Launch } from "../../../model";
@@ -7,6 +7,7 @@ import RocketInfo from "./rocket-info";
 import TimeAndLocation from "./time-and-location";
 import OpenURLButton from "../../openURLButton";
 import LaunchPageHeader from "./launch-page-header";
+import { Divider } from "react-native-elements";
 
 
 interface LaunchPageProps {
@@ -14,41 +15,55 @@ interface LaunchPageProps {
   [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
 
-export const launchPageIconSize = 20
 
 const LaunchPage = (props: LaunchPageProps) => {
+  console.log("props.launch.links.flickr_images")
+  console.log(props.launch.links.flickr_images)
 
   return (
-    <View style={styles.viewContainer}>
+    <ScrollView style={styles.viewContainer}>
       <LaunchPageHeader launch={props.launch} />
+      <Divider style={{ marginBottom: 10 }} />
       <TimeAndLocation launch={props.launch} />
+      <Divider style={{ margin: 10 }} />
       <RocketInfo launch={props.launch} />
       <Text style={styles.launchDetails}>
         {props.launch.details}
       </Text>
-      {/* <WebView
-        style={styles.webview} // Aspect ratio as string doesn't play nicely with stylesheet. TODO: is it working here?
-        title={props.launch.mission_name}
-        src={`https://www.youtube.com/embed/${props.launch.links.youtube_id}`}
-        allowFullScreen
-      /> */}
-
-      <View style={{ marginLeft: 6, marginRight: 6 }}>
-        {props.launch.links.flickr_images.map((imageUrl) => (
-          <OpenURLButton url={imageUrl} key={imageUrl}>
-            <Image source={{ uri: imageUrl.replace("_o.jpg", "_z.jpg") }} />
-          </OpenURLButton>
-        ))}
+      <View style={styles.webviewContainer}>
+        <WebView
+          androidHardwareAccelerationDisabled={true}
+          style={styles.webview}
+          title={props.launch.mission_name}
+          source={{ uri: `https://www.youtube.com/embed/${props.launch.links.youtube_id}` }}
+          allowFullScreen
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          startInLoadingState={true}
+        />
       </View>
 
-    </View>
+      <View style={styles.gallery}>
+        {props.launch.links.flickr_images.map((imageUrl) => {
+          console.log("imageUrl")
+          console.log(imageUrl)
+          return (
+            <OpenURLButton url={imageUrl} key={imageUrl}>
+              <Image source={{ uri: imageUrl.replace("_o.jpg", "_z.jpg") }} />
+            </OpenURLButton>
+          )
+        }
+        )}
+      </View>
+
+    </ScrollView>
   );
 }
 
 
 const styles = StyleSheet.create({
   viewContainer: {
-    marginTop: 30,
+
   },
   launchDetails: {
     color: 'darkgray',
@@ -59,11 +74,27 @@ const styles = StyleSheet.create({
   button: {
     minWidth: 350
   },
+  webviewContainer: {
+    marginTop: 30,
+    alignSelf: 'stretch',
+    flex: 1,
+    alignItems: 'center',
+  },
   webview: {
-    maxHeight: 400,
-    aspectRatio: 1.7
+    borderColor: 'red',
+    borderWidth: 1,
+    width: Dimensions.get('window').width * .9,
+    margin: 'auto',
+    // width: 300,
+    height: 300
+  },
+  gallery: {
+    marginLeft: 6,
+    marginRight: 6,
+    width: 100,
+    height: 100,
+    borderColor: 'red'
   }
-
 });
 
 export default LaunchPage

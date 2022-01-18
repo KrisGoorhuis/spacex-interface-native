@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, ImageBackground, StyleSheet, Text, Dimensions } from "react-native";
+import { View, Image, ImageBackground, StyleSheet, Text } from "react-native";
 import { Badge } from "react-native-elements";
 
 import { LaunchProps } from "../../../model";
@@ -27,22 +27,17 @@ const LaunchPageHeader = (props: LaunchProps) => {
          </Text>
 
          <View style={styles.stack}>
-            <FavoriteLaunchButton {...props} />
-            {/* colorScheme="purple" */}
-            <Badge>
-               #{props.launch.flight_number}
-            </Badge>
-            {props.launch.launch_success ? (
-               // colorScheme="green"
-               <Badge>
-                  Successful
-               </Badge>
-            ) : (
-               // colorScheme="red"
-               <Badge>
-                  Failed
-               </Badge>
-            )}
+            <View style={styles.badge}>
+               <FavoriteLaunchButton {...props} />
+            </View>
+            <Badge containerStyle={styles.badge} value={`#${props.launch.flight_number}`} />
+            {
+               props.launch.launch_success ? (
+                  <Badge containerStyle={styles.badge} value={"Successful"} status={"success"} />
+               ) : (
+                  <Badge containerStyle={styles.badge} value={"Failed"} status={"warning"} />
+               )
+            }
          </View>
       </ImageBackground>
    );
@@ -80,6 +75,9 @@ const styles = StyleSheet.create({
       position: 'absolute',
       bottom: 5,
       right: 5,
+   },
+   badge: {
+      marginRight: 5
    }
 });
 
