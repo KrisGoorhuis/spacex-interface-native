@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from "react-native";
+import { View, Text, Image, StyleSheet, Dimensions, ScrollView, FlatList, Pressable, Linking } from "react-native";
 import { WebView } from 'react-native-webview';
 
 import { Launch } from "../../../model";
@@ -16,12 +16,12 @@ interface LaunchPageProps {
 }
 
 
-const LaunchPage = (props: LaunchPageProps) => {
-  console.log("props.launch.links.flickr_images")
-  console.log(props.launch.links.flickr_images)
 
-  return (
-    <ScrollView style={styles.viewContainer}>
+
+const LaunchPage = (props: LaunchPageProps) => {
+
+  const Header = () => (
+    <>
       <LaunchPageHeader launch={props.launch} />
       <Divider style={{ marginBottom: 10 }} />
       <TimeAndLocation launch={props.launch} />
@@ -32,38 +32,43 @@ const LaunchPage = (props: LaunchPageProps) => {
       </Text>
       <View style={styles.webviewContainer}>
         <WebView
-          androidHardwareAccelerationDisabled={true}
+          androidHardwareAccelerationDisabled={true} // Solves crash without error
           style={styles.webview}
           title={props.launch.mission_name}
           source={{ uri: `https://www.youtube.com/embed/${props.launch.links.youtube_id}` }}
           allowFullScreen
-          javaScriptEnabled={true}
-          domStorageEnabled={true}
-          startInLoadingState={true}
         />
       </View>
+    </>
+  )
 
-      <View style={styles.gallery}>
-        {props.launch.links.flickr_images.map((imageUrl) => {
-          console.log("imageUrl")
-          console.log(imageUrl)
+  return (
+    <View style={styles.viewContainer}>
+      <FlatList 
+        style={styles.gallery}
+        contentContainerStyle={{justifyContent: 'space-between', display: 'flex', width: '100%'}}
+        ListHeaderComponent={Header}
+        data={props.launch.links.flickr_images}
+        numColumns={3}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={(imageObject) => {
           return (
-            <OpenURLButton url={imageUrl} key={imageUrl}>
-              <Image source={{ uri: imageUrl.replace("_o.jpg", "_z.jpg") }} />
-            </OpenURLButton>
+            <Pressable style={styles.imageContainer} onPress={() => Linking.openURL(imageObject.item)}>
+              <Image style={styles.image} source={{ uri: imageObject.item.replace("_o.jpg", "_z.jpg") }} />
+            </Pressable>
           )
-        }
-        )}
-      </View>
-
-    </ScrollView>
+        }}
+      />
+    </View>
   );
 }
 
 
 const styles = StyleSheet.create({
   viewContainer: {
-
+    // flex: 1,
+    // flexDirection: 'column',
+    // margin: 1,
   },
   launchDetails: {
     color: 'darkgray',
@@ -71,8 +76,8 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     marginRight: 8
   },
-  button: {
-    minWidth: 350
+  imageContainer: {
+
   },
   webviewContainer: {
     marginTop: 30,
@@ -89,11 +94,20 @@ const styles = StyleSheet.create({
     height: 300
   },
   gallery: {
-    marginLeft: 6,
-    marginRight: 6,
-    width: 100,
-    height: 100,
-    borderColor: 'red'
+    // margin: 1,
+    // marginLeft: 6,
+    // marginRight: 6,
+    // // width: 100,
+    // // height: 100,
+    // flex: 1,
+    // flexDirection: 'column',
+    // justifyContent: 'space-between'
+  },
+  image: {
+    width: Dimensions.get('window').width * .3,
+    height: Dimensions.get('window').width * .3
+    // width: '100%',
+    // height: '100%'
   }
 });
 
