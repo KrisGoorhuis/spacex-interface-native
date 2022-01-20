@@ -45,11 +45,11 @@ const LaunchPage = (props: LaunchPageProps) => {
   return (
     <View style={styles.viewContainer}>
       <FlatList 
-        style={styles.gallery}
-        contentContainerStyle={{justifyContent: 'space-between', display: 'flex', width: '100%'}}
+        style={styles.flatlist}
         ListHeaderComponent={Header}
         data={props.launch.links.flickr_images}
         numColumns={3}
+        columnWrapperStyle={styles.column}
         keyExtractor={(item, index) => index.toString()}
         renderItem={(imageObject) => {
           return (
@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
   },
   webviewContainer: {
     marginTop: 30,
+    marginBottom: 30,
     alignSelf: 'stretch',
     flex: 1,
     alignItems: 'center',
@@ -93,21 +94,17 @@ const styles = StyleSheet.create({
     // width: 300,
     height: 300
   },
-  gallery: {
-    // margin: 1,
-    // marginLeft: 6,
-    // marginRight: 6,
-    // // width: 100,
-    // // height: 100,
-    // flex: 1,
-    // flexDirection: 'column',
-    // justifyContent: 'space-between'
+  flatlist: {
+
+  },
+  column: {
+    flex: 1,
+    justifyContent: 'space-around'
   },
   image: {
     width: Dimensions.get('window').width * .3,
-    height: Dimensions.get('window').width * .3
-    // width: '100%',
-    // height: '100%'
+    height: Dimensions.get('window').width * .3,
+    margin: 5
   }
 });
 
