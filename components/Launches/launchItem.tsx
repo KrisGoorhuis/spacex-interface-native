@@ -61,13 +61,9 @@ const LaunchItem = (props: LaunchItemProps) => {
          </View>
 
          <View style={styles.body}>
-            <View>
-               <View>
-                  <Text style={styles.rocketName}>
-                     {props.launch.rocket.rocket_name} &bull; {props.launch.launch_site.site_name}
-                  </Text>
-               </View>
-            </View>
+            <Text style={styles.rocketName}>
+               {props.launch.rocket.rocket_name} &bull; {props.launch.launch_site.site_name}
+            </Text>
             <Text style={styles.missionName}>
                {props.launch.mission_name}
             </Text>

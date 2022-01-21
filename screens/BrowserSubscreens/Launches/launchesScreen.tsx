@@ -10,7 +10,7 @@ import { Divider } from "react-native-elements"
 
 const pageSize = 3
 const LaunchScrollScreen = () => {
-   const { isLoading, isError, error, data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<Launch[], { message: string }>(
+   const { isLoading, isError, error, data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<Launch[], Error>(
       ['launches'],
       (context) => queryLaunches(context, pageSize),
       {
@@ -63,7 +63,6 @@ const LaunchScrollScreen = () => {
                      />
                   }
                </View>
-
             )}
          />
       </View>

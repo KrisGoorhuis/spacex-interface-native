@@ -1,10 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import * as React from 'react';
-import { Platform, StyleSheet } from 'react-native';
-import LaunchPage from '../../../components/Launches/launchPage/launch-page';
+import { StatusBar } from 'expo-status-bar'
+import * as React from 'react'
+import { Platform, StyleSheet } from 'react-native'
+import LaunchPage from '../../../components/Launches/launchPage/launch-page'
 
-import { View } from '../../../components/Themed';
-import { Launch } from '../../../model';
+import { View } from '../../../components/Themed'
+import { Launch } from '../../../model'
 
 
 interface LaunchScreenProps {
@@ -25,7 +25,7 @@ export default function LaunchScreen(props: LaunchScreenProps) {
          {/* Use a light status bar on iOS to account for the black space above the modal */}
          <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
       </View>
-   );
+   )
 }
 
 const styles = StyleSheet.create({
@@ -34,8 +34,4 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
    },
-   title: {
-      fontSize: 20,
-      fontWeight: 'bold',
-   },
-});
+})

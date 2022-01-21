@@ -18,8 +18,8 @@ export const queryLaunch = (context: QueryFunctionContext, launchId: number): Pr
 }
 
 
-export const queryPastLaunches = (launchPadId: number, limit: number, order: string = 'desc'): Promise<LaunchPad[]> => {
-   return fetch(`${REACT_APP_SPACEX_API_URL}/launchPads/${launchPadId}/past?limit=${limit}&order="${order}"&sort=launch_date_utc&offset=0`)
+export const queryPastLaunches = (context: QueryFunctionContext, launchPadId: number, pageSize: number, order: string = 'desc'): Promise<Launch[]> => {
+   return fetch(`${REACT_APP_SPACEX_API_URL}/launchPads/${launchPadId}/past?limit=${pageSize}&order="${order}"&sort=launch_date_utc&offset=0`)
       .then((response) => response.json())
       .catch(() => {
          // TODO: Handle errors?

@@ -1,21 +1,18 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, Dimensions, ScrollView, FlatList, Pressable, Linking } from "react-native";
+import { View, Text, Image, StyleSheet, Dimensions, FlatList, Pressable, Linking } from "react-native";
 import { WebView } from 'react-native-webview';
+import { Divider } from "react-native-elements";
 
 import { Launch } from "../../../model";
 import RocketInfo from "./rocket-info";
 import TimeAndLocation from "./time-and-location";
-import OpenURLButton from "../../openURLButton";
 import LaunchPageHeader from "./launch-page-header";
-import { Divider } from "react-native-elements";
 
 
 interface LaunchPageProps {
   launch: Launch,
   [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
-
-
 
 
 const LaunchPage = (props: LaunchPageProps) => {
@@ -44,8 +41,8 @@ const LaunchPage = (props: LaunchPageProps) => {
 
   return (
     <View style={styles.viewContainer}>
-      <FlatList 
-        style={styles.flatlist}
+      <FlatList
+        // style={styles.flatlist}
         ListHeaderComponent={Header}
         data={props.launch.links.flickr_images}
         numColumns={3}
@@ -91,7 +88,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: Dimensions.get('window').width * .9,
     margin: 'auto',
-    // width: 300,
     height: 300
   },
   flatlist: {

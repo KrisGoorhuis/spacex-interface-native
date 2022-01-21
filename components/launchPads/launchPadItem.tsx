@@ -28,7 +28,7 @@ const LaunchPadItem = (props: launchPadItemProps) => {
       <View style={{ padding: 6 }}>
         <View style={{ display: 'flex', alignItems: 'baseline' }}>
           <View>
-            <View style={{ marginRight: '10px', display: 'flex' }} >
+            <View style={styles.favoriteButtonContainer} >
               <FavoriteLaunchPadButton {...props} />
             </View>
             {props.launchPad.status === "active" ? (
@@ -64,7 +64,11 @@ const LaunchPadItem = (props: launchPadItemProps) => {
 }
 
 const styles = StyleSheet.create({
-
+  favoriteButtonContainer: {
+    position: "absolute",
+    bottom: 10,
+    right: 10
+  },
 });
 
 export default LaunchPadItem
