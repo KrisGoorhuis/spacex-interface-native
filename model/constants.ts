@@ -10,3 +10,6 @@ export enum SpaceXSections {
 }
 
 export const launchPageIconSize = 20
+
+export const launchesPageSize = 5
+export const launchPadPageSize = 8

@@ -56,10 +56,9 @@ const styles = StyleSheet.create({
       marginRight: 8
    },
    container: {
-      // borderWidth: '1px',
       marginTop: 4,
       padding: 4,
-      borderRadius: 5, // 'md'
+      borderRadius: 5, 
    },
    listItemTitle: {
       display: 'flex',
@@ -68,7 +67,7 @@ const styles = StyleSheet.create({
       marginLeft: 2
    },
    content: {
-      fontSize: 20, // Replaces 'md' | 'xl'
+      fontSize: 20,
    },
    recentLaunchesContainer: {
       display: 'flex',

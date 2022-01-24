@@ -30,7 +30,7 @@ function LaunchPadHeader(props: { launchPad: LaunchPadType }) {
          // display: 'inline',
          backgroundColor: '#718096b8',
          // fontSize: 'large' or '5xl'
-         margin: '2px 4px',
+         margin: '2 4',
          borderRadius: 10 // 'large'
       },
       stack: {

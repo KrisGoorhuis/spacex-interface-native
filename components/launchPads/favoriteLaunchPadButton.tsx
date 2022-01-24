@@ -47,17 +47,17 @@ const FavoriteLaunchPadButton = (props: FavoriteLaunchPadButtonProps) => {
 
       setConfirming(false)
    }
-
+// backgroundColor: 'whitesmoke'
    return (
-      <View style={{ padding: 2 }}>
+      <View>
          {
             confirming ?
-            <View style={{ display: 'flex', backgroundColor: 'whitesmoke' }}>
+            <View style={{ display: 'flex',  }}> 
                <Pressable onPress={handleToggleFavorite}>
-                  <Check color="#1dbf04" style={{ position: 'relative' }} />
+                  <Check color="#1dbf04" />
                </Pressable>
                <Pressable onPress={handleCancel}>
-                  <X color='red' style={{ position: 'relative' }} />
+                  <X color='red' />
                </Pressable>
             </View>
             : 
@@ -66,7 +66,7 @@ const FavoriteLaunchPadButton = (props: FavoriteLaunchPadButtonProps) => {
          {
             !confirming ?
             <Pressable onPress={handleToggleFavorite}>
-               <Star color={isFavorited ? 'gold' : 'darkgray'} style={{ position: 'relative', backgroundColor: 'whitesmoke' }} />
+               <Star color={isFavorited ? 'gold' : 'darkgray'} style={{backgroundColor: 'black'}} />
             </Pressable>
             :
             null

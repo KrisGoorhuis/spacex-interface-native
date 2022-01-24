@@ -1,7 +1,7 @@
 import React from 'react'
 import { Check, X, Star } from "react-native-feather";
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
 
 import { Launch } from '../../model';
 import { removeFromFavoriteLaunches, addToFavoriteLaunches } from '../../redux/slices/favoritesSlice';
@@ -55,8 +55,8 @@ const FavoriteLaunchButton = (props: FavoriteLaunchButtonProps) => {
                <Pressable onPress={handleToggleFavorite}>
                   <Check color="greenyellow" />
                </Pressable>
-               <Pressable>
-                  <X color="red" onPress={handleCancel} />
+               <Pressable onPress={handleCancel}>
+                  <X color="red" />
                </Pressable>
             </View>
             :
@@ -64,7 +64,7 @@ const FavoriteLaunchButton = (props: FavoriteLaunchButtonProps) => {
          }
          {
             !confirming ?
-            <Pressable onPress={handleToggleFavorite}>
+            <Pressable onPress={handleToggleFavorite} style={styles.starContainer}>
                <Star color={isFavorited ? 'gold' : 'darkgray'} />
             </Pressable>
             :
@@ -73,5 +73,13 @@ const FavoriteLaunchButton = (props: FavoriteLaunchButtonProps) => {
       </View>
    )
 }
+
+const styles = StyleSheet.create({
+   starContainer: {
+      backgroundColor: 'gray',
+      padding: 2,
+      borderRadius: 999
+   }
+})
 
 export default FavoriteLaunchButton

@@ -7,11 +7,26 @@ import LaunchScrollScreen from "../screens/BrowserSubscreens/Launches/launchesSc
 import LaunchScreen from "../screens/BrowserSubscreens/Launches/LaunchScreen";
 import LaunchPadScreen from "../screens/BrowserSubscreens/LaunchPads/LaunchPadScreen";
 import LaunchPadScrollScreen from "../screens/BrowserSubscreens/LaunchPads/launchPadsScreen";
+import { useInfiniteQuery } from 'react-query';
+import { Launch, LaunchPad } from '../model';
+import { queryLaunches, queryLaunchPads } from '../utils/networking';
+import { launchPadPageSize, launchesPageSize } from '../model/constants';
 
 
 const Stack = createNativeStackNavigator<BrowserStackParamList>();
 
 export default function BrowserStack({ navigation }: BrowserScreenProps<'Browser Screen'>) {
+
+
+  // Begin queries before users reach their relevant pages. So cool!
+  useInfiniteQuery<LaunchPad[], Error>(
+    ['launchPads'],
+    (context) => queryLaunchPads(context, launchPadPageSize),
+  )
+  useInfiniteQuery<Launch[], Error>(
+    ['launches'],
+    (context) => queryLaunches(context, launchesPageSize),
+  )
 
   return (
     <Stack.Navigator initialRouteName="Browser Screen">

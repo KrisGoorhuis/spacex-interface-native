@@ -28,7 +28,9 @@ export const queryPastLaunches = (context: QueryFunctionContext, launchPadId: nu
 
 
 export const queryLaunchPads = (context: QueryFunctionContext, pageSize: number): Promise<LaunchPad[]> => {
-   return fetch(`${REACT_APP_SPACEX_API_URL}/launchpads?limit=${pageSize}&offset=0`)
+   const offset = context.pageParam | 0
+
+   return fetch(`${REACT_APP_SPACEX_API_URL}/launchpads?limit=${pageSize}&offset=${offset}`)
       .then((response) => response.json())
       .catch((error) => console.log(error))
 }

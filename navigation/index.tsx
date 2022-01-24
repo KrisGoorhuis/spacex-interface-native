@@ -8,7 +8,6 @@ import { ColorSchemeName, Pressable } from 'react-native';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import Favorites from '../screens/FavoritesScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../model/navTypes';
 import LinkingConfiguration from './LinkingConfiguration';
 import BrowserStack from './browserStack';

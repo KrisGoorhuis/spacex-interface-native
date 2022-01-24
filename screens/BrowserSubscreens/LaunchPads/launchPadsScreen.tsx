@@ -1,27 +1,24 @@
-import { StatusBar } from 'expo-status-bar'
 import React from "react";
-import { ScrollView, View, Text, Platform, StyleSheet, FlatList, Dimensions } from "react-native";
+import { View, StyleSheet, FlatList, Dimensions, Text } from "react-native";
 import { Divider } from 'react-native-elements';
 import { useInfiniteQuery } from "react-query";
 import IsFetchingMoreIndicator from "../../../components/isFetchingMoreIndicator";
 
 import LaunchPadItem from "../../../components/launchPads/launchPadItem";
-import LaunchPadPage from "../../../components/launchPads/launchPadPage/launch-pad-page";
 import { LaunchPad } from "../../../model";
+import { launchPadPageSize } from '../../../model/constants';
 import { queryLaunchPads } from "../../../utils/networking";
 
 
 interface LaunchPadScrollScreenProps {
-  [x: string]: any // TODO: how to type the props coming from react-navigation?
+
 }
 
-const pageSize = 3
 const LaunchPadScrollScreen = (props: LaunchPadScrollScreenProps) => {
-  // const launchPad = props.route.params.launchPad
-  console.log("plural")
+
   const { isLoading, isError, error, data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<LaunchPad[], Error>(
     ['launchPads'],
-    (context) => queryLaunchPads(context, pageSize),
+    (context) => queryLaunchPads(context, launchPadPageSize),
     {
       initialData: { pages: [], pageParams: [] },
       getNextPageParam: (lastPage: any, allPages: any) => {
@@ -30,63 +27,48 @@ const LaunchPadScrollScreen = (props: LaunchPadScrollScreenProps) => {
     }
   )
 
-  // if (isLoading) {
-  //   return <Text>Loading...</Text>
-  // }
+  if (isLoading) {
+    return <span>Loading...</span>
+  }
 
-  // if (isError && error) {
-  //   return <Text>Error: {error.message}</Text>
-  // }
+  if (isError && error) {
+    return <span>Error: {error.message}</span>
+  }
 
   const flatPages = data?.pages.flat() || []
 
+  console.log("isLoading")
+  console.log(isLoading)
+
   return (
     <View style={styles.container}>
-
-
-
-      <View style={styles.container}>
-        <FlatList
-          contentContainerStyle={styles.list}
-          data={flatPages}
-          onEndReachedThreshold={1}
-          onEndReached={(info: { distanceFromEnd: number }) => fetchNextPage()}
-          renderItem={({ item, index }) => {
-            return (
-              <View style={{ ...styles.item, width: Dimensions.get('window').width }}>
-                <LaunchPadItem key={item.site_id + index} launchPad={item} />
-                {
-                  (index < flatPages.length - 1 && flatPages.length > 0) ?
-                    <Divider color="white" style={styles.divider} />
-                    :
-                    null
-                }
-              </View>
-            )
-          }}
-          keyExtractor={(item, index) => item.site_id.toString() + index}
-          ListFooterComponent={(
-            <View style={styles.listFooter}>
+      <FlatList
+        contentContainerStyle={styles.list}
+        data={flatPages}
+        onEndReachedThreshold={.5}
+        onEndReached={(info: { distanceFromEnd: number }) => fetchNextPage()}
+        renderItem={({ item, index }) => {
+          return (
+            <View style={{ ...styles.item, width: Dimensions.get('window').width }}>
+              <LaunchPadItem key={item.site_id + index} launchPad={item} />
               {
-                isFetchingNextPage &&
-                <IsFetchingMoreIndicator
-                  data={data?.pages.flat()}
-                  pageSize={pageSize}
-                  isFetchingMore={isLoading}
-                />
+                (index < flatPages.length - 1 && flatPages.length > 0) ?
+                  <Divider color="white" style={styles.divider} />
+                  :
+                  null
               }
             </View>
-          )}
-        />
-      </View>
-      {/* {
-        launchPad ?
-          <LaunchPadPage launchPad={launchPad} />
-          :
-          null
-      } */}
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
-      {/* <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} /> */}
+          )
+        }}
+        keyExtractor={(item, index) => item.site_id.toString() + index}
+        ListFooterComponent={(
+          <IsFetchingMoreIndicator
+            data={data?.pages.flat()}
+            pageSize={launchPadPageSize}
+            isFetchingMore={isFetchingNextPage}
+          />
+        )}
+      />
     </View>
   );
 }
@@ -98,15 +80,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   item: {
-    padding: 20
+    padding: 20,
+    paddingBottom: 0,
   },
   list: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'black'
-  },
-  listFooter: {
-    height: 50
   },
   divider: {
     marginTop: 10,

@@ -35,12 +35,12 @@ const LaunchItem = (props: LaunchItemProps) => {
                resizeMode={props.launch.links.flickr_images[0] ? "cover" : "contain"}
             />
             {props.launch.launch_success ?
-               <View style={styles.statusBadge}>
-                  <Badge containerStyle={styles.launchSuccessBadge} value="Successful" status={"success"} />
+               <View style={styles.badgeContainer}>
+                  <Badge containerStyle={styles.statusBadge} value="Successful" status={"success"} />
                </View>
                :
-               <View style={styles.statusBadge}>
-                  <Badge containerStyle={styles.launchSuccessBadge} value="Failed" status={"warning"} />
+               <View style={styles.badgeContainer}>
+                  <Badge containerStyle={styles.statusBadge} value="Failed" status={"warning"} badgeStyle={{borderRadius: 3}} />
                </View>
             }
             {
@@ -97,19 +97,20 @@ const styles = StyleSheet.create({
       width: 50,
       zIndex: 20
    },
-   statusBadge: {
+   badgeContainer: {
       position: 'absolute',
       bottom: 10,
-      left: 10
+      left: 10,
    },
    body: {
       padding: 6,
    },
-   launchSuccessBadge: {
+   statusBadge: {
       paddingLeft: 2,
       paddingRight: 2,
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+      borderRadius: 1,
    },
    missionName: {
       marginTop: 1,

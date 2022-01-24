@@ -1,18 +1,18 @@
 import React from "react"
 import { StyleSheet, FlatList, View, Dimensions } from 'react-native'
 import { useInfiniteQuery } from "react-query"
+import { Divider } from "react-native-elements"
 
 import { Launch } from "../../../model"
 import LaunchItem from "../../../components/Launches/launchItem"
 import { queryLaunches } from "../../../utils/networking"
 import IsFetchingMoreIndicator from "../../../components/isFetchingMoreIndicator"
-import { Divider } from "react-native-elements"
+import { launchesPageSize } from "../../../model/constants"
 
-const pageSize = 3
 const LaunchScrollScreen = () => {
    const { isLoading, isError, error, data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<Launch[], Error>(
       ['launches'],
-      (context) => queryLaunches(context, pageSize),
+      (context) => queryLaunches(context, launchesPageSize),
       {
          initialData: { pages: [], pageParams: [] },
          getNextPageParam: (lastPage: any, allPages: any) => {
@@ -36,7 +36,7 @@ const LaunchScrollScreen = () => {
          <FlatList
             contentContainerStyle={styles.list}
             data={flatPages}
-            onEndReachedThreshold={1}
+            onEndReachedThreshold={.5}
             onEndReached={(info: { distanceFromEnd: number }) => fetchNextPage()}
             renderItem={({ item, index }) => {
                return (
@@ -58,7 +58,7 @@ const LaunchScrollScreen = () => {
                      isFetchingNextPage &&
                      <IsFetchingMoreIndicator
                         data={data?.pages.flat()}
-                        pageSize={pageSize}
+                        pageSize={launchesPageSize}
                         isFetchingMore={isLoading}
                      />
                   }
@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
       // paddingBottom: 30
    },
    item: {
-      padding: 20
+      padding: 20,
+      paddingBottom: 0,
    },
    list: {
       alignItems: 'center',

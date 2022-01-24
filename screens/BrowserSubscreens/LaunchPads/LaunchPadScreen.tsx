@@ -13,7 +13,6 @@ interface LaunchPadScreenProps {
 export default function LaunchPadScreen(props: LaunchPadScreenProps) { 
    const launchPad = props.route.params.launchPad
 
-   console.log("singular")
    return (
       <View style={styles.container}>
          {
