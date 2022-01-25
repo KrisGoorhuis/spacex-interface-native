@@ -22,6 +22,10 @@ export default function BrowserScreen({ navigation }: BrowserScreenProps<'Browse
           Browse Launch Pads
         </Text>
       </Pressable>
+      
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+
+
     </View>
   );
 }

@@ -57,7 +57,7 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
             />
             // {/* <ListItem.Chevron /> */}
             :
-            <Text>
+            <Text style={styles.noItems}>
               No favorite launches yet
             </Text>
         }
@@ -102,11 +102,9 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
               </ListItem.Content>
             </ListItem>
             :
-            <ListItem>
-              <Text>
-                No favorite launch pads yet
-              </Text>
-            </ListItem>
+            <Text style={styles.noItems}>
+              No favorite launch pads yet
+            </Text>
         }
       </ListItem.Accordion>
     </View >
@@ -120,20 +118,24 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'center',
     width: '100%',
-    backgroundColor: 'red',
   },
   accordion: {
-    // maxHeight:
     width: '100%',
   },
   item: {
     padding: 20
   },
+  noItems: {
+    display: 'flex',
+    justifyContent: 'center',
+    textAlign: 'center',
+    width: '100%',
+    height: 30
+  },
   interiorList: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 40,
-    backgroundColor: 'blue'
   },
   title: {
     flex: 1,

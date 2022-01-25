@@ -19,7 +19,7 @@ const IsFetchingMoreIndicator = (props: IsFetchingMoreIndicatorProps) => {
   console.log(isReachingEnd)
   return (
     <View style={styles.container} >
-                <Text style={styles.text}>That's all!</Text>
+      <Text style={styles.text}>That's all!</Text>
 
       {/* {
         !true ? (
@@ -28,6 +28,7 @@ const IsFetchingMoreIndicator = (props: IsFetchingMoreIndicatorProps) => {
           <Text style={styles.text}>That's all!</Text>
         )
       } */}
+      
     </View>
   );
 }
