@@ -41,7 +41,9 @@ const LocationAndVehicles = (props: LocationAndVehiclesProps) => {
                </Text>
             </ListItem.Title>
             <ListItem.Content>
-               {props.launchPad.vehicles_launched.join(", ")}
+               <Text>
+                  {props.launchPad.vehicles_launched.join(", ")}
+               </Text>
             </ListItem.Content>
          </ListItem>
 
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
    container: {
       marginTop: 4,
       padding: 4,
-      borderRadius: 5, 
+      borderRadius: 5,
    },
    listItemTitle: {
       display: 'flex',

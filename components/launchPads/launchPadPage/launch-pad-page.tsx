@@ -29,7 +29,7 @@ export default function LaunchPadPage(props: LaunchPadPageProps) {
       ['pastLaunches'],
       (context) => queryPastLaunches(context, props.launchPad.id, pageSize)
    )
- 
+
    // 
 
    // if (props.launchPad.error || LaunchesQuery.error) return <Error />;
@@ -71,13 +71,13 @@ export default function LaunchPadPage(props: LaunchPadPageProps) {
                   source={{ uri: `https://maps.google.com/maps?q=${props.launchPad.location.latitude}, ${props.launchPad.location.longitude}&z=15&output=embed` }}
                   allowFullScreen
                />
-            </View>
+            </View>  
 
             <Text style={{ fontWeight: 'bold' }}>
                Last launches
             </Text>
             <FlatList
-               data={data} // Need to figure out react-query stuff for this
+               data={data}
                renderItem={(launchObject) => {
                   return (
                      <LaunchItem launch={launchObject.item} key={launchObject.item.flight_number} />
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
    container: {
       marginTop: 4,
       padding: 4,
-      borderRadius: 5, // 'md'
+      borderRadius: 5,
    },
    listItemTitle: {
       display: 'flex',
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
       marginLeft: 2
    },
    content: {
-      fontSize: 20, // Replaces 'md' | 'xl'
+      fontSize: 20,
    },
    recentLaunchesContainer: {
       display: 'flex',

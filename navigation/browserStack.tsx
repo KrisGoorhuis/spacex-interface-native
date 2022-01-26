@@ -48,6 +48,14 @@ export default function BrowserStack({ navigation }: BrowserScreenProps<'Browser
 
       <Stack.Screen name="Launch Pads" component={LaunchPadScrollScreen} />
       <Stack.Screen name="Launch Pad" component={LaunchPadScreen} />
+
+      {/* <Stack.Screen name="Missions" component={MissionScrollScreen} /> */}
+      {/* <Stack.Screen name="Mission" component={MissionScreen} /> */}
+
+      {/* <Stack.Screen name="Ships" component={ShipScrollScreen} /> */}
+      {/* <Stack.Screen name="Ship" component={ShipScreen} /> */}
+
+
     </Stack.Navigator>
   );
 }

@@ -1,9 +1,9 @@
-import React from "react";
-import { View, Image, ImageBackground, StyleSheet, Text } from "react-native";
-import { Badge } from "react-native-elements";
+import React from "react"
+import { View, Image, ImageBackground, StyleSheet, Text } from "react-native"
+import { Badge } from "react-native-elements"
 
-import { LaunchProps } from "../../../model";
-import FavoriteLaunchButton from "../favoriteLaunchButton";
+import { LaunchProps } from "../../../model"
+import FavoriteLaunchButton from "../favoriteLaunchButton"
 
 
 const LaunchPageHeader = (props: LaunchProps) => {
@@ -40,7 +40,7 @@ const LaunchPageHeader = (props: LaunchProps) => {
             }
          </View>
       </ImageBackground>
-   );
+   )
 }
 
 const styles = StyleSheet.create({
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
    badge: {
       marginRight: 5
    }
-});
+})
 
 export default LaunchPageHeader
 

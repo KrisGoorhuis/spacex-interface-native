@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { ExampleLaunchPad } from '../../../model/example-launch-pad';
+import { exampleLaunchPad } from '../../../model/Examples/example-launch-pad';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store'
 import { initialFavoritesState } from '../../../redux/slices/favoritesSlice';
@@ -28,7 +28,7 @@ describe('<LauncheItem />', () => {
       render(
          <Provider store={store}>
             <BrowserRouter>
-               <LaunchPadItem launchPad={{ ...ExampleLaunchPad, status: "active" }} />
+               <LaunchPadItem launchPad={{ ...exampleLaunchPad, status: "active" }} />
             </BrowserRouter>
          </Provider>
 
@@ -45,7 +45,7 @@ describe('<LauncheItem />', () => {
          <Provider store={store}>
             <BrowserRouter>
                {/* String doesn't matter here as long as it's not 'active' */}
-               <LaunchPadItem launchPad={{ ...ExampleLaunchPad, status: "retired" }} />
+               <LaunchPadItem launchPad={{ ...exampleLaunchPad, status: "retired" }} />
             </BrowserRouter>
          </Provider>
       )

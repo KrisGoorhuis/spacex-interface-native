@@ -6,7 +6,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import LaunchPadScrollScreen from '../../../screens/LaunchPads/launchPadsScreen';
-import { ExampleLaunchPad } from '../../../model/example-launch-pad';
+import { exampleLaunchPad } from '../../../model/Examples/example-launch-pad';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store'
 import { initialFavoritesState } from '../../../redux/slices/favoritesSlice';
@@ -25,7 +25,7 @@ describe('<LaunchPads />', () => {
    it('renders three <LaunchPadItem /> components', async () => {
       store = mockStore(initialState)
 
-      fetch.mockResponseOnce(JSON.stringify([ExampleLaunchPad, ExampleLaunchPad, ExampleLaunchPad]))
+      fetch.mockResponseOnce(JSON.stringify([exampleLaunchPad, exampleLaunchPad, exampleLaunchPad]))
 
       // BrowserRouter solves 'useHref() may be used only in the context of a <Router> component.'
       render(

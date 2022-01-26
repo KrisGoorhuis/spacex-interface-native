@@ -7,7 +7,7 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import { Launch, LaunchPad } from '.';
+import { Launch, LaunchPad, Mission, Ship } from '.';
 
 declare global {
   namespace ReactNavigation {
@@ -31,6 +31,12 @@ export type BrowserStackParamList = {
 
   "Launch Pad": { launchPad: LaunchPad };
   "Launch Pads": undefined;
+
+  "Ship": { ship: Ship };
+  "Ships": undefined
+
+  "Mission": { mission: Mission };
+  "Missions": undefined
 };
 
 export type FavoritesStackParamList = {

@@ -1,4 +1,4 @@
-export const ExampleLaunchPad = {
+export const exampleLaunchPad = {
    "id": 6,
    "status": "active",
    "location": {

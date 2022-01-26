@@ -9,6 +9,7 @@ export default function BrowserScreen({ navigation }: BrowserScreenProps<'Browse
 
   return (
     <View style={styles.container}>
+
       <Pressable onPress={() => navigation.navigate('Launches')}>
         <Text>
           Browse Launches
@@ -22,9 +23,22 @@ export default function BrowserScreen({ navigation }: BrowserScreenProps<'Browse
           Browse Launch Pads
         </Text>
       </Pressable>
-      
+
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 
+      <Pressable onPress={() => navigation.navigate('Ships')}>
+        <Text>
+          Browse Ships
+        </Text>
+      </Pressable>
+
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+
+      <Pressable onPress={() => navigation.navigate('Missions')}>
+        <Text>
+          Browse Missions
+        </Text>
+      </Pressable>
 
     </View>
   );

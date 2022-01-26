@@ -1,4 +1,4 @@
-export const ExampleLaunch = {
+export const exampleLaunch = {
    "flight_number": 1,
    "mission_name": "FalconSat",
    "mission_id": [],

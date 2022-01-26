@@ -1,5 +1,5 @@
-import { ExampleLaunch } from '../../model/example-launch'
-import { ExampleLaunchPad } from '../../model/example-launch-pad'
+import { exampleLaunch } from '../../model/Examples/example-launch'
+import { exampleLaunchPad } from '../../model/Examples/example-launch-pad'
 import slice, { addToFavoriteLaunches, addToFavoriteLaunchPads, FavoritesDataSlice, initialFavoritesState } from './favoritesSlice'
 
 
@@ -9,29 +9,29 @@ test('should return the initial state', () => {
 
 test('should handle a launch being added to an empty list', () => {
    const previousState: FavoritesDataSlice = initialFavoritesState
-   expect(slice.reducer(previousState, addToFavoriteLaunches(ExampleLaunch)).favoriteLaunches).toEqual([
-      ExampleLaunch
+   expect(slice.reducer(previousState, addToFavoriteLaunches(exampleLaunch)).favoriteLaunches).toEqual([
+      exampleLaunch
    ])
 })
 
 test('should handle a launch being added to an existing list', () => {
-   const previousState: FavoritesDataSlice = { ...initialFavoritesState, favoriteLaunches: [ExampleLaunch] }
-   expect(slice.reducer(previousState, addToFavoriteLaunches(ExampleLaunch)).favoriteLaunches).toEqual([
-      ExampleLaunch,
-      ExampleLaunch
+   const previousState: FavoritesDataSlice = { ...initialFavoritesState, favoriteLaunches: [exampleLaunch] }
+   expect(slice.reducer(previousState, addToFavoriteLaunches(exampleLaunch)).favoriteLaunches).toEqual([
+      exampleLaunch,
+      exampleLaunch
    ])
 })
 
 test('should handle a launch pad being added to an empty list', () => {
    const previousState: FavoritesDataSlice = initialFavoritesState
-   expect(slice.reducer(previousState, addToFavoriteLaunchPads(ExampleLaunchPad)).favoriteLaunchPads).toEqual([
-      ExampleLaunchPad
+   expect(slice.reducer(previousState, addToFavoriteLaunchPads(exampleLaunchPad)).favoriteLaunchPads).toEqual([
+      exampleLaunchPad
    ])
 })
 test('should handle a launch pad being added to an existing list', () => {
-   const previousState: FavoritesDataSlice = { ...initialFavoritesState, favoriteLaunchPads: [ExampleLaunchPad] }
-   expect(slice.reducer(previousState, addToFavoriteLaunchPads(ExampleLaunchPad)).favoriteLaunchPads).toEqual([
-      ExampleLaunchPad,
-      ExampleLaunchPad
+   const previousState: FavoritesDataSlice = { ...initialFavoritesState, favoriteLaunchPads: [exampleLaunchPad] }
+   expect(slice.reducer(previousState, addToFavoriteLaunchPads(exampleLaunchPad)).favoriteLaunchPads).toEqual([
+      exampleLaunchPad,
+      exampleLaunchPad
    ])
 })
