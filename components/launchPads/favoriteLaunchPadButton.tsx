@@ -1,13 +1,12 @@
 import React from 'react'
-import { Check, X, Star } from "react-native-feather";
-import { useDispatch, useSelector } from 'react-redux';
+import { Check, X, Star } from "react-native-feather"
+import { useDispatch, useSelector } from 'react-redux'
+import { Pressable, StyleSheet } from 'react-native'
 
-import { removeFromFavoriteLaunchPads, addToFavoriteLaunchPads } from '../../redux/slices/favoritesSlice';
-import { State } from '../../redux';
-import { LaunchPad } from '../../model';
-import { Badge } from 'react-native-elements';
-import { View } from '../Themed';
-import { Pressable } from 'react-native';
+import { removeFromFavoriteLaunchPads, addToFavoriteLaunchPads } from '../../redux/slices/favoritesSlice'
+import { State } from '../../redux'
+import { LaunchPad } from '../../model'
+import { View } from '../Themed'
 
 
 interface FavoriteLaunchPadButtonProps {
@@ -47,9 +46,9 @@ const FavoriteLaunchPadButton = (props: FavoriteLaunchPadButtonProps) => {
 
       setConfirming(false)
    }
-// backgroundColor: 'whitesmoke'
+
    return (
-      <View>
+      <>
          {
             confirming ?
             <View style={{ display: 'flex',  }}> 
@@ -65,14 +64,22 @@ const FavoriteLaunchPadButton = (props: FavoriteLaunchPadButtonProps) => {
          }
          {
             !confirming ?
-            <Pressable onPress={handleToggleFavorite}>
-               <Star color={isFavorited ? 'gold' : 'darkgray'} style={{backgroundColor: 'black'}} />
+            <Pressable onPress={handleToggleFavorite} style={styles.starContainer}>
+               <Star color={isFavorited ? 'gold' : 'darkgray'} />
             </Pressable>
             :
             null
          }
-      </View>
+      </>
    )
 }
+
+const styles = StyleSheet.create({
+   starContainer: {
+      backgroundColor: 'gray',
+      padding: 2,
+      borderRadius: 999
+   }
+})
 
 export default FavoriteLaunchPadButton

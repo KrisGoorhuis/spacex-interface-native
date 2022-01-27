@@ -25,7 +25,7 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
       <ListItem.Accordion
         content={
           <>
-            <AntDesign size={25} style={styles.icon} name="dingding" />
+            <AntDesign size={25} style={styles.icon} name="rocket1" />
             <ListItem.Content>
               <ListItem.Title style={styles.title}>Favorite Launches</ListItem.Title>
             </ListItem.Content>
@@ -46,7 +46,7 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
                     <LaunchItem launch={item} />
                     {
                       (index < favoriteLaunches.length - 1 && favoriteLaunches.length > 0) ?
-                        <Divider color="white" style={styles.marginBottom} />
+                        <Divider color="white" />
                         :
                         null
                     }
@@ -55,7 +55,6 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
               }}
               keyExtractor={(item, index) => "favorite" + index.toString()}
             />
-            // {/* <ListItem.Chevron /> */}
             :
             <Text style={styles.noItems}>
               No favorite launches yet
@@ -63,7 +62,7 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
         }
       </ListItem.Accordion>
 
-      <Divider style={styles.divider} />
+      <Divider />
 
       <ListItem.Accordion
         content={
@@ -81,9 +80,7 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
           favoriteLaunchPads.length > 0 ?
             <ListItem>
               <ListItem.Content>
-                <Text style={styles.title}>
-                  Favorite Launch Pads
-                </Text>
+                <Text style={styles.title}>Favorite Launch Pads</Text>
                 <FlatList
                   data={favoriteLaunchPads}
                   contentContainerStyle={styles.interiorList}
@@ -92,7 +89,7 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
                       <LaunchPadItem launchPad={item} isDrawerFavorite />
                       {
                         (index < favoriteLaunchPads.length - 1 && favoriteLaunchPads.length > 0) ?
-                          <Divider style={styles.marginBottom} />
+                          <Divider />
                           :
                           null
                       }
@@ -114,9 +111,6 @@ export default function FavoritesScreen({ navigation }: RootTabScreenProps<'Favo
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
     width: '100%',
   },
   accordion: {
@@ -140,13 +134,6 @@ const styles = StyleSheet.create({
   title: {
     flex: 1,
     textAlign: 'left'
-  },
-  divider: {
-    // marginTop: 10,
-    // marginBottom: 10
-  },
-  marginBottom: {
-    // marginBottom: 24,
   },
   icon: {
     paddingRight: 8

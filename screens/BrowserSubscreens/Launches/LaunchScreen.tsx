@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar'
 import * as React from 'react'
 import { Platform, StyleSheet } from 'react-native'
-import LaunchPage from '../../../components/Launches/launchPage/launch-page'
 
+import LaunchPage from '../../../components/Launches/launchPage/launch-page'
 import { View } from '../../../components/Themed'
 import { Launch } from '../../../model'
 

@@ -1,9 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Divider, ListItem } from "react-native-elements";
-import { MapPin, Navigation } from "react-native-feather";
+import { ListItem } from "react-native-elements";
+import { MapPin, Navigation, Send, Truck } from "react-native-feather";
 
 import { LaunchPad } from "../../../model";
+import { launchPageIconSize } from "../../../model/constants";
 
 
 interface LocationAndVehiclesProps {
@@ -15,35 +16,19 @@ const LocationAndVehicles = (props: LocationAndVehiclesProps) => {
       <View style={styles.container}>
 
          <ListItem>
-            <ListItem.Title style={styles.listItemTitle}>
-               <MapPin />{" "}
-               <Text style={styles.titleText}>
-                  Location
-               </Text>
-            </ListItem.Title>
-
+            <MapPin color="black" width={launchPageIconSize} height={launchPageIconSize} />
+            <ListItem.Title style={styles.listItemTitle}>Location</ListItem.Title>
             <ListItem.Content style={styles.content}>
-               <Text>
-                  {props.launchPad.location.name}
-               </Text>
-               <Divider />
+               <ListItem.Title>{props.launchPad.location.name}</ListItem.Title>
+               <ListItem.Subtitle>{props.launchPad.location.region}</ListItem.Subtitle>
             </ListItem.Content>
-            <Text>
-               {props.launchPad.location.region}
-            </Text>
          </ListItem>
 
          <ListItem>
-            <ListItem.Title style={styles.listItemTitle}>
-               <Navigation />{" "}
-               <Text style={styles.titleText}>
-                  Vehicles
-               </Text>
-            </ListItem.Title>
+            <Send color="black" width={launchPageIconSize} height={launchPageIconSize} />
+            <ListItem.Title style={styles.listItemTitle}>Vehicles</ListItem.Title>
             <ListItem.Content>
-               <Text>
-                  {props.launchPad.vehicles_launched.join(", ")}
-               </Text>
+               <Text>{props.launchPad.vehicles_launched.join(", ")}</Text>
             </ListItem.Content>
          </ListItem>
 
@@ -64,9 +49,6 @@ const styles = StyleSheet.create({
    },
    listItemTitle: {
       display: 'flex',
-   },
-   titleText: {
-      marginLeft: 2
    },
    content: {
       fontSize: 20,

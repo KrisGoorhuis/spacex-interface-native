@@ -24,19 +24,15 @@ const LaunchPadItem = (props: launchPadItemProps) => {
     >
       <View style={styles.topLine}>
         {props.launchPad.status === "active" ? (
-          <View style={styles.badgeContainer}>
-            <Badge containerStyle={styles.statusBadge} value="Active" status="success" />
-          </View>
+          <Badge containerStyle={styles.statusBadge} value="Active" status="success" />
         ) : (
-          <View style={styles.badgeContainer}>
-            <Badge containerStyle={styles.statusBadge} value="Retired" status="warning" />
-          </View>
+          <Badge containerStyle={styles.statusBadge} value="Retired" status="warning" />
         )}
         <Text style={styles.launchText}>
           {props.launchPad.attempted_launches} attempted &bull;{" "}
           {props.launchPad.successful_launches} succeeded
         </Text>
-        <View style={styles.favoriteButtonContainer} >
+        <View>
           <FavoriteLaunchPadButton {...props} />
         </View>
       </View>
@@ -75,12 +71,6 @@ const styles = StyleSheet.create({
   badge: {
     paddingLeft: 2,
     paddingRight: 2
-  },
-  favoriteButtonContainer: {
-
-  },
-  badgeContainer: {
-
   },
   statusBadge: {
     padding: 5,

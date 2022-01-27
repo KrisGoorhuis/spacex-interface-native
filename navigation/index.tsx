@@ -76,7 +76,7 @@ function BottomTabNavigator() {
         component={BrowserStack}
         options={({ navigation }: RootTabScreenProps<'Browser'>) => ({
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name="rocket1" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="menu-fold" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}

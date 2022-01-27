@@ -1,7 +1,7 @@
 import React from 'react'
 import { Check, X, Star } from "react-native-feather";
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { View, Pressable, StyleSheet } from 'react-native';
 
 import { Launch } from '../../model';
 import { removeFromFavoriteLaunches, addToFavoriteLaunches } from '../../redux/slices/favoritesSlice';

@@ -1,23 +1,23 @@
-import React from "react";
-import { Navigation as Navigation2, Layers } from "react-native-feather";
-import { View, StyleSheet } from "react-native";
-import { ListItem } from "react-native-elements";
+import React from "react"
+import { Navigation as Navigation2, Layers } from "react-native-feather"
+import { View, StyleSheet } from "react-native"
+import { ListItem } from "react-native-elements"
 
-import { LaunchProps } from "../../../model";
-import { launchPageIconSize } from "../../../model/constants";
+import { LaunchProps } from "../../../model"
+import { launchPageIconSize } from "../../../model/constants"
 
 
 
 function RocketInfo(props: LaunchProps) {
-   const cores = props.launch.rocket.first_stage.cores;
+   const cores = props.launch.rocket.first_stage.cores
 
    return (
       <View style={styles.container}>
 
          <ListItem containerStyle={styles.listItem}>
             <Navigation2 color="black" height={launchPageIconSize} width={launchPageIconSize} />
-            <ListItem.Content style={styles.listItemTitle}>
-               <ListItem.Title style={styles.titleText}>
+            <ListItem.Content>
+               <ListItem.Title>
                   Rocket
                </ListItem.Title>
                <ListItem.Subtitle>
@@ -32,8 +32,8 @@ function RocketInfo(props: LaunchProps) {
 
          <ListItem containerStyle={styles.listItem}>
             <Layers color="black" height={launchPageIconSize} width={launchPageIconSize} />
-            <ListItem.Content style={styles.content}>
-               <ListItem.Title style={styles.listItemTitle}>
+            <ListItem.Content>
+               <ListItem.Title>
                   First Stage
                </ListItem.Title>
                <ListItem.Subtitle>
@@ -52,7 +52,7 @@ function RocketInfo(props: LaunchProps) {
          <ListItem containerStyle={styles.listItem}>
             <Layers color="black" height={launchPageIconSize} width={launchPageIconSize} />
             <ListItem.Content>
-               <ListItem.Title style={styles.listItemTitle}>
+               <ListItem.Title>
                   Second Stage
                </ListItem.Title>
                <ListItem.Subtitle>
@@ -67,7 +67,7 @@ function RocketInfo(props: LaunchProps) {
             </ListItem.Content>
          </ListItem>
       </View>
-   );
+   )
 }
 
 const styles = StyleSheet.create({
@@ -78,16 +78,8 @@ const styles = StyleSheet.create({
       paddingTop: 5,
       paddingBottom: 5
    },
-   listItemTitle: {
 
-   },
-   titleText: {
-
-   },
-   content: {
-
-   }
-});
+})
 
 
 export default RocketInfo
