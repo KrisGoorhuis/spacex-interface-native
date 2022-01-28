@@ -86,7 +86,12 @@ export default function LaunchPadPage(props: LaunchPadPageProps) {
                   }}
                />
             </View>
-            <Text style={{ fontWeight: 'bold' }}>Last launches</Text>
+            {
+               flatPages.length > 0 ?
+                  <Text style={styles.lastLaunches}>Last launches</Text>
+                  :
+                  <Text style={styles.lastLaunches}>No previous launches</Text>
+            }
          </View>
       </>
    )
@@ -183,4 +188,8 @@ const styles = StyleSheet.create({
    divider: {
       marginTop: 10,
    },
+   lastLaunches: {
+      // fontWeight: 'bold',
+      marginLeft: 10
+   }
 })
