@@ -1,12 +1,12 @@
-import React from "react";
-import { View, Text, Image, StyleSheet, Dimensions, FlatList, Pressable, Linking } from "react-native";
-import { WebView } from 'react-native-webview';
-import { Divider } from "react-native-elements";
+import React from "react"
+import { View, Text, Image, StyleSheet, Dimensions, FlatList, Pressable, Linking } from "react-native"
+import { WebView } from 'react-native-webview'
+import { Divider } from "react-native-elements"
 
-import { Launch } from "../../../model";
-import RocketInfo from "./rocket-info";
-import TimeAndLocation from "./time-and-location";
-import LaunchPageHeader from "./launch-page-header";
+import { Launch } from "../../../model"
+import RocketInfo from "./rocket-info"
+import TimeAndLocation from "./time-and-location"
+import LaunchPageHeader from "./launch-page-header"
 
 
 interface LaunchPageProps {
@@ -42,7 +42,6 @@ const LaunchPage = (props: LaunchPageProps) => {
   return (
     <View style={styles.viewContainer}>
       <FlatList
-        // style={styles.flatlist}
         ListHeaderComponent={Header}
         data={props.launch.links.flickr_images}
         numColumns={3}
@@ -50,14 +49,14 @@ const LaunchPage = (props: LaunchPageProps) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={(imageObject) => {
           return (
-            <Pressable style={styles.imageContainer} onPress={() => Linking.openURL(imageObject.item)}>
+            <Pressable onPress={() => Linking.openURL(imageObject.item)}>
               <Image style={styles.image} source={{ uri: imageObject.item.replace("_o.jpg", "_z.jpg") }} />
             </Pressable>
           )
         }}
       />
     </View>
-  );
+  )
 }
 
 
@@ -73,9 +72,6 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     marginRight: 8
   },
-  imageContainer: {
-
-  },
   webviewContainer: {
     marginTop: 30,
     marginBottom: 30,
@@ -90,9 +86,6 @@ const styles = StyleSheet.create({
     margin: 'auto',
     height: 300
   },
-  flatlist: {
-
-  },
   column: {
     flex: 1,
     justifyContent: 'space-around'
@@ -102,6 +95,6 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').width * .3,
     margin: 5
   }
-});
+})
 
 export default LaunchPage

@@ -8,14 +8,22 @@ import FavoriteLaunchButton from "../favoriteLaunchButton"
 
 const LaunchPageHeader = (props: LaunchProps) => {
 
+   console.log(`!props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg")`)
+   console.log(props.launch.links.flickr_images[0])
+   console.log(props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg"))
+
    return (
       <ImageBackground
          resizeMode="cover"
          style={{ ...styles.container }}
-         source={{ uri: `${props.launch.links.flickr_images[0]}` }}
+         source={{
+            uri:
+               props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
+               props.launch.links.mission_patch_small
+         }}
       >
          {
-            props.launch.links.mission_patch_small !== null &&
+            props.launch.links.mission_patch_small !== null && props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") &&
             <Image
                style={styles.image}
                source={{ uri: props.launch.links.mission_patch_small }}

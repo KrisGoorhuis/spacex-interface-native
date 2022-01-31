@@ -4,21 +4,21 @@ import { Divider } from 'react-native-elements'
 import { useInfiniteQuery } from "react-query"
 
 import IsFetchingMoreIndicator from "../../../components/isFetchingMoreIndicator"
-import LaunchPadItem from "../../../components/launchPads/launchPadItem"
-import { LaunchPad } from "../../../model"
-import { launchPadPageSize } from '../../../model/constants'
-import { queryLaunchPads } from "../../../utils/networking"
+import MissionItem from "../../../components/missions/missionItem"
+import { Mission } from "../../../model"
+import { missionPageSize } from '../../../model/constants'
+import { queryMissions } from "../../../utils/networking"
 
 
-interface LaunchPadScrollScreenProps {
+interface MissionScrollScreenProps {
 
 }
 
-const LaunchPadScrollScreen = (props: LaunchPadScrollScreenProps) => {
+const MissionScrollScreen = (props: MissionScrollScreenProps) => {
 
-  const { isLoading, isError, error, data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<LaunchPad[], Error>(
-    ['launchPads'],
-    (context) => queryLaunchPads(context, launchPadPageSize),
+  const { isLoading, isError, error, data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<Mission[], Error>(
+    ['missions'],
+    (context) => queryMissions(context, missionPageSize),
     {
       initialData: { pages: [], pageParams: [] },
       getNextPageParam: (lastPage: any, allPages: any) => {
@@ -47,7 +47,7 @@ const LaunchPadScrollScreen = (props: LaunchPadScrollScreenProps) => {
         renderItem={({ item, index }) => {
           return (
             <View style={{ ...styles.item, width: Dimensions.get('window').width }}>
-              <LaunchPadItem key={item.site_id + index} launchPad={item} />
+              <MissionItem key={item.mission_id + index} mission={item} />
               {
                 (index < flatPages.length - 1 && flatPages.length > 0) ?
                   <Divider color="white" style={styles.divider} />
@@ -57,11 +57,11 @@ const LaunchPadScrollScreen = (props: LaunchPadScrollScreenProps) => {
             </View>
           )
         }}
-        keyExtractor={(item, index) => item.site_id.toString() + index}
+        keyExtractor={(item, index) => item.mission_id.toString() + index}
         ListFooterComponent={(
           <IsFetchingMoreIndicator
             data={data?.pages.flat()}
-            pageSize={launchPadPageSize}
+            pageSize={missionPageSize}
             isFetchingMore={isFetchingNextPage}
           />
         )}
@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default LaunchPadScrollScreen
+export default MissionScrollScreen

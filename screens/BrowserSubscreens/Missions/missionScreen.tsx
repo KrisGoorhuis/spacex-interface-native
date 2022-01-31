@@ -1,22 +1,21 @@
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
 
-import LaunchPadPage from '../../../components/launchPads/launchPadPage/launch-pad-page'
 import { View } from '../../../components/Themed'
 
 
-interface LaunchPadScreenProps {
-   [x: string]: any // TODO: how to type the props coming from react-navigation?
+interface MissionScreenProps {
+   [x: string]: any 
 }
 
-export default function LaunchPadScreen(props: LaunchPadScreenProps) {
-   const launchPad = props.route.params.launchPad
+export default function MissionScreen(props: MissionScreenProps) {
+   const mission = props.route.params.mission
 
    return (
       <View style={styles.container}>
          {
-            launchPad ?
-               <LaunchPadPage launchPad={launchPad} />
+            mission ?
+               <MissionPage mission={mission} />
                :
                null
          }

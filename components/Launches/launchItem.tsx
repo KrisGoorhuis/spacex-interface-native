@@ -1,14 +1,14 @@
-import React from "react";
-import { format as timeAgo } from "timeago.js";
+import React from "react"
+import { format as timeAgo } from "timeago.js"
 import { Image, Badge } from 'react-native-elements'
-import { View, Text, Pressable, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { View, Text, Pressable, StyleSheet } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from '@react-navigation/stack'
 
-import { formatDateSimple } from "../../utils/format-date";
-import { Launch } from "../../model";
-import FavoriteLaunchButton from "./favoriteLaunchButton";
-import { BrowserStackParamList } from "../../model/navTypes";
+import { formatDateSimple } from "../../utils/format-date"
+import { Launch } from "../../model"
+import FavoriteLaunchButton from "./favoriteLaunchButton"
+import { BrowserStackParamList } from "../../model/navTypes"
 
 interface LaunchItemProps {
    launch: Launch
@@ -40,7 +40,7 @@ const LaunchItem = (props: LaunchItemProps) => {
                </View>
                :
                <View style={styles.badgeContainer}>
-                  <Badge containerStyle={styles.statusBadge} value="Failed" status={"warning"} badgeStyle={{borderRadius: 3}} />
+                  <Badge containerStyle={styles.statusBadge} value="Failed" status={"warning"} badgeStyle={{ borderRadius: 3 }} />
                </View>
             }
             {

@@ -1,19 +1,23 @@
-import * as React from 'react';
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import * as React from 'react'
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { useInfiniteQuery } from 'react-query'
 
-import { BrowserScreenProps, BrowserStackParamList } from "../model/navTypes";
-import BrowserScreen from "../screens/BrowserScreen";
-import LaunchScrollScreen from "../screens/BrowserSubscreens/Launches/launchesScreen";
-import LaunchScreen from "../screens/BrowserSubscreens/Launches/LaunchScreen";
-import LaunchPadScreen from "../screens/BrowserSubscreens/LaunchPads/LaunchPadScreen";
-import LaunchPadScrollScreen from "../screens/BrowserSubscreens/LaunchPads/launchPadsScreen";
-import { useInfiniteQuery } from 'react-query';
-import { Launch, LaunchPad } from '../model';
-import { queryLaunches, queryLaunchPads } from '../utils/networking';
-import { launchPadPageSize, launchesPageSize } from '../model/constants';
+import { BrowserScreenProps, BrowserStackParamList } from "../model/navTypes"
+import BrowserScreen from "../screens/BrowserScreen"
+import LaunchScrollScreen from "../screens/BrowserSubscreens/Launches/launchesScreen"
+import LaunchScreen from "../screens/BrowserSubscreens/Launches/LaunchScreen"
+import LaunchPadScreen from "../screens/BrowserSubscreens/LaunchPads/LaunchPadScreen"
+import LaunchPadScrollScreen from "../screens/BrowserSubscreens/LaunchPads/launchPadsScreen"
+import { Launch, LaunchPad, Mission, Ship } from '../model'
+import { queryLaunches, queryLaunchPads, queryMissions, queryShips } from '../utils/networking'
+import { launchPadPageSize, launchesPageSize } from '../model/constants'
+import ShipScrollScreen from '../screens/BrowserSubscreens/Ships/shipsScreen'
+import MissionScreen from '../screens/BrowserSubscreens/Missions/missionScreen'
+import MissionScrollScreen from '../screens/BrowserSubscreens/Missions/missionsScreen'
+import ShipScreen from '../screens/BrowserSubscreens/Ships/shipScreen'
 
 
-const Stack = createNativeStackNavigator<BrowserStackParamList>();
+const Stack = createNativeStackNavigator<BrowserStackParamList>()
 
 export default function BrowserStack({ navigation }: BrowserScreenProps<'Browser Screen'>) {
 
@@ -26,6 +30,14 @@ export default function BrowserStack({ navigation }: BrowserScreenProps<'Browser
   useInfiniteQuery<Launch[], Error>(
     ['launches'],
     (context) => queryLaunches(context, launchesPageSize),
+  )
+  useInfiniteQuery<Ship[], Error>(
+    ['ships'],
+    (context) => queryShips(context, launchesPageSize),
+  )
+  useInfiniteQuery<Mission[], Error>(
+    ['missions'],
+    (context) => queryMissions(context, launchesPageSize),
   )
 
   return (
@@ -49,13 +61,12 @@ export default function BrowserStack({ navigation }: BrowserScreenProps<'Browser
       <Stack.Screen name="Launch Pads" component={LaunchPadScrollScreen} />
       <Stack.Screen name="Launch Pad" component={LaunchPadScreen} />
 
-      {/* <Stack.Screen name="Missions" component={MissionScrollScreen} /> */}
-      {/* <Stack.Screen name="Mission" component={MissionScreen} /> */}
+      <Stack.Screen name="Missions" component={MissionScrollScreen} />
+      <Stack.Screen name="Mission" component={MissionScreen} />
 
-      {/* <Stack.Screen name="Ships" component={ShipScrollScreen} /> */}
-      {/* <Stack.Screen name="Ship" component={ShipScreen} /> */}
-
+      <Stack.Screen name="Ships" component={ShipScrollScreen} />
+      <Stack.Screen name="Ship" component={ShipScreen} />
 
     </Stack.Navigator>
-  );
+  )
 }

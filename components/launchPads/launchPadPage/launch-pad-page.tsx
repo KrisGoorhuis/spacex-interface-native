@@ -1,13 +1,12 @@
 import React from "react"
-import { QueryFunctionContext, useInfiniteQuery, useQuery } from "react-query"
+import { useInfiniteQuery } from "react-query"
 import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native'
 import { Divider } from "react-native-elements"
 import MapView from 'react-native-maps'
 
-import Error from "../../error"
-import { Launch, LaunchPad, LaunchPad as LaunchPadType, LaunchPadProps } from '../../../model/index'
+import { Launch, LaunchPad } from '../../../model/index'
 import LaunchPadHeader from "./launch-pad-header"
-import { queryLaunches, queryLaunchPads, queryPastLaunches } from "../../../utils/networking"
+import { queryPastLaunches } from "../../../utils/networking"
 import LaunchItem from "../../Launches/launchItem"
 import LocationAndVehicles from "./locationAndVehicles"
 import { launchesPageSize } from "../../../model/constants"

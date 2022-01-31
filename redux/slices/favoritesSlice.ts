@@ -1,17 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Launch, LaunchPad } from "../../model"
+import { Launch, LaunchPad, Mission, Ship } from "../../model"
 import { LocalStorageKeys } from "../../model/constants"
 
 
 export interface FavoritesDataSlice {
    favoriteLaunches: Launch[] // flight_number, ex 1
    favoriteLaunchPads: LaunchPad[] // site_id, ex 'vafb_slc_4e'
+   favoriteMissions: Mission[]
+   favoriteShips: Ship[]
    defaultIndex: number[]
 }
 
 export const initialFavoritesState: FavoritesDataSlice = {
    favoriteLaunches: JSON.parse(localStorage.getItem(LocalStorageKeys.favoriteLaunches) || "[]"),
    favoriteLaunchPads: JSON.parse(localStorage.getItem(LocalStorageKeys.favoriteLaunchPads) || "[]"),
+   favoriteMissions: JSON.parse(localStorage.getItem(LocalStorageKeys.favoriteMissions) || "[]"),
+   favoriteShips: JSON.parse(localStorage.getItem(LocalStorageKeys.favoriteShips) || "[]"),
    defaultIndex: JSON.parse(localStorage.getItem(LocalStorageKeys.defaultIndex) || "[0]")
 }
 
@@ -47,6 +51,34 @@ const favoritesSlice = createSlice({
          state.favoriteLaunchPads = newState
       },
 
+      // missions
+      addToFavoriteMissions: (state, { payload }: PayloadAction<Mission>) => {
+         const newState = [...state.favoriteMissions, payload]
+
+         localStorage.setItem(LocalStorageKeys.favoriteMissions, JSON.stringify(newState))
+         state.favoriteMissions = newState
+      },
+      removeFromFavoriteMissions: (state, { payload }: PayloadAction<Mission>) => {
+         const newState = state.favoriteMissions.filter((mission: Mission) => payload.mission_id !== mission.mission_id)
+
+         localStorage.setItem(LocalStorageKeys.favoriteMissions, JSON.stringify(newState))
+         state.favoriteMissions = newState
+      },
+
+      // ships
+      addToFavoriteShips: (state, { payload }: PayloadAction<Ship>) => {
+         const newState = [...state.favoriteShips, payload]
+
+         localStorage.setItem(LocalStorageKeys.favoriteShips, JSON.stringify(newState))
+         state.favoriteShips = newState
+      },
+      removeFromFavoriteShips: (state, { payload }: PayloadAction<Ship>) => {
+         const newState = state.favoriteShips.filter((ship: Ship) => payload.ship_id !== ship.ship_id)
+
+         localStorage.setItem(LocalStorageKeys.favoriteShips, JSON.stringify(newState))
+         state.favoriteShips = newState
+      },
+
       // misc
       setDefaultIndex: (state, { payload }: PayloadAction<number[]>) => {
          localStorage.setItem(LocalStorageKeys.defaultIndex, JSON.stringify(payload))
@@ -61,6 +93,12 @@ export const {
 
    addToFavoriteLaunchPads,
    removeFromFavoriteLaunchPads,
+
+   addToFavoriteMissions,
+   removeFromFavoriteMissions,
+
+   addToFavoriteShips,
+   removeFromFavoriteShips,
 
    setDefaultIndex
 } = favoritesSlice.actions

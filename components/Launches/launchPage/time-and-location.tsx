@@ -1,24 +1,55 @@
-import React from "react";
-import { Watch, MapPin } from "react-native-feather";
-import { format as timeAgo } from "timeago.js";
-import { View, StyleSheet, Text, Pressable, Dimensions } from "react-native";
-import { ListItem } from "react-native-elements";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import React from "react"
+import { Watch, MapPin } from "react-native-feather"
+import { format as timeAgo } from "timeago.js"
+import { View, StyleSheet, Text, Pressable, Dimensions } from "react-native"
+import { Button, ListItem, Overlay } from "react-native-elements"
+import { useNavigation } from "@react-navigation/native"
+import { StackNavigationProp } from "@react-navigation/stack"
 
-import { LaunchProps } from "../../../model";
-import { formatDateTargetZone } from "../../../utils/format-date";
-import { BrowserStackParamList } from "../../../model/navTypes";
-import { launchPageIconSize } from "../../../model/constants";
+import { LaunchPad, LaunchProps } from "../../../model"
+import { formatDateTargetZone } from "../../../utils/format-date"
+import { BrowserStackParamList } from "../../../model/navTypes"
+import { launchPadPageSize, launchPageIconSize } from "../../../model/constants"
+import { useInfiniteQuery } from "react-query"
+import { queryLaunchPads } from "../../../utils/networking"
 
 
 
 function TimeAndLocation(props: LaunchProps) {
-   const navigation = useNavigation<StackNavigationProp<BrowserStackParamList>>();
+   const [visible, setVisible] = React.useState<boolean>(false)
+   const navigation = useNavigation<StackNavigationProp<BrowserStackParamList>>()
+
+
+   const { isLoading, isError, error, data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<LaunchPad[], Error>(
+      ['launchPads'],
+      (context) => queryLaunchPads(context, launchPadPageSize),
+   )
+
+   const navigateToPad = (launchPads: LaunchPad[] | undefined) => {
+      if (launchPads) {
+         const ourPad = launchPads.filter(pad => pad.id.toString() === props.launch.launch_site.site_id)[0]
+         navigation.navigate('Launch Pad', { launchPad: ourPad })
+      }
+      else {
+         // This should never be reached, assuming our 
+         setVisible(true)
+      }
+   }
+
+   const NoPadOverlay = () => (
+      <Overlay isVisible={visible} onBackdropPress={() => setVisible(false)}>
+         <Text>Launch pad not found</Text>
+         <Button
+            title="Close"
+            onPress={() => setVisible(false)}
+         />
+      </Overlay>
+   )
 
    return (
       <View>
-
+         <NoPadOverlay />
+         
          <ListItem containerStyle={styles.listItem}>
             <Watch color="black" width={launchPageIconSize} height={launchPageIconSize} />
             <ListItem.Content style={styles.content}>
@@ -42,7 +73,7 @@ function TimeAndLocation(props: LaunchProps) {
                </ListItem.Title>
                <ListItem.Subtitle >
                   <Pressable
-                     onPress={() => navigation.navigate('Launch Pad', { launchPadId: props.launch.launch_site.site_id })}
+                     onPress={() => navigateToPad(data?.pages.flat())}
                   >
                      <Text style={styles.location}>{props.launch.launch_site.site_name_long}</Text>
                   </Pressable>

@@ -1,24 +1,24 @@
-import React from "react"
-import { View, StyleSheet, FlatList, Dimensions } from "react-native"
-import { Divider } from 'react-native-elements'
-import { useInfiniteQuery } from "react-query"
+import React from "react";
+import { View, StyleSheet, FlatList, Dimensions, Text } from "react-native";
+import { Divider } from 'react-native-elements';
+import { useInfiniteQuery } from "react-query";
+import IsFetchingMoreIndicator from "../../../components/isFetchingMoreIndicator";
 
-import IsFetchingMoreIndicator from "../../../components/isFetchingMoreIndicator"
-import LaunchPadItem from "../../../components/launchPads/launchPadItem"
-import { LaunchPad } from "../../../model"
-import { launchPadPageSize } from '../../../model/constants'
-import { queryLaunchPads } from "../../../utils/networking"
+import LaunchPadItem from "../../../components/launchPads/launchPadItem";
+import { LaunchPad as Mission, Ship } from "../../../model";
+import { shipPageSize } from '../../../model/constants';
+import { queryShips } from "../../../utils/networking";
 
 
-interface LaunchPadScrollScreenProps {
+interface ShipScrollScreenProps {
 
 }
 
-const LaunchPadScrollScreen = (props: LaunchPadScrollScreenProps) => {
+const ShipScrollScreen = (props: ShipScrollScreenProps) => {
 
-  const { isLoading, isError, error, data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<LaunchPad[], Error>(
-    ['launchPads'],
-    (context) => queryLaunchPads(context, launchPadPageSize),
+  const { isLoading, isError, error, data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<Ship[], Error>(
+    ['ships'],
+    (context) => queryShips(context, shipPageSize),
     {
       initialData: { pages: [], pageParams: [] },
       getNextPageParam: (lastPage: any, allPages: any) => {
@@ -47,7 +47,7 @@ const LaunchPadScrollScreen = (props: LaunchPadScrollScreenProps) => {
         renderItem={({ item, index }) => {
           return (
             <View style={{ ...styles.item, width: Dimensions.get('window').width }}>
-              <LaunchPadItem key={item.site_id + index} launchPad={item} />
+              {/* <ShipItem key={item.site_id + index} ship={item} /> */}
               {
                 (index < flatPages.length - 1 && flatPages.length > 0) ?
                   <Divider color="white" style={styles.divider} />
@@ -61,13 +61,13 @@ const LaunchPadScrollScreen = (props: LaunchPadScrollScreenProps) => {
         ListFooterComponent={(
           <IsFetchingMoreIndicator
             data={data?.pages.flat()}
-            pageSize={launchPadPageSize}
+            pageSize={shipPageSize}
             isFetchingMore={isFetchingNextPage}
           />
         )}
       />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default LaunchPadScrollScreen
+export default ShipScrollScreen

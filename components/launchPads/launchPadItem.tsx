@@ -1,12 +1,12 @@
-import React from "react";
+import React from "react"
 import { Pressable, StyleSheet, View, Text, Dimensions } from 'react-native'
-import { useNavigation } from "@react-navigation/native";
-import { Badge } from "react-native-elements";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native"
+import { Badge } from "react-native-elements"
+import { StackNavigationProp } from "@react-navigation/stack"
 
-import { LaunchPad, LaunchPadProps } from "../../model";
-import FavoriteLaunchPadButton from "./favoriteLaunchPadButton";
-import { BrowserStackParamList } from "../../model/navTypes";
+import { LaunchPad, LaunchPadProps } from "../../model"
+import FavoriteLaunchPadButton from "./favoriteLaunchPadButton"
+import { BrowserStackParamList } from "../../model/navTypes"
 
 interface launchPadItemProps extends LaunchPadProps {
   launchPad: LaunchPad
@@ -14,7 +14,7 @@ interface launchPadItemProps extends LaunchPadProps {
 }
 
 const LaunchPadItem = (props: launchPadItemProps) => {
-  const navigation = useNavigation<StackNavigationProp<BrowserStackParamList>>();
+  const navigation = useNavigation<StackNavigationProp<BrowserStackParamList>>()
 
   return (
     <Pressable
@@ -47,7 +47,7 @@ const LaunchPadItem = (props: launchPadItemProps) => {
         {props.launchPad.vehicles_launched.join(", ")}
       </Text>
     </Pressable>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -78,6 +78,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center'
   },
-});
+})
 
 export default LaunchPadItem

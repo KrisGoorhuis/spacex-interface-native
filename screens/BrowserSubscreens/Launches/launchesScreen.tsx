@@ -36,7 +36,7 @@ const LaunchScrollScreen = () => {
          <FlatList
             contentContainerStyle={styles.list}
             data={flatPages}
-            onEndReachedThreshold={.5}
+            onEndReachedThreshold={.8}
             onEndReached={(info: { distanceFromEnd: number }) => fetchNextPage()}
             renderItem={({ item, index }) => {
                return (
