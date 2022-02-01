@@ -9,7 +9,7 @@ import LaunchPadHeader from "./launch-pad-header"
 import { queryPastLaunches } from "../../../utils/networking"
 import LaunchItem from "../../Launches/launchItem"
 import LocationAndVehicles from "./locationAndVehicles"
-import { launchesPageSize } from "../../../model/constants"
+import { launchesPageSize, launchPadPageSize } from "../../../model/constants"
 import IsFetchingMoreIndicator from "../../isFetchingMoreIndicator"
 
 
@@ -18,14 +18,13 @@ interface LaunchPadPageProps {
    [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
 
-const pageSize = 3
 export default function LaunchPadPage(props: LaunchPadPageProps) {
    // (context: QueryFunctionContext<TQueryKey>) => T | Promise<T>
 
    // const LaunchesQuery = { data: [], error: 'temp' }
    const { isLoading, isError, error, data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<Launch[], Error>(
       ['pastLaunches'],
-      (context) => queryPastLaunches(context, pageSize, props.launchPad.site_id),
+      (context) => queryPastLaunches(context, launchPadPageSize, props.launchPad.site_id),
       {
          initialData: { pages: [], pageParams: [] },
          getNextPageParam: (lastPage: any, allPages: any) => {

@@ -39,7 +39,7 @@ export const queryLaunchPads = (context: QueryFunctionContext, pageSize: number)
 export const queryShips = (context: QueryFunctionContext, pageSize: number): Promise<Ship[]> => {
    const offset = context.pageParam | 0
 
-   return fetch(`${REACT_APP_SPACEX_API_URL}/ships/past?limit=${pageSize}&order=desc&sort=launch_date_utc&offset=${offset}`)
+   return fetch(`${REACT_APP_SPACEX_API_URL}/ships?limit=${pageSize}&order=desc&offset=${offset}`)
       .then((response) => response.json())
       .catch((error) => console.log(error))
 }
@@ -47,8 +47,17 @@ export const queryShips = (context: QueryFunctionContext, pageSize: number): Pro
 export const queryMissions = (context: QueryFunctionContext, pageSize: number): Promise<Mission[]> => {
    const offset = context.pageParam | 0
 
-   return fetch(`${REACT_APP_SPACEX_API_URL}/mission/past?limit=${pageSize}&order=desc&sort=launch_date_utc&offset=${offset}`)
-      .then((response) => response.json())
+   return fetch(`${REACT_APP_SPACEX_API_URL}/missions?limit=${pageSize}&order=desc&offset=${offset}`)
+      .then((response) => {
+         console.log("response.json()")
+         console.log(response.json())
+         console.log("response")
+         console.log(response)
+         console.log("after")
+         return response.json()
+      }
+      
+      )
       .catch((error) => console.log(error))
 }
 

@@ -1,6 +1,5 @@
-import { produceWithPatches } from "immer"
 import React from "react"
-import { ActivityIndicator, Text, Pressable, StyleSheet, View } from "react-native"
+import { Text, StyleSheet, View } from "react-native"
 
 
 interface IsFetchingMoreIndicatorProps {

@@ -2,10 +2,7 @@ import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { AppRegistry } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import {
-  QueryClientProvider,
-  QueryClient,
-} from 'react-query'
+import { QueryClientProvider, QueryClient } from 'react-query'
 import { Provider } from 'react-redux'
 import 'localstorage-polyfill'
 

@@ -37,14 +37,21 @@ const MissionScrollScreen = (props: MissionScrollScreenProps) => {
 
   const flatPages = data?.pages.flat() || []
 
+  console.log("data")
+  console.log(data)
+  console.log("flatPages")
+  console.log(flatPages)
+
   return (
     <View style={styles.container}>
-      <FlatList
+      {/* <FlatList
         contentContainerStyle={styles.list}
         data={flatPages}
         onEndReachedThreshold={.5}
         onEndReached={(info: { distanceFromEnd: number }) => fetchNextPage()}
         renderItem={({ item, index }) => {
+          console.log("item")
+          console.log(item)
           return (
             <View style={{ ...styles.item, width: Dimensions.get('window').width }}>
               <MissionItem key={item.mission_id + index} mission={item} />
@@ -65,7 +72,7 @@ const MissionScrollScreen = (props: MissionScrollScreenProps) => {
             isFetchingMore={isFetchingNextPage}
           />
         )}
-      />
+      /> */}
     </View>
   )
 }

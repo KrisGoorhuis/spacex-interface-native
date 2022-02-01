@@ -1,13 +1,13 @@
-import React from "react";
-import { View, StyleSheet, FlatList, Dimensions, Text } from "react-native";
-import { Divider } from 'react-native-elements';
-import { useInfiniteQuery } from "react-query";
-import IsFetchingMoreIndicator from "../../../components/isFetchingMoreIndicator";
+import React from "react"
+import { View, StyleSheet, FlatList, Dimensions, Text } from "react-native"
+import { Divider } from 'react-native-elements'
+import { useInfiniteQuery } from "react-query"
+import IsFetchingMoreIndicator from "../../../components/isFetchingMoreIndicator"
+import ShipItem from "../../../components/ships/shipItem"
 
-import LaunchPadItem from "../../../components/launchPads/launchPadItem";
-import { LaunchPad as Mission, Ship } from "../../../model";
-import { shipPageSize } from '../../../model/constants';
-import { queryShips } from "../../../utils/networking";
+import { LaunchPad as Mission, Ship } from "../../../model"
+import { shipPageSize } from '../../../model/constants'
+import { queryShips } from "../../../utils/networking"
 
 
 interface ShipScrollScreenProps {
@@ -35,7 +35,10 @@ const ShipScrollScreen = (props: ShipScrollScreenProps) => {
     return <span>Error: {error.message}</span>
   }
 
+  
   const flatPages = data?.pages.flat() || []
+  console.log("flatPages")
+  console.log(flatPages)
 
   return (
     <View style={styles.container}>
@@ -47,7 +50,7 @@ const ShipScrollScreen = (props: ShipScrollScreenProps) => {
         renderItem={({ item, index }) => {
           return (
             <View style={{ ...styles.item, width: Dimensions.get('window').width }}>
-              {/* <ShipItem key={item.site_id + index} ship={item} /> */}
+              <ShipItem key={item.ship_id + index} ship={item} />
               {
                 (index < flatPages.length - 1 && flatPages.length > 0) ?
                   <Divider color="white" style={styles.divider} />
@@ -57,7 +60,7 @@ const ShipScrollScreen = (props: ShipScrollScreenProps) => {
             </View>
           )
         }}
-        keyExtractor={(item, index) => item.site_id.toString() + index}
+        keyExtractor={(item, index) => item.ship_id.toString() + index}
         ListFooterComponent={(
           <IsFetchingMoreIndicator
             data={data?.pages.flat()}
@@ -67,7 +70,7 @@ const ShipScrollScreen = (props: ShipScrollScreenProps) => {
         )}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
