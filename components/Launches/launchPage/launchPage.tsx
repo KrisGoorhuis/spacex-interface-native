@@ -4,9 +4,9 @@ import { WebView } from 'react-native-webview'
 import { Divider } from "react-native-elements"
 
 import { Launch } from "../../../model"
-import RocketInfo from "./rocket-info"
-import TimeAndLocation from "./time-and-location"
-import LaunchPageHeader from "./launch-page-header"
+import RocketInfo from "./rocketInfo"
+import TimeAndLocation from "./timeAndLocation"
+import LaunchPageHeader from "./launchPageHeader"
 
 
 interface LaunchPageProps {

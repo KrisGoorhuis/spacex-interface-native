@@ -19,7 +19,6 @@ const LaunchItem = (props: LaunchItemProps) => {
 
    return (
       <Pressable
-         key={props.launch.flight_number}
          onPress={() => navigation.navigate('Launch', { launch: props.launch })}
          data-testid={"launchItem"}
          style={styles.container}
@@ -36,11 +35,11 @@ const LaunchItem = (props: LaunchItemProps) => {
             />
             {props.launch.launch_success ?
                <View style={styles.badgeContainer}>
-                  <Badge containerStyle={styles.statusBadge} value="Successful" status={"success"} />
+                  <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.statusBadge} value="Successful" status={"success"} />
                </View>
                :
                <View style={styles.badgeContainer}>
-                  <Badge containerStyle={styles.statusBadge} value="Failed" status={"warning"} badgeStyle={{ borderRadius: 3 }} />
+                  <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.statusBadge} value="Failed" status={"warning"} />
                </View>
             }
             {
@@ -102,6 +101,9 @@ const styles = StyleSheet.create({
       bottom: 10,
       left: 10,
    },
+   badgeStyle: {
+      borderRadius: 3,
+    },
    body: {
       padding: 6,
    },
@@ -133,7 +135,6 @@ const styles = StyleSheet.create({
       bottom: 10,
       right: 10
    },
-
 })
 
 export default LaunchItem

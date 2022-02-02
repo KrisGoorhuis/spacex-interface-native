@@ -8,14 +8,10 @@ import FavoriteLaunchButton from "../favoriteLaunchButton"
 
 const LaunchPageHeader = (props: LaunchProps) => {
 
-   console.log(`!props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg")`)
-   console.log(props.launch.links.flickr_images[0])
-   console.log(props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg"))
-
    return (
       <ImageBackground
          resizeMode="cover"
-         style={{ ...styles.container }}
+         style={styles.container}
          source={{
             uri:
                props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
@@ -38,12 +34,12 @@ const LaunchPageHeader = (props: LaunchProps) => {
             <View style={styles.badge}>
                <FavoriteLaunchButton {...props} />
             </View>
-            <Badge containerStyle={styles.badge} value={`#${props.launch.flight_number}`} />
+            <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.badge} value={`#${props.launch.flight_number}`} />
             {
                props.launch.launch_success ? (
-                  <Badge containerStyle={styles.badge} value={"Successful"} status={"success"} />
+                  <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.badge} value={"Successful"} status={"success"} />
                ) : (
-                  <Badge containerStyle={styles.badge} value={"Failed"} status={"warning"} />
+                  <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.badge} value={"Failed"} status={"warning"} />
                )
             }
          </View>
@@ -86,7 +82,10 @@ const styles = StyleSheet.create({
    },
    badge: {
       marginRight: 5
-   }
+   },
+   badgeStyle: {
+      borderRadius: 3,
+    },
 })
 
 export default LaunchPageHeader

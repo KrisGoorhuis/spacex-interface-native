@@ -2,10 +2,10 @@ import React from "react"
 import { useInfiniteQuery } from "react-query"
 import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native'
 import { Divider } from "react-native-elements"
-import MapView from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps'
 
 import { Launch, LaunchPad } from '../../../model/index'
-import LaunchPadHeader from "./launch-pad-header"
+import LaunchPadHeader from "./launchPadHeader"
 import { queryPastLaunches } from "../../../utils/networking"
 import LaunchItem from "../../Launches/launchItem"
 import LocationAndVehicles from "./locationAndVehicles"
@@ -50,19 +50,6 @@ export default function LaunchPadPage(props: LaunchPadPageProps) {
    //   )
    // }
 
-   // const thisLaunchPad = LaunchesQuery.data.filter((launchPad: LaunchPadType) => launchPad.id === props.launchPadId)[0]
-
-   // const { isLoading, isError, error, data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<Launch[], { message: string }>(
-   //    ['launches'],
-   //    (context) => queryLaunches(context, pageSize),
-   //    {
-   //       initialData: { pages: [], pageParams: [] },
-   //       getNextPageParam: (lastPage: any, allPages: any) => {
-   //          if (lastPage) { return allPages.flat().length + 1 }
-   //       }
-   //    }
-   // )
-
 
    const flatPages = data?.pages.flat() || []
 
@@ -79,10 +66,17 @@ export default function LaunchPadPage(props: LaunchPadPageProps) {
                   initialRegion={{
                      latitude: props.launchPad.location.latitude,
                      longitude: props.launchPad.location.longitude,
-                     latitudeDelta: 0.0922,
-                     longitudeDelta: 0.0421,
+                     latitudeDelta: 10,
+                     longitudeDelta: 10,
                   }}
-               />
+               >
+                  <Marker
+                     coordinate={{
+                        latitude: props.launchPad.location.latitude,
+                        longitude: props.launchPad.location.longitude
+                     }}
+                  />
+               </MapView>
             </View>
             {
                flatPages.length > 0 ?

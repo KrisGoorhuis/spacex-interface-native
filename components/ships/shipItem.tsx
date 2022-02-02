@@ -1,5 +1,4 @@
 import React from "react"
-import { format as timeAgo } from "timeago.js"
 import { View, Text, Pressable, StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -19,35 +18,22 @@ const ShipItem = (props: ShipItemProps) => {
   return (
     <Pressable
       onPress={() => navigation.navigate('Ship', { ship: props.ship })}
-      data-testid={"missionItem"}
+      data-testid={"shipItem"}
       style={styles.container}
     >
       <View>
         <Image
           source={{ uri: props.ship.image }}
-          containerStyle={{ height: 300 }}
-          // resizeMode={props.launch.links.flickr_images[0] ? "cover" : "contain"}
+          containerStyle={{ height: 200 }}
         />
-        {props.ship.launch_success ?
+        {props.ship.active ?
           <View style={styles.badgeContainer}>
-            <Badge containerStyle={styles.statusBadge} value="Successful" status={"success"} />
+            <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.statusBadge} value="Active" status={"primary"} />
           </View>
           :
           <View style={styles.badgeContainer}>
-            <Badge containerStyle={styles.statusBadge} value="Failed" status={"warning"} badgeStyle={{ borderRadius: 3 }} />
+            <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.statusBadge} value="Inactive" status={"warning"} />
           </View>
-        }
-        {
-          props.launch.links.flickr_images[0] ?
-            <View style={styles.patchContainer}>
-              <Image
-                source={{ uri: props.launch.links.mission_patch_small }}
-                style={styles.patch}
-                resizeMode="contain"
-              />
-            </View>
-            :
-            null
         }
         <View style={styles.favoriteButtonContainer} >
           <FavoriteShipButton {...props} />
@@ -55,19 +41,50 @@ const ShipItem = (props: ShipItemProps) => {
       </View>
 
       <View style={styles.body}>
-        <Text style={styles.rocketName}>
-          {props.launch.rocket.rocket_name} &bull; {props.launch.launch_site.site_name}
-        </Text>
-        <Text style={styles.missionName}>
-          {props.launch.mission_name}
-        </Text>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.launchDate}>{formatDateSimple(props.launch.launch_date_utc)} </Text>
-          <Text style={styles.timeAgo}>
-            {timeAgo(props.launch.launch_date_utc)}
-          </Text>
+          <Text style={styles.shipDetail}>{props.ship.ship_name} &bull; </Text>
+          <Text style={styles.shipDetail}>{props.ship.ship_type}</Text>
+        </View>
+        {
+          props.ship.roles.length > 0 &&
+          <View style={styles.roles}>
+            <Text style={styles.roles}>Role(s):</Text>
+            {
+                <Text style={styles.shipDetail}> {props.ship.roles.join(", ")} </Text>
+            }
+          </View>
+        }
+
+        <View style={{ flexDirection: 'column' }}>
+          {
+            props.ship.ship_model &&
+            <Text style={styles.shipDetail}>Model: {props.ship.ship_model}</Text>
+          }
+          {
+            props.ship.weight_kg &&
+            <Text style={styles.shipDetail}>Weight: {props.ship.weight_kg.toLocaleString()} kilograms</Text>
+          }
+          {
+            props.ship.year_built &&
+            <Text style={styles.shipDetail}>Built in {props.ship.year_built}</Text>
+          }
+          {
+            props.ship.speed_kn &&
+            <Text style={styles.shipDetail}>Speed: {props.ship.speed_kn} knots</Text>
+          }
         </View>
       </View>
+
+      {/* name, model */}
+      {/* role, active, weight, home port, status,  */}
+      {/* url */}
+      {/* position map - easy copy/paste */}
+
+      {/* missions */}
+
+      {/* attempted / successful landings - hide if either is null? */}
+
+
 
     </Pressable>
   )
@@ -97,24 +114,30 @@ const styles = StyleSheet.create({
     bottom: 10,
     left: 10,
   },
+  badgeStyle: {
+    borderRadius: 3,
+  },
   body: {
     padding: 6,
+    color: 'white'
   },
   statusBadge: {
     paddingLeft: 2,
     paddingRight: 2,
     display: 'flex',
     alignItems: 'center',
-    borderRadius: 1,
+    borderRadius: 3,
   },
-  missionName: {
-    marginTop: 1,
+  shipTitle: {
     color: 'white',
-  },
-  rocketName: {
-    color: 'white',
-    marginTop: 2,
     textTransform: "uppercase"
+  },
+  shipDetail: {
+    color: 'white',
+  },
+  roles: {
+    color: 'white',
+    flexDirection: 'row',
   },
   launchDate: {
     color: 'white'

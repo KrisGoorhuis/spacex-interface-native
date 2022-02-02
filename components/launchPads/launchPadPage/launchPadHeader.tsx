@@ -24,11 +24,11 @@ function LaunchPadHeader(props: { launchPad: LaunchPadType }) {
             <View style={styles.badge}>
                <FavoriteLaunchPadButton {...props} />
             </View>
-            <Badge containerStyle={styles.badge} value={`${props.launchPad.successful_launches}/${props.launchPad.attempted_launches} successful`} status={'primary'} />
+            <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.badge} value={`${props.launchPad.successful_launches}/${props.launchPad.attempted_launches} successful`} status={'primary'} />
             {props.launchPad.status === "active" ? (
-               <Badge containerStyle={styles.badge} value={'Active'} status={'success'} />
+               <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.badge} value={'Active'} status={'success'} />
             ) : (
-               <Badge containerStyle={styles.badge} value={'Retired'} status={'warning'} />
+               <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.badge} value={'Retired'} status={'warning'} />
             )}
          </View>
       </LinearGradient>
@@ -70,6 +70,9 @@ const styles = StyleSheet.create({
       fontSize: 18,
       padding: 3
    },
+   badgeStyle: {
+      borderRadius: 3,
+    },
 })
 
 

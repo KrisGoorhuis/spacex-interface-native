@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
 
-import LaunchPadPage from '../../../components/launchPads/launchPadPage/launch-pad-page'
+import LaunchPadPage from '../../../components/launchPads/launchPadPage/launchPadPage'
 import { View } from '../../../components/Themed'
 
 

@@ -1,11 +1,11 @@
 import React from "react"
-import { View, StyleSheet, FlatList, Dimensions, Text } from "react-native"
+import { View, StyleSheet, FlatList, Dimensions } from "react-native"
 import { Divider } from 'react-native-elements'
 import { useInfiniteQuery } from "react-query"
+
 import IsFetchingMoreIndicator from "../../../components/isFetchingMoreIndicator"
 import ShipItem from "../../../components/ships/shipItem"
-
-import { LaunchPad as Mission, Ship } from "../../../model"
+import { Ship } from "../../../model"
 import { shipPageSize } from '../../../model/constants'
 import { queryShips } from "../../../utils/networking"
 

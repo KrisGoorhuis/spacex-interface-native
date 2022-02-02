@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
 
-import ShipPage from '../../../components/launchPads/launchPadPage/launch-pad-page'
+import ShipPage from '../../../components/ships/shipPage/shipPage'
 import { View } from '../../../components/Themed'
 
 
