@@ -53,7 +53,7 @@ function TimeAndLocation(props: LaunchProps) {
          <ListItem containerStyle={styles.listItem}>
             <Watch color="black" width={launchPageIconSize} height={launchPageIconSize} />
             <ListItem.Content style={styles.content}>
-               <ListItem.Title style={styles.titleText}>
+               <ListItem.Title>
                   Launch Date
                </ListItem.Title>
                <ListItem.Subtitle>
@@ -68,7 +68,7 @@ function TimeAndLocation(props: LaunchProps) {
          <ListItem containerStyle={styles.listItem}>
             <MapPin color="black" width={launchPageIconSize} height={launchPageIconSize} />
             <ListItem.Content>
-               <ListItem.Title style={styles.titleText} >
+               <ListItem.Title>
                   Launch Site
                </ListItem.Title>
                <ListItem.Subtitle >
@@ -103,11 +103,8 @@ const styles = StyleSheet.create({
       maxWidth: Dimensions.get('window').width * .75,
       textDecorationLine: 'underline'
    },
-   titleText: {
-
-   },
    content: {
-      fontSize: 20, // Replaces 'md' | 'xl'
+      fontSize: 20,
    }
 });
 

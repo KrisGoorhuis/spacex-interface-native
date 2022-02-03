@@ -74,18 +74,6 @@ const ShipItem = (props: ShipItemProps) => {
           }
         </View>
       </View>
-
-      {/* name, model */}
-      {/* role, active, weight, home port, status,  */}
-      {/* url */}
-      {/* position map - easy copy/paste */}
-
-      {/* missions */}
-
-      {/* attempted / successful landings - hide if either is null? */}
-
-
-
     </Pressable>
   )
 }

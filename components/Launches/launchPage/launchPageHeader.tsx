@@ -50,7 +50,6 @@ const LaunchPageHeader = (props: LaunchProps) => {
 const styles = StyleSheet.create({
    container: {
       position: 'relative',
-      padding: 2,
       alignItems: 'flex-end',
       justifyContent: 'space-between',
       height: 150

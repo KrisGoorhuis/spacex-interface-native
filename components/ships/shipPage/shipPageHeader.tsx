@@ -1,5 +1,5 @@
 import React from "react"
-import { View, ImageBackground, StyleSheet, Text } from "react-native"
+import { View, ImageBackground, StyleSheet, Text, Dimensions } from "react-native"
 import { Badge } from "react-native-elements"
 
 import { Ship } from "../../../model"
@@ -26,12 +26,12 @@ const ShipPageHeader = (props: ShipProps) => {
             <View style={styles.badge}>
                <FavoriteShipButton {...props} />
             </View>
-            {/* <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.badge} value={`#${props.ship.}`} /> */}
+            <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.badge} value={`#${props.ship.ship_id}`} />
             {
                props.ship.active ? (
-                  <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.badge} value={"Successful"} status={"success"} />
+                  <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.badge} value={"Active"} status={"success"} />
                ) : (
-                  <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.badge} value={"Failed"} status={"warning"} />
+                  <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.badge} value={"Inactive"} status={"warning"} />
                )
             }
          </View>
@@ -42,10 +42,9 @@ const ShipPageHeader = (props: ShipProps) => {
 const styles = StyleSheet.create({
    container: {
       position: 'relative',
-      padding: 2,
       alignItems: 'flex-end',
       justifyContent: 'space-between',
-      height: 150
+      height: 150,
    },
    image: {
       position: 'absolute',
