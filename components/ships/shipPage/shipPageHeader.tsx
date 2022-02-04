@@ -18,10 +18,7 @@ const ShipPageHeader = (props: ShipProps) => {
          style={styles.container}
          source={{ uri: props.ship.image }}
       >
-         <Text style={styles.title}>
-            {props.ship.ship_name}
-         </Text>
-
+         <Text style={styles.title}>{props.ship.ship_name}</Text>
          <View style={styles.stack}>
             <View style={styles.badge}>
                <FavoriteShipButton {...props} />
@@ -76,7 +73,7 @@ const styles = StyleSheet.create({
    },
    badgeStyle: {
       borderRadius: 3,
-    },
+   },
 })
 
 export default ShipPageHeader

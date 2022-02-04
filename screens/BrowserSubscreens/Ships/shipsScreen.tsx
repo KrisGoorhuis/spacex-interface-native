@@ -35,10 +35,7 @@ const ShipScrollScreen = (props: ShipScrollScreenProps) => {
     return <span>Error: {error.message}</span>
   }
 
-  
   const flatPages = data?.pages.flat() || []
-  console.log("flatPages")
-  console.log(flatPages)
 
   return (
     <View style={styles.container}>

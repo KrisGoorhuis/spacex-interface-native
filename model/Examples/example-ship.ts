@@ -23,8 +23,8 @@ export const exampleShip = {
      "latitude": 30.52731,
      "longitude": -88.10171
    },
-   "successful_landings": null,
-   "attempted_landings": null,
+   "successful_landings": 0,
+   "attempted_landings": 0,
    "missions": [
      {
        "name": "COTS 1",

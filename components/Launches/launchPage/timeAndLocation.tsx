@@ -9,7 +9,7 @@ import { StackNavigationProp } from "@react-navigation/stack"
 import { LaunchPad, LaunchProps } from "../../../model"
 import { formatDateTargetZone } from "../../../utils/format-date"
 import { BrowserStackParamList } from "../../../model/navTypes"
-import { launchPadPageSize, launchPageIconSize } from "../../../model/constants"
+import { launchPadPageSize, iconSize } from "../../../model/constants"
 import { useInfiniteQuery } from "react-query"
 import { queryLaunchPads } from "../../../utils/networking"
 
@@ -51,7 +51,7 @@ function TimeAndLocation(props: LaunchProps) {
          <NoPadOverlay />
          
          <ListItem containerStyle={styles.listItem}>
-            <Watch color="black" width={launchPageIconSize} height={launchPageIconSize} />
+            <Watch color="black" width={iconSize} height={iconSize} />
             <ListItem.Content style={styles.content}>
                <ListItem.Title>
                   Launch Date
@@ -66,7 +66,7 @@ function TimeAndLocation(props: LaunchProps) {
          </ListItem>
 
          <ListItem containerStyle={styles.listItem}>
-            <MapPin color="black" width={launchPageIconSize} height={launchPageIconSize} />
+            <MapPin color="black" width={iconSize} height={iconSize} />
             <ListItem.Content>
                <ListItem.Title>
                   Launch Site

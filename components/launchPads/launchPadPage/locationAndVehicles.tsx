@@ -4,7 +4,7 @@ import { ListItem } from "react-native-elements";
 import { MapPin, Navigation, Send, Truck } from "react-native-feather";
 
 import { LaunchPad } from "../../../model";
-import { launchPageIconSize } from "../../../model/constants";
+import { iconSize } from "../../../model/constants";
 
 
 interface LocationAndVehiclesProps {
@@ -16,7 +16,7 @@ const LocationAndVehicles = (props: LocationAndVehiclesProps) => {
       <View style={styles.container}>
 
          <ListItem>
-            <MapPin color="black" width={launchPageIconSize} height={launchPageIconSize} />
+            <MapPin color="black" width={iconSize} height={iconSize} />
             <ListItem.Title style={styles.listItemTitle}>Location</ListItem.Title>
             <ListItem.Content style={styles.content}>
                <ListItem.Title>{props.launchPad.location.name}</ListItem.Title>
@@ -25,7 +25,7 @@ const LocationAndVehicles = (props: LocationAndVehiclesProps) => {
          </ListItem>
 
          <ListItem>
-            <Send color="black" width={launchPageIconSize} height={launchPageIconSize} />
+            <Send color="black" width={iconSize} height={iconSize} />
             <ListItem.Title style={styles.listItemTitle}>Vehicles</ListItem.Title>
             <ListItem.Content>
                <Text>{props.launchPad.vehicles_launched.join(", ")}</Text>

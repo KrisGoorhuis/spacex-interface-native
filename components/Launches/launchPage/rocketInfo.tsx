@@ -4,7 +4,7 @@ import { View, StyleSheet } from "react-native"
 import { ListItem } from "react-native-elements"
 
 import { LaunchProps } from "../../../model"
-import { launchPageIconSize } from "../../../model/constants"
+import { iconSize } from "../../../model/constants"
 
 
 
@@ -15,7 +15,7 @@ function RocketInfo(props: LaunchProps) {
       <View style={styles.container}>
 
          <ListItem containerStyle={styles.listItem}>
-            <Navigation2 color="black" height={launchPageIconSize} width={launchPageIconSize} />
+            <Navigation2 color="black" height={iconSize} width={iconSize} />
             <ListItem.Content>
                <ListItem.Title>
                   Rocket
@@ -31,7 +31,7 @@ function RocketInfo(props: LaunchProps) {
          </ListItem>
 
          <ListItem containerStyle={styles.listItem}>
-            <Layers color="black" height={launchPageIconSize} width={launchPageIconSize} />
+            <Layers color="black" height={iconSize} width={iconSize} />
             <ListItem.Content>
                <ListItem.Title>
                   First Stage
@@ -50,7 +50,7 @@ function RocketInfo(props: LaunchProps) {
          </ListItem>
 
          <ListItem containerStyle={styles.listItem}>
-            <Layers color="black" height={launchPageIconSize} width={launchPageIconSize} />
+            <Layers color="black" height={iconSize} width={iconSize} />
             <ListItem.Content>
                <ListItem.Title>
                   Second Stage

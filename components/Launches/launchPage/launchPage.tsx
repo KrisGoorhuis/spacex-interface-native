@@ -40,7 +40,7 @@ const LaunchPage = (props: LaunchPageProps) => {
    )
 
    return (
-      <View style={styles.viewContainer}>
+      <View>
          <FlatList
             ListHeaderComponent={Header}
             data={props.launch.links.flickr_images}
@@ -61,11 +61,6 @@ const LaunchPage = (props: LaunchPageProps) => {
 
 
 const styles = StyleSheet.create({
-   viewContainer: {
-      // flex: 1,
-      // flexDirection: 'column',
-      // margin: 1,
-   },
    launchDetails: {
       color: 'darkgray',
       marginTop: 20,

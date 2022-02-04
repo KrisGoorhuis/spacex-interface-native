@@ -13,7 +13,7 @@ export enum SpaceXSections {
    ships = "ships",
 }
 
-export const launchPageIconSize = 20
+export const iconSize = 20
 
 export const launchesPageSize = 5
 export const launchPadPageSize = 8
