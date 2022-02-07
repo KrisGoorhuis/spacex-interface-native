@@ -1,6 +1,7 @@
 import { exampleLaunch } from "./Examples/example-launch";
 import { exampleLaunchPad } from "./Examples/example-launch-pad";
 import { exampleMission } from "./Examples/example-mission"
+import { exampleRoadster } from "./Examples/example-roadster";
 import { exampleShip } from "./Examples/example-ship";
 
 export interface BreadcrumbObject {
@@ -25,3 +26,4 @@ export interface Launch extends Omit<typeof exampleLaunch, 'links'> { 'links': U
 export type LaunchPad = typeof exampleLaunchPad
 export type Mission = typeof exampleMission
 export type Ship = typeof exampleShip
+export type Roadster = typeof exampleRoadster

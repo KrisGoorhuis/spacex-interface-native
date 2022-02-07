@@ -10,3 +10,6 @@ export function formatDateSimple(timestamp: string) {
 export function formatDateTargetZone(timestamp: string) {
   return DateTime.fromISO(timestamp, { setZone: true }).toFormat('MMMM dd yyyy, h:mm:ss a ZZ')
 }
+export function formatDateTargetZoneShorter(timestamp: string) {
+  return DateTime.fromISO(timestamp, { setZone: true }).toFormat('MMM dd yyyy, h:mm a ZZ')
+}

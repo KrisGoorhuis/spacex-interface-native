@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, FlatList, View, Dimensions } from 'react-native'
+import { StyleSheet, FlatList, View, Dimensions, Text } from 'react-native'
 import { useInfiniteQuery } from "react-query"
 import { Divider } from "react-native-elements"
 
@@ -22,11 +22,11 @@ const LaunchScrollScreen = () => {
    )
 
    if (isLoading) {
-      return <span>Loading...</span>
+      return <Text>Loading...</Text>
    }
 
    if (isError && error) {
-      return <span>Error: {error.message}</span>
+      return <Text>Error: {error.message}</Text>
    }
 
    const flatPages = data?.pages.flat() || []

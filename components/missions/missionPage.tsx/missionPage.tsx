@@ -11,7 +11,7 @@ interface MissionPage {
    [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
 
-export default function LaunchPadPage(props: MissionPage) {
+export default function MissionPage(props: MissionPage) {
 
 
 
@@ -19,6 +19,7 @@ export default function LaunchPadPage(props: MissionPage) {
       <>
          <View>
             <Text>Mission Page</Text>
+            <Text>{props.mission}</Text>
          </View>
       </>
    )

@@ -1,10 +1,7 @@
 import React from "react"
-import { View, StyleSheet, FlatList, Dimensions } from "react-native"
-import { Divider } from 'react-native-elements'
+import { View, StyleSheet, Text } from "react-native"
 import { useInfiniteQuery } from "react-query"
 
-import IsFetchingMoreIndicator from "../../../components/isFetchingMoreIndicator"
-import MissionItem from "../../../components/missions/missionItem"
 import { Mission } from "../../../model"
 import { missionPageSize } from '../../../model/constants'
 import { queryMissions } from "../../../utils/networking"
@@ -28,11 +25,11 @@ const MissionScrollScreen = (props: MissionScrollScreenProps) => {
   )
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <Text>Loading...</Text>
   }
 
   if (isError && error) {
-    return <span>Error: {error.message}</span>
+    return <Text>Error: {error.message}</Text>
   }
 
   const flatPages = data?.pages.flat() || []

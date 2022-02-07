@@ -6,12 +6,6 @@ export enum LocalStorageKeys {
    defaultIndex = "defaultIndex"
 }
 
-export enum SpaceXSections {
-   launches = "launches",
-   launchPads = "launchPads",
-   missions = "missions",
-   ships = "ships",
-}
 
 export const iconSize = 20
 

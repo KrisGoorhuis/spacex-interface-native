@@ -35,11 +35,11 @@ export default function LaunchPadPage(props: LaunchPadPageProps) {
 
 
    if (isLoading) {
-      return <span>Loading...</span>
+      return <Text>Loading...</Text>
    }
 
    if (isError && error) {
-      return <span>Error: {error.message}</span>
+      return <Text>Error: {error.message}</Text>
    }
 
    // if (props.launchPad.error || LaunchesQuery.error) return <Error />

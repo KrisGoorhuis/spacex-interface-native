@@ -5,13 +5,13 @@ import { View, StyleSheet, Text, Pressable, Dimensions } from "react-native"
 import { Button, ListItem, Overlay } from "react-native-elements"
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from "@react-navigation/stack"
+import { useQuery } from "react-query"
 
 import { LaunchPad, LaunchProps } from "../../../model"
 import { formatDateTargetZone } from "../../../utils/format-date"
 import { BrowserStackParamList } from "../../../model/navTypes"
-import { launchPadPageSize, iconSize } from "../../../model/constants"
-import { useInfiniteQuery } from "react-query"
-import { queryLaunchPads } from "../../../utils/networking"
+import { iconSize } from "../../../model/constants"
+import { querySingleLaunchPad } from "../../../utils/networking"
 
 
 
@@ -20,36 +20,45 @@ function TimeAndLocation(props: LaunchProps) {
    const navigation = useNavigation<StackNavigationProp<BrowserStackParamList>>()
 
 
-   const { isLoading, isError, error, data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<LaunchPad[], Error>(
-      ['launchPads'],
-      (context) => queryLaunchPads(context, launchPadPageSize),
+   const { isLoading, isError, error, data } = useQuery<LaunchPad, Error>(
+      ['launchPads', props.launch.launch_site.site_id],
+      (context) => querySingleLaunchPad(context, props.launch.launch_site.site_id),
    )
 
-   const navigateToPad = (launchPads: LaunchPad[] | undefined) => {
-      if (launchPads) {
-         const ourPad = launchPads.filter(pad => pad.id.toString() === props.launch.launch_site.site_id)[0]
-         navigation.navigate('Launch Pad', { launchPad: ourPad })
-      }
-      else {
-         // This should never be reached, assuming our 
+   // Still changes the page, just lets users know why it might take a moment
+   const navigateToPad = async () => {
+      if (isLoading) {
          setVisible(true)
+      }
+
+      await data
+
+      if (!isLoading && data) {
+         setVisible(false)
+         navigation.navigate('Launch Pad', { launchPad: data })
       }
    }
 
-   const NoPadOverlay = () => (
-      <Overlay isVisible={visible} onBackdropPress={() => setVisible(false)}>
-         <Text>Launch pad not found</Text>
-         <Button
-            title="Close"
-            onPress={() => setVisible(false)}
-         />
-      </Overlay>
-   )
+
+   // if (isLoading) {
+   //    return <Text>Loading...</Text>
+   // }
+
+   // if (isError && error) {
+   //    return <Text>Error: {error.message}</Text>
+   // }
+
 
    return (
       <View>
-         <NoPadOverlay />
-         
+         <Overlay isVisible={visible} onBackdropPress={() => setVisible(false)}>
+            <Text>Awaiting launch pad data</Text>
+            <Button
+               title="Close"
+               onPress={() => setVisible(false)}
+            />
+         </Overlay>
+
          <ListItem containerStyle={styles.listItem}>
             <Watch color="black" width={iconSize} height={iconSize} />
             <ListItem.Content style={styles.content}>
@@ -73,7 +82,7 @@ function TimeAndLocation(props: LaunchProps) {
                </ListItem.Title>
                <ListItem.Subtitle >
                   <Pressable
-                     onPress={() => navigateToPad(data?.pages.flat())}
+                     onPress={() => navigateToPad()}
                   >
                      <Text style={styles.location}>{props.launch.launch_site.site_name_long}</Text>
                   </Pressable>

@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { Pressable, ScrollView, StyleSheet } from 'react-native';
+import * as React from 'react'
+import { Pressable, StyleSheet } from 'react-native'
 
-import { Text, View } from '../components/Themed';
-import { BrowserScreenProps } from '../model/navTypes';
+import { Text, View } from '../components/Themed'
+import { BrowserScreenProps } from '../model/navTypes'
 
 
 export default function BrowserScreen({ navigation }: BrowserScreenProps<'Browser Screen'>) {
@@ -33,15 +33,23 @@ export default function BrowserScreen({ navigation }: BrowserScreenProps<'Browse
       </Pressable>
 
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-
+{/* 
       <Pressable onPress={() => navigation.navigate('Missions')}>
         <Text>
           Browse Missions
         </Text>
       </Pressable>
 
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" /> */}
+
+      <Pressable onPress={() => navigation.navigate('Roadster')}>
+        <Text>
+          Where's that Roadster?
+        </Text>
+      </Pressable>
+
     </View>
-  );
+  )
 }
 
 
@@ -60,4 +68,4 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
-});
+})

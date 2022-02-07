@@ -1,5 +1,5 @@
 import React from "react"
-import { View, StyleSheet, FlatList, Dimensions } from "react-native"
+import { View, StyleSheet, FlatList, Dimensions, Text } from "react-native"
 import { Divider } from 'react-native-elements'
 import { useInfiniteQuery } from "react-query"
 
@@ -28,11 +28,11 @@ const ShipScrollScreen = (props: ShipScrollScreenProps) => {
   )
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <Text>Loading...</Text>
   }
 
   if (isError && error) {
-    return <span>Error: {error.message}</span>
+    return <Text>Error: {error.message}</Text>
   }
 
   const flatPages = data?.pages.flat() || []

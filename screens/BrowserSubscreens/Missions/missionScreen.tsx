@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
 
+import MissionPage from '../../../components/missions/missionPage.tsx/missionPage'
 import { View } from '../../../components/Themed'
 
 

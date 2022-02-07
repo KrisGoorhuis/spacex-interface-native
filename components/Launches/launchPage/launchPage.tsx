@@ -62,7 +62,7 @@ const LaunchPage = (props: LaunchPageProps) => {
 
 const styles = StyleSheet.create({
    launchDetails: {
-      color: 'darkgray',
+      // color: 'darkgray',
       marginTop: 20,
       marginLeft: 8,
       marginRight: 8
