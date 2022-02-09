@@ -10,7 +10,7 @@ import { BrowserStackParamList } from "../../model/navTypes"
 
 interface launchPadItemProps extends LaunchPadProps {
   launchPad: LaunchPad
-  isDrawerFavorite?: boolean
+  isDark?: boolean
 }
 
 const LaunchPadItem = (props: launchPadItemProps) => {
@@ -23,27 +23,29 @@ const LaunchPadItem = (props: launchPadItemProps) => {
       style={styles.container}
     >
       <View style={styles.topLine}>
+        <Text
+          style={{...styles.name, color: props.isDark ? 'black' : 'whitesmoke', }}
+          numberOfLines={3}
+        >
+          {props.launchPad.location.name}
+        </Text>
         {props.launchPad.status === "active" ? (
           <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.statusBadge} value="Active" status="success" />
         ) : (
           <Badge badgeStyle={styles.badgeStyle} containerStyle={styles.statusBadge} value="Retired" status="warning" />
         )}
-        <Text style={styles.launchText}>
-          {props.launchPad.attempted_launches} attempted &bull;{" "}
-          {props.launchPad.successful_launches} succeeded
-        </Text>
+
         <View>
           <FavoriteLaunchPadButton {...props} />
         </View>
       </View>
 
-      <Text
-        style={{ color: 'whitesmoke' }}
-        numberOfLines={3}
-      >
-        {props.launchPad.location.name}
+      <Text style={{...styles.launchText, color: props.isDark ? 'darkgray' : 'whitesmoke',}}>
+        {props.launchPad.attempted_launches} attempted &bull;{" "}
+        {props.launchPad.successful_launches} succeeded
       </Text>
-      <Text style={{ color: 'lightgray' }}>
+
+      <Text style={{ color: props.isDark ? 'darkgray' : 'lightgray' }}>
         {props.launchPad.vehicles_launched.join(", ")}
       </Text>
     </Pressable>
@@ -62,9 +64,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: Dimensions.get('window').width * .8
   },
+  name: {
+    width: 200,
+    overflow: 'hidden'
+  },
   launchText: {
-    marginLeft: 5,
-    marginRight: 5,
     textTransform: "uppercase",
     color: 'whitesmoke'
   },

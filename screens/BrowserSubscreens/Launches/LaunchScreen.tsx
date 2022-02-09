@@ -1,3 +1,4 @@
+import { RouteProp } from '@react-navigation/native'
 import { StatusBar } from 'expo-status-bar'
 import * as React from 'react'
 import { Platform, StyleSheet } from 'react-native'
@@ -5,10 +6,11 @@ import { Platform, StyleSheet } from 'react-native'
 import LaunchPage from '../../../components/Launches/launchPage/launchPage'
 import { View } from '../../../components/Themed'
 import { Launch } from '../../../model'
+import { BrowserStackParamList } from '../../../model/navTypes'
 
 
 interface LaunchScreenProps {
-   [x: string]: any // TODO: how to type the props coming from react-navigation?
+   route: RouteProp<BrowserStackParamList, "Launch">
 }
 
 export default function LaunchScreen(props: LaunchScreenProps) {

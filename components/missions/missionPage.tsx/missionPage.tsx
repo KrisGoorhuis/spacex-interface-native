@@ -8,12 +8,9 @@ import { Mission } from '../../../model/index'
 
 interface MissionPage {
    mission: Mission,
-   [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
 
 export default function MissionPage(props: MissionPage) {
-
-
 
    const Header = () => (
       <>

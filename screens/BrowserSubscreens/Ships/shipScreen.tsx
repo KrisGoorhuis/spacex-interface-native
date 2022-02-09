@@ -1,12 +1,14 @@
+import { RouteProp } from '@react-navigation/native'
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
 
 import ShipPage from '../../../components/ships/shipPage/shipPage'
 import { View } from '../../../components/Themed'
+import { BrowserStackParamList } from '../../../model/navTypes'
 
 
 interface ShipScreenProps {
-   [x: string]: any // TODO: how to type the props coming from react-navigation?
+   route: RouteProp<BrowserStackParamList, "Ship">
 }
 
 export default function ShipScreen(props: ShipScreenProps) {

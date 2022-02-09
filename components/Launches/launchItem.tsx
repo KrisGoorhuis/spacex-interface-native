@@ -25,6 +25,7 @@ const LaunchItem = (props: LaunchItemProps) => {
       >
          <View>
             <Image
+               key={props.launch.mission_id + 'image'}
                source={{
                   uri:
                      props.launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
@@ -91,7 +92,6 @@ const styles = StyleSheet.create({
       width: 50,
    },
    patch: {
-      // position: 'relative',
       height: 50,
       width: 50,
       zIndex: 20
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
    },
    badgeStyle: {
       borderRadius: 3,
-    },
+   },
    body: {
       padding: 6,
    },

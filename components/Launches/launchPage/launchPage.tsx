@@ -11,7 +11,6 @@ import LaunchPageHeader from "./launchPageHeader"
 
 interface LaunchPageProps {
    launch: Launch,
-   [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
 
 

@@ -53,16 +53,11 @@ const LaunchScrollScreen = () => {
             }}
             keyExtractor={(item) => item.flight_number.toString()}
             ListFooterComponent={(
-               <View style={styles.listFooter}>
-                  {
-                     isFetchingNextPage &&
-                     <IsFetchingMoreIndicator
-                        data={data?.pages.flat()}
-                        pageSize={launchesPageSize}
-                        isFetchingMore={isLoading}
-                     />
-                  }
-               </View>
+               <IsFetchingMoreIndicator
+                  data={data?.pages.flat()}
+                  pageSize={launchesPageSize}
+                  isFetching={isLoading || isFetchingNextPage}
+               />
             )}
          />
       </View>
@@ -71,7 +66,6 @@ const LaunchScrollScreen = () => {
 
 const styles = StyleSheet.create({
    container: {
-      // paddingBottom: 30
    },
    item: {
       padding: 20,
@@ -81,9 +75,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: 'black'
-   },
-   listFooter: {
-      height: 50
    },
    divider: {
       marginTop: 10,

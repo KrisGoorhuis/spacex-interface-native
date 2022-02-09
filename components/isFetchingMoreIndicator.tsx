@@ -1,49 +1,39 @@
 import React from "react"
-import { Text, StyleSheet, View } from "react-native"
+import { Text, StyleSheet, View, ActivityIndicator } from "react-native"
+import { ListItem } from "react-native-elements"
 
 
 interface IsFetchingMoreIndicatorProps {
   data: any[] | undefined
   pageSize: number
-  isFetchingMore: boolean
+  isFetching: boolean
 }
 
 
 const IsFetchingMoreIndicator = (props: IsFetchingMoreIndicatorProps) => {
-  const isReachingEnd = props.data?.[0]?.length === 0 ||
-    (props.data && props.data[props.data.length - 1]?.length < props.pageSize) ||
-    (props.data && props.data[props.data.length - 1] !== undefined)
 
-  console.log("isReachingEnd")
-  console.log(isReachingEnd)
   return (
     <View style={styles.container} >
-      <Text style={styles.text}>That's all!</Text>
-
-      {/* {
-        !true ? (
+      {
+        props.isFetching ? (
           <ActivityIndicator color="whitesmoke" size="large" />
         ) : (
-          <Text style={styles.text}>That's all!</Text>
+          <Text style={styles.text}  >That's all!</Text>
         )
-      } */}
-      
+      }
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    height: 125,
+    alignItems: 'center',
     display: 'flex',
-    justifyContent: 'center',
-    borderColor: 'red',
-    height: 100
+    justifyContent: 'center'
   },
   text: {
-    textAlign: 'center',
-    padding: 10,
-    color: 'red',
-    height: 20,
+    color: 'white'
   }
 })
 

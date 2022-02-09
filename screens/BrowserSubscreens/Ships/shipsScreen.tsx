@@ -62,7 +62,7 @@ const ShipScrollScreen = (props: ShipScrollScreenProps) => {
           <IsFetchingMoreIndicator
             data={data?.pages.flat()}
             pageSize={shipPageSize}
-            isFetchingMore={isFetchingNextPage}
+            isFetching={isLoading || isFetchingNextPage}
           />
         )}
       />

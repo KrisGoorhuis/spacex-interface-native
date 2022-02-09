@@ -62,7 +62,7 @@ const LaunchPadScrollScreen = (props: LaunchPadScrollScreenProps) => {
           <IsFetchingMoreIndicator
             data={data?.pages.flat()}
             pageSize={launchPadPageSize}
-            isFetchingMore={isFetchingNextPage}
+            isFetching={isLoading || isFetchingNextPage}
           />
         )}
       />

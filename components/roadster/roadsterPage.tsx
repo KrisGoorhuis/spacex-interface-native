@@ -1,5 +1,5 @@
 import React from "react"
-import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Linking, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { ListItem, Image, Divider } from "react-native-elements"
 import { Disc, Truck } from "react-native-feather"
 import { format as timeAgo } from "timeago.js"
@@ -13,11 +13,9 @@ import roadster from '../../assets/images/roadster-small.jpg'
 
 interface RoadsterPageProps {
    roadster: Roadster,
-   [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
 
 const RoadsterPage = (props: RoadsterPageProps) => {
-
 
    return (
       <ScrollView style={styles.container}>
@@ -33,7 +31,7 @@ const RoadsterPage = (props: RoadsterPageProps) => {
                {timeAgo(props.roadster.launch_date_utc)}, Elon Musk launched his car into space.
             </Text>
             <Text style={styles.headline}>
-               Starman pilots it around the sun.{" "}
+               Starman now pilots it around the sun.{" "}
                <Text style={styles.wikiLink} onPress={() => Linking.openURL(props.roadster.wikipedia)}>Wikipedia</Text>
             </Text>
          </View>
@@ -57,8 +55,7 @@ const RoadsterPage = (props: RoadsterPageProps) => {
                   Speed: {formatLargeNumber(props.roadster.speed_kph)} kph
                   {/* - {formatLargeNumber(props.roadster.speed_mph)} mph */}
                </ListItem.Subtitle>
-
-
+ 
             </ListItem.Content>
          </ListItem>
 
@@ -72,7 +69,7 @@ const RoadsterPage = (props: RoadsterPageProps) => {
                   Type: {props.roadster.orbit_type}
                </ListItem.Subtitle>
                <ListItem.Subtitle>
-                  Periapsis argument: {props.roadster.periapsis_arg.toLocaleString()}
+                  Periapsis argument: {props.roadster.periapsis_arg.toLocaleString()}°
                </ListItem.Subtitle>
                <ListItem.Subtitle>
                   Periapsis distance: {props.roadster.periapsis_au.toLocaleString()} au
@@ -84,10 +81,10 @@ const RoadsterPage = (props: RoadsterPageProps) => {
                   Eccentricity: {props.roadster.eccentricity.toLocaleString()}
                </ListItem.Subtitle>
                <ListItem.Subtitle>
-                  Inclination: {props.roadster.inclination.toLocaleString()}
+                  Inclination: {props.roadster.inclination.toLocaleString()}°
                </ListItem.Subtitle>
                <ListItem.Subtitle>
-                  Longitude: {props.roadster.longitude.toLocaleString()}
+                  Longitude: {props.roadster.longitude.toLocaleString()}°
                </ListItem.Subtitle>
 
             </ListItem.Content>

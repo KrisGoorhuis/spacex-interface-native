@@ -15,13 +15,10 @@ import IsFetchingMoreIndicator from "../../isFetchingMoreIndicator"
 
 interface LaunchPadPageProps {
    launchPad: LaunchPad,
-   [x: string]: any // TODO: how to type the props coming from react-navigation?
 }
 
 export default function LaunchPadPage(props: LaunchPadPageProps) {
-   // (context: QueryFunctionContext<TQueryKey>) => T | Promise<T>
 
-   // const LaunchesQuery = { data: [], error: 'temp' }
    const { isLoading, isError, error, data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<Launch[], Error>(
       ['pastLaunches'],
       (context) => queryPastLaunches(context, launchPadPageSize, props.launchPad.site_id),
@@ -116,7 +113,7 @@ export default function LaunchPadPage(props: LaunchPadPageProps) {
                      <IsFetchingMoreIndicator
                         data={data?.pages.flat()}
                         pageSize={launchesPageSize}
-                        isFetchingMore={isLoading}
+                        isFetching={isLoading}
                      />
                   }
                </View>
